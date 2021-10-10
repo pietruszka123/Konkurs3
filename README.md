@@ -50,11 +50,6 @@ przykład:
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-.w3-border{border:1px solid #ccc!important}
-.w3-center{text-align:center!important}
-.w3-red,.w3-hover-red:hover{color:#fff!important;background-color:#f44336!important}
-</style>
 </head>
 <body>
 <div style="color:#000;background-color:#9e9e9e">
