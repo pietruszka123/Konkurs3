@@ -49,19 +49,16 @@ przykład:
 - [x] przykład do skońconego
 <!DOCTYPE html>
 <html>
+<head>
 <style>
 .w3-border{border:1px solid #ccc!important}
 .w3-center{text-align:center!important}
 .w3-red,.w3-hover-red:hover{color:#fff!important;background-color:#f44336!important}
-.w3-grey,.w3-hover-grey:hover,.w3-gray,.w3-hover-gray:hover{color:#000!important;background-color:#9e9e9e!important}
 </style>
+</head>
 <body>
-<div class="w3-grey">
-  <div class="w3-container w3-red w3-center">90%</div>
-<script>
-    var t = document.getElementsByClassName("w3-container")[0]
-    t.style = `width: ${t.textContent}`;
-</script>
+<div style="color:#000;background-color:#9e9e9e">
+  <div style="text-align:center;color:#fff;background-color:#f44336;width:90%;">90%</div>
 </div><br>
 </body>
 </html>
