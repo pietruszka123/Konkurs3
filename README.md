@@ -1,11 +1,15 @@
 # Konkurs3
 - [Podział pracy](##Podział-pracy)<br>
 - [informacje](##info)
-
+- [stan Poszczególnych sekcji projektu](##stan-Projektu)<br>
 Jakieś informacje<br>
 ciąg dalszy informacji
+
+---
 ## **Podział pracy**
 *cos tu kiedyś będzie*
+
+---
 ## **info**
 - [html](###info-Html)<br>
 - [css](###info-css)<br>
@@ -13,17 +17,10 @@ ciąg dalszy informacji
 - [cała reszta](###info-reszta)
 ### **info javascript**
 *cos tu kiedyś będzie*<br>
-- [ ] test
 ### **info Html**
 nie wstawiać elementów które mają pozostać w elemtntach który zawarość się zmienia<br>
 przykład:
 ```html
-<!DOCTYPE html>
-<html>
-      <head>
-    <title>This is a title</title>
-  </head>
-  <body>
 <div class="listaZamiennikow">
     <div class="zamiennik">
         <img src="https://world-pl.openfoodfacts.org/images/products/594/900/050/5342/front_ro.4.full.jpg" alt="seawching fow photo">
@@ -39,11 +36,32 @@ przykład:
         <input id="zamiennikSubmit" type="button" value="Dodaj">
     </div>
 </div>
-</body>
-</html>
 ```
 
 ### **info css**
 *cos tu kiedyś będzie*
 ### **info reszta**
 *cos tu kiedyś będzie*
+
+---
+## stan Projektu
+- [ ] przykład do zrobienia
+- [x] przykład do skońconego
+<!DOCTYPE html>
+<html>
+<style>
+.w3-border{border:1px solid #ccc!important}
+.w3-center{text-align:center!important}
+.w3-red,.w3-hover-red:hover{color:#fff!important;background-color:#f44336!important}
+.w3-grey,.w3-hover-grey:hover,.w3-gray,.w3-hover-gray:hover{color:#000!important;background-color:#9e9e9e!important}
+</style>
+<body>
+<div class="w3-grey">
+  <div class="w3-container w3-red w3-center">90%</div>
+<script>
+    var t = document.getElementsByClassName("w3-container")[0]
+    t.style = `width: ${t.textContent}`;
+</script>
+</div><br>
+</body>
+</html>
