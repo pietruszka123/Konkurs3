@@ -1,7 +1,9 @@
 # Konkurs3
+
 - [Podział pracy](##Podział-pracy)<br>
 - [informacje](##info)
 - [stan Poszczególnych sekcji projektu](##stan-Projektu)<br>
+
 Jakieś informacje<br>
 ciąg dalszy informacji
 
@@ -45,8 +47,8 @@ przykład:
 
 ---
 ## stan Projektu
-- [ ] przykład do zrobienia
-- [x] przykład do skońconego
+- [ ] 0% przykład do zrobienia
+- [x] 100% przykład do skończonego
 <!-- <!DOCTYPE html>
 <html>
 <head>
