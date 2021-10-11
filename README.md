@@ -1,8 +1,8 @@
 # Konkurs3
 
 - [Podział pracy](##Podział-pracy)<br>
-- [informacje](##info)
-- [stan Poszczególnych sekcji projektu](##stan-Projektu)<br>
+<!-- - [informacje](##info)
+- [stan Poszczególnych sekcji projektu](##stan-Projektu)<br> -->
 
 Jakieś informacje<br>
 ciąg dalszy informacji
