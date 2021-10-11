@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+:root {
+    --darkerDiscordColor: rgb(41, 41, 41);
+    --mainBackgroundColor:  rgb(236, 236, 236); 
+    --weakerColor: rgb(225, 230, 249);
+    --weakColor: rgb(195, 214, 237);
+    --mediumColor: rgb(170, 200, 226);
+    --strongerColor: rgb(54, 93, 128);
+    --strongestColor: rgb(23, 49, 82);
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+}
+
+
+.header {
+    grid-column: 1 / 2;
+    background-color: var(--darkerDiscordColor);
+}
+
+.main-grid > .header > nav > ul > li {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content {
+    background-color: var(--mainBackgroundColor);
+    overflow: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 2vw;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 7px;
+    background-color: rgb(63, 63, 63);
+    border-radius: 15px;
+    box-shadow: 0px 0px 2px black;
+}
+
+.grades {
+    background-color: var(--weakerColor);
+    width: fit-content;
+    height: fit-content;
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+    min-width: 15vw;
+    padding: 1.5vw;
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+    border-radius: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 1000;
+}
+
+.subjectGradesTable > h1 {
+    margin-bottom: 10px;
+}
+
+.subjectGradesTitle {
+    margin-bottom: 5px;
+}
+
+.subjectGradesGrades {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.singleGrade {
+    margin-right: 2vw;
+    width: 5vh;
+    height: 5vh;
+    min-width: 25px;
+    min-height: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.hr {
+    padding: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0.8px;
+    width: auto;
+    border: none;
+    background-color: rgb(56, 56, 56);
+}
+
+.grade1 {
+    background-color: rgb(197, 26, 26);
+}
+
+.grade2 {
+    background-color: rgb(197, 94, 26);
+}
+
+.grade3 {
+    background-color: rgb(197, 194, 26);
+}
+
+.grade4 {
+    background-color: rgb(117, 197, 26);
+}
+
+.grade5 {
+    background-color: rgb(3, 172, 20);
+}
+
+.grade6 {
+    background-color: rgb(26, 197, 160);
+}
+
+.singleGrade {
+    position: relative;
+}
+
+.gradeGreaterInfo {
+    visibility: hidden;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--weakColor);
+    color: rgb(0, 0, 0);
+    text-align: left;
+    white-space: nowrap;
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+    border-radius: 3px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1000;
+    left: 45px;
+    top: 8px;
+    opacity: 0%;
+    transition-duration: 0.1s;
+}
+
+.gradeGreaterInfo > p {
+    white-space: pre-wrap;
+}
+
+.singleGrade:hover .gradeGreaterInfo {
+    visibility: visible;
+    opacity: 100%;
+}
+
+.messagesButtons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.messagesButtons > button {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.messagesButtons > button > p {
+    font-size: 1.5vw;
+}
+
+.inputek[type=checkbox] {
+    position: absolute;
+    top: -9999px;
+ }
+.labelaToJeKlasa {
+   -webkit-appearance: push-button;
+   -moz-appearance: button; 
+   display: inline-block;
+   margin: 60px 0 10px 0;
+   cursor: pointer;
+   height: 100px;
+ }
+ 
+ /* Default State */
+ .sendMessageBox {
+    display: none;
+ }
+ 
+ /* Toggled State */
+ input[type=checkbox]:checked ~ .sendMessageBox {
+    display: block;
+ }
