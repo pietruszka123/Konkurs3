@@ -11,7 +11,7 @@ ciąg dalszy informacji
 ## **Podział pracy**
 *cos tu kiedyś będzie*
 
----
+<!-- ---
 ## **info**
 - [html](###info-Html)<br>
 - [css](###info-css)<br>
@@ -48,7 +48,7 @@ przykład:
 ---
 ## stan Projektu
 - [ ] 0% przykład do zrobienia
-- [x] 100% przykład do skończonego
+- [x] 100% przykład do skończonego -->
 <!-- <!DOCTYPE html>
 <html>
 <head>
