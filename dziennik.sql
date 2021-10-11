@@ -197,7 +197,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`meetingId`, `teacherId`, `meetingDescription`, `meetingDate`, `meetingForm`, `meetingClassroom`) VALUES
-(1, 1, 'Spotykamy się, aby obmówić oralnie ważną sytuację ekonomii Polskiej metaamfetaminy', '2021-07-19 06:46:38', 'Irl', '694201337213769');
+(1, 1, 'Spotykamy się, aby obmówić oralnie ważną sytuację ekonomii Polskiej metamfetaminy', '2021-07-19 06:46:38', 'Irl', '694201337213769');
 
 -- --------------------------------------------------------
 
