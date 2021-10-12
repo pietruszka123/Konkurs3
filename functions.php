@@ -51,7 +51,7 @@ function getUserGrades()
 
                     if ($stmt2 = $mysqli->prepare($sql2))
                     {
-                        $stmt2->bind_param("ss",$subjectId, $param_id);
+                        $stmt2->bind_param("ss", $subjectId, $param_id);
 
                         if ($stmt2->execute())
                         {
@@ -63,7 +63,7 @@ function getUserGrades()
 
                                 while ($stmt2->fetch())
                                 {
-                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
+                                    echo "<div class=\"singleGrade grade" . $gradeScale . "\">";
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
@@ -120,9 +120,8 @@ function getUserMessages()
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
                     echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
                     </button>";
-                   
                 }
             }
             else
@@ -138,7 +137,8 @@ function getUserMessages()
     $stmt->close();
 }
 
-function viewMessage(int $messageId) {
+function viewMessage(int $messageId)
+{
     global $mysqli;
     global $error;
 
@@ -166,7 +166,6 @@ function viewMessage(int $messageId) {
                     echo "<div class=\"tempMessageBox\">
                         <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
                     </div>";
-                   
                 }
             }
             else
@@ -215,7 +214,8 @@ function viewAllReceivers()
     $stmt->close();
 }
 
-function sendMessage() {
+function sendMessage()
+{
     global $mysqli;
     global $error;
 
@@ -225,7 +225,7 @@ function sendMessage() {
     {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [" . $_SESSION["selectReceiver"] . "]}"  ;
+        $receiverId = "{ \"id\": [" . $_SESSION["selectReceiver"] . "]}";
         $messageContent = $_SESSION["messageInputContent"];
         $messageTitle = $_SESSION["titleInputBox"];
         if ($stmt->execute())
@@ -249,7 +249,8 @@ function sendMessage() {
     $stmt->close();
 }
 
-function getTimetable() {
+function getTimetable()
+{
     global $mysqli;
     global $error;
 
@@ -280,7 +281,7 @@ function getTimetable() {
 
                     if ($stmt2 = $mysqli->prepare($sql2))
                     {
-                        $stmt2->bind_param("ss",$subjectId, $param_id);
+                        $stmt2->bind_param("ss", $subjectId, $param_id);
 
                         if ($stmt2->execute())
                         {
@@ -292,7 +293,7 @@ function getTimetable() {
 
                                 while ($stmt2->fetch())
                                 {
-                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
+                                    echo "<div class=\"singleGrade grade" . $gradeScale . "\">";
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
@@ -330,3 +331,21 @@ function getTimetable() {
     $sql = "SELECT userFirstName, userSecondName, userLastName, userPhoneNumber FROM `users` WHERE userId = ?";
 
 }*/
+
+function getDaysUntilEndOfYear()
+{
+
+    $now = new DateTime(date('m/d/Y h:i:s a', time())); //AKTUALNY CZAS
+
+    $koniecRoku  = new DateTime('06/25/2022 12:00 PM'); //TU POWINNA BYC DATA WPROWADZONA PRZEZ DYREKTORA ALE NIE MAMY TABELI W BAZIE DANYCH NA TO
+
+    $dni = $koniecRoku->diff($now)->days;
+    $godziny = $koniecRoku->diff($now)->h;
+    $minuty = $koniecRoku->diff($now)->i;
+    $sekundy = $koniecRoku->diff($now)->s;
+
+    echo 'DNI DO KONCA ROKU: ' . $dni . "<br>";
+    echo 'GODZINY DO KONCA ROKU: ' . $godziny + 24 * $dni . "<br>";
+    echo 'MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . "<br>";
+    echo 'SEKUNDY DO KONCA ROKU: ' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "<br>";
+}

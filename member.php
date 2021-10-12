@@ -6,9 +6,16 @@ include_once("header.php");
     <div class="subjectGradesTable">
         <?php
         getUserGrades();
+        
         ?>
 
     </div>
+</div>
+<div class="daysUntilEndOfYear">
+<?php
+getDaysUntilEndOfYear()
+?>
+
 </div>
 
 
