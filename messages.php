@@ -25,7 +25,7 @@ include_once "header.php";
 </div>
 <div class="sendMessageBox">
     <form method="post" name="formName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="selectReceiver">Choose a car:</label>
+        <label for="selectReceiver">Wybierz odbiorce:</label>
 
         <select name="selectReceiver" id="selectReceiver">
             <?php
@@ -33,7 +33,9 @@ include_once "header.php";
             ?>
         </select>
         <input type="text" id="titleInputBox" name="titleInputBox">
-        <input type="text" id="messageInputContent" name="messageInputContent">
+        <textarea id="messageInputContent" name="messageInputContent" rows="4" cols="50">
+
+        </textarea>
         <button class="sendMessageButton">wysjil</button>
 
     </form>

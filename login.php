@@ -11,9 +11,9 @@ include_once("header.php");
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="email">E-mail:</label>
     <input class="input"type="text" name="email" required><br>
-    <label for="Password">Hasło:</label>
-    <input type="password" name="Password" required><br>
-    <input type="submit" name="Zaloguj!">
+    <label for="password">Hasło:</label>
+    <input type="password" name="password" required><br>
+    <input type="submit" value="Zaloguj!">
     </div>
 </div>
 </form>
