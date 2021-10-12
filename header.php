@@ -17,5 +17,9 @@ include_once("functions.php");
 </head>
 
 <body>
+
     <div class="main-grid">
         <div class="content">
+        <header></header>
+            
+        

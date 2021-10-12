@@ -23,9 +23,13 @@
 }
 
 
-.header {
+header {
     grid-column: 1 / 2;
-    background-color: var(--darkerDiscordColor);
+    background-color: #2D3142;
+    height: 110px;
+    width: 100%;
+
+    
 }
 
 .main-grid > .header > nav > ul > li {
@@ -35,25 +39,107 @@
 }
 
 .content {
-    background-color: wheat;
+    background-color: #808ea8;
     overflow: auto;
     overflow-x: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    padding: 2vw;
+    padding-bottom: 2vw;
+
 }
 .logowanie{
-    background: #e7e7e7;
+    background: #BFC0C0;
     max-width: 560px;
     width: 100%;
+    margin: 0 auto;
+    margin-top: 70px;
     position: relative;
+    margin-bottom: 20px;
     border: 0 none;
     outline: 0 none;
     box-shadow: none;
+    padding: 2.5vw;
+    padding-top: 1vw;
+    border-radius: 20px;
+    filter: drop-shadow(0px 0px 1.5px #000000);
+}
+.logowanie h2{
+    font-family: Verdana, sans-serif;
+    font-size: 13.5px;
+    font-weight: normal;
+    color: #2D3142;
+    text-align: center;
+    display: block;
+}
+.logowanie div{
+    margin-top: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+div {
+    display: block;
+}
+.logowanie label{
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #2D3142;
+    text-align: center;
+    display: block;
+}
+.logowanie div input, .logowanie div label{
+    width: 480px;
+    text-align: left;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.logowanie input[type="submit"]{
+   
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    font-style: normal;
+    color: #444554;
+    text-align: center;
+    background: #BFC0C0;
+    width: auto;
+    padding-left: 20px;
+    margin-top:10px;
+    padding-right: 20px;
+    height: 54px;
+    border: none;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 1px #000000);
+}
+.container{
+    padding: 2vw;
+}
+.log{
+    display: flex;
+    justify-content: center;
+    
+}
+.log input[type="submit"]{
+border: solid 2px white ;
+border-radius: 10px;
 }
 
+.h1Default{
+    
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: #FF9933;
+    text-align: center;
+    margin-bottom: 20px;
+}
+div input[type="text"], div input[type="password"] {
+    border: 1px solid #ffffff;
+    margin-top: 4px;
+    height: 25px;
+    font-size: 20pxpx;
+    padding-left: 8px;
+    filter: drop-shadow(0px 0px 1px #000000);
+}
 .center {
     display: flex;
     flex-direction: row;
