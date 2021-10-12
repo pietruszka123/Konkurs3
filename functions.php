@@ -114,7 +114,7 @@ function getUserMessages()
                 while ($stmt->fetch())
                 {
                     echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p>
+                        <p>".(string)$messageTitle."</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p>
                     </button>";
                    
                 }
@@ -152,14 +152,14 @@ function viewMessage(int $messageId) {
                 while ($stmt->fetch())
                 {
                     echo "<div class=\"tempMessageBox\">
-                        <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
+                        <p>" . (string)$messageTitle . "</p> <p>$messageDate</p> <p>" . (string)$userFirstName . " " . (string)$userSecondName. " " . (string)$userLastName ."</p> <p>". (string)$messageContent. "</p>
                     </div>";
                    
                 }
             }
             else
             {
-                $error = $error . "UwU, somethin went wong.";
+                $error .= "UwU, somethin went wong.";
             }
         }
         else
@@ -237,7 +237,7 @@ function sendMessage() {
     $stmt->close();
 }
 
-function getTimetable() {
+function getTimeTable() {
     global $mysqli;
     global $error;
 
