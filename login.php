@@ -1,11 +1,23 @@
 <?php
 include_once("header.php");
 ?>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <input type="text" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
+<div class="container">
+
+</div>
+<div class="logowanie">
+    <div>
+    <h1 class="h1Default">Logowanie</h1>
+    <h2>Proszę podać e-mail i hasło</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <label for="email">E-mail:</label>
+    <input class="input"type="text" name="email" required><br>
+    <label for="Password">Hasło:</label>
+    <input type="password" name="Password" required><br>
     <input type="submit" name="Zaloguj!">
+    </div>
+</div>
 </form>
+</div>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST")

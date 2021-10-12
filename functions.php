@@ -113,8 +113,14 @@ function getUserMessages()
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName);
                 while ($stmt->fetch())
                 {
+                    $messageDate = strip_tags((string)$messageDate);
+                    $messageId = strip_tags((string)$messageId);
+                    $messageTitle = strip_tags((string)$messageTitle);
+                    $userFirstName = strip_tags((string)$userFirstName);
+                    $userSecondName = strip_tags((string)$userSecondName);
+                    $userLastName = strip_tags((string)$userLastName);
                     echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p>
+                        <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
                     </button>";
                    
                 }
@@ -151,6 +157,12 @@ function viewMessage(int $messageId) {
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName, $messageContent);
                 while ($stmt->fetch())
                 {
+                    $messageDate = strip_tags((string)$messageDate);
+                    $messageId = strip_tags((string)$messageId);
+                    $messageTitle = strip_tags((string)$messageTitle);
+                    $userFirstName = strip_tags((string)$userFirstName);
+                    $userSecondName = strip_tags((string)$userSecondName);
+                    $userLastName = strip_tags((string)$userLastName);
                     echo "<div class=\"tempMessageBox\">
                         <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
                     </div>";
@@ -309,3 +321,12 @@ function getTimetable() {
     }
     $stmt->close();
 }
+
+
+/*function getContactData() {
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT userFirstName, userSecondName, userLastName, userPhoneNumber FROM `users` WHERE userId = ?";
+
+}*/
