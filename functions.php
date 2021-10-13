@@ -93,12 +93,13 @@ function getUserGrades()
     $stmt->close();
 }
 function getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName){
-    echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
-    <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+    return "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
+    <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName</p>
 </button>";
 }
-function getUserMessages()
+function getUserMessages($ret = false)
 {
+    if($ret)$rarr = array();
     global $mysqli;
     global $error;
 
@@ -123,10 +124,11 @@ function getUserMessages()
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
-                    </button>";
+                    if($ret)array_push($rarr,getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName));
+                    else echo getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName);
+                    
                 }
+                if($ret)return $rarr;
             }
             else
             {
@@ -140,53 +142,10 @@ function getUserMessages()
     }
     $stmt->close();
 }
-/*
-function getUserMessages(){
-    global $mysqli;
-    global $error;
 
-    $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName FROM messages, users WHERE users.userId LIKE messages.senderId AND messages.receiverId LIKE ? ORDER BY messages.messageDate DESC";
-
-    if ($stmt = $mysqli->prepare($sql))
-    {
-        $stmt->bind_param("s", $param_id);
-        $param_id = "%" . $_SESSION["id"] . "%";
-        if ($stmt->execute())
-        {
-            $stmt->store_result();
-
-            if ($stmt->num_rows != 0)
-            {
-                $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName);
-                $arr = array();
-                while ($stmt->fetch())
-                {
-                    $messageDate = strip_tags((string)$messageDate);
-                    $messageId = strip_tags((string)$messageId);
-                    $messageTitle = strip_tags((string)$messageTitle);
-                    $userFirstName = strip_tags((string)$userFirstName);
-                    $userSecondName = strip_tags((string)$userSecondName);
-                    $userLastName = strip_tags((string)$userLastName);
-                    array_push($arr,"{messageId:$messageId,messageDate:$messageDate,messageTitle:$messageTitle,userFirstName:$userFirstName,userSecondName:$userSecondName,userLastName:$userLastName}");
-                   
-                }
-                echo json_encode(array_values($arr));
-            }
-            else
-            {
-                $error = $error . "UwU, somethin went wong.";
-            }
-        }
-        else
-        {
-            echo "UwU, somethin went wong.";
-        }
-    }
-    $stmt->close();
-}*/
-
-function viewMessage(int $messageId)
+function viewMessage(int $messageId,$ret = false)
 {
+    if($ret)$rarr = array();
     global $mysqli;
     global $error;
 
@@ -211,10 +170,13 @@ function viewMessage(int $messageId)
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    echo "<div class=\"tempMessageBox\">
+                    $temp = "<div class=\"tempMessageBox\">
                         <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
                     </div>";
+                    if($ret)array_push($rarr,$temp);
+                    else echo $temp;
                 }
+                if($ret)return $rarr;
             }
             else
             {
