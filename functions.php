@@ -180,7 +180,7 @@ function viewMessage(int $messageId,$ret = false)
             }
             else
             {
-                $error = $error . "UwU, somethin went wong.";
+                $error .= "UwU, somethin went wong.";
             }
         }
         else
