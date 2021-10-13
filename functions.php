@@ -92,7 +92,11 @@ function getUserGrades()
     }
     $stmt->close();
 }
-
+function getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName){
+    echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
+    <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+</button>";
+}
 function getUserMessages()
 {
     global $mysqli;
@@ -136,6 +140,50 @@ function getUserMessages()
     }
     $stmt->close();
 }
+/*
+function getUserMessages(){
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName FROM messages, users WHERE users.userId LIKE messages.senderId AND messages.receiverId LIKE ? ORDER BY messages.messageDate DESC";
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        $stmt->bind_param("s", $param_id);
+        $param_id = "%" . $_SESSION["id"] . "%";
+        if ($stmt->execute())
+        {
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName);
+                $arr = array();
+                while ($stmt->fetch())
+                {
+                    $messageDate = strip_tags((string)$messageDate);
+                    $messageId = strip_tags((string)$messageId);
+                    $messageTitle = strip_tags((string)$messageTitle);
+                    $userFirstName = strip_tags((string)$userFirstName);
+                    $userSecondName = strip_tags((string)$userSecondName);
+                    $userLastName = strip_tags((string)$userLastName);
+                    array_push($arr,"{messageId:$messageId,messageDate:$messageDate,messageTitle:$messageTitle,userFirstName:$userFirstName,userSecondName:$userSecondName,userLastName:$userLastName}");
+                   
+                }
+                echo json_encode(array_values($arr));
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
+            }
+        }
+        else
+        {
+            echo "UwU, somethin went wong.";
+        }
+    }
+    $stmt->close();
+}*/
 
 function viewMessage(int $messageId)
 {
@@ -214,32 +262,22 @@ function viewAllReceivers()
     $stmt->close();
 }
 
-function sendMessage()
-{
+function sendMessage($Receiver,$title,$Content) {
     global $mysqli;
     global $error;
 
     $sql = "INSERT INTO `messages` (`senderId`, `receiverId`, `messageContent`, `messageTitle`) VALUES (?, ?, ?, ?)";
-
     if ($stmt = $mysqli->prepare($sql))
     {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [" . $_SESSION["selectReceiver"] . "]}";
-        $messageContent = $_SESSION["messageInputContent"];
-        $messageTitle = $_SESSION["titleInputBox"];
+        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}"  ;
+        $messageContent = $Content;
+        $messageTitle = $title;
         if ($stmt->execute())
         {
-            $stmt->store_result();
-
-            if ($stmt->num_rows != 0)
-            {
-                echo "działa";
-            }
-            else
-            {
-                $error = $error . "UwU, somethin went wong.";
-            }
+            echo "{\"status\":true}";
+            $error = $error . "UwU, somethin went wong.";
         }
         else
         {

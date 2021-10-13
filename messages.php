@@ -17,40 +17,25 @@ include_once "header.php";
 </div>
 <div class="messageContent">
     <?php
-    if (isset($_POST['viewMessage']))
-    {
+    if (isset($_POST['viewMessage'])) {
         viewMessage($_POST['messageId']);
     }
     ?>
 </div>
 <div class="sendMessageBox">
-    <form method="post" name="formName" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="selectReceiver">Wybierz odbiorce:</label>
+    <label for="selectReceiver">Choose a car:</label>
 
-        <select name="selectReceiver" id="selectReceiver">
-            <?php
-            viewAllReceivers();
-            ?>
-        </select>
-        <input type="text" id="titleInputBox" name="titleInputBox">
-        <textarea id="messageInputContent" name="messageInputContent" rows="4" cols="50">
+    <select name="selectReceiver" id="selectReceiver">
+        <?php
+        viewAllReceivers();
+        ?>
+    </select>
+    <input type="text" id="titleInputBox" name="titleInputBox">
+    <input type="text" id="messageInputContent" name="messageInputContent">
+    <input type="button" class="sendMessageButton" value="wysjil">
 
-        </textarea>
-        <button class="sendMessageButton">wysjil</button>
-
-    </form>
-    <?php
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $_SESSION["selectReceiver"] = $_POST["selectReceiver"];
-        $_SESSION["messageInputContent"] = $_POST["messageInputContent"];
-        $_SESSION["titleInputBox"] = $_POST["titleInputBox"];
-        sendMessage();
-    }
-    ?>
 </div>
-
+<script src="/js/messages.js"></script>
 
 
 
