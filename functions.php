@@ -331,7 +331,11 @@ function getTimetable()
     $sql = "SELECT userFirstName, userSecondName, userLastName, userPhoneNumber FROM `users` WHERE userId = ?";
 
 }*/
-
+function GetTime(){
+    //POBIERANIE Z BAZY TAK JAK W FUNKCJI NIŻEJ
+    $koniecRoku = new DateTime('06/25/2022 12:00 PM');
+    return $koniecRoku->getTimestamp();
+}
 function getDaysUntilEndOfYear()
 {
 
@@ -347,5 +351,5 @@ function getDaysUntilEndOfYear()
     echo 'DNI DO KONCA ROKU: ' . $dni . "<br>";
     echo 'GODZINY DO KONCA ROKU: ' . $godziny + 24 * $dni . "<br>";
     echo 'MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . "<br>";
-    echo 'SEKUNDY DO KONCA ROKU: ' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "<br>";
+    echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
 }

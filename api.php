@@ -30,6 +30,9 @@
         case 'getMessageData':
             echo '{"status":true, "message":' .json_encode(array_values(viewMessage($data["messageId"],true))) . '}';
             break;
+        case 'getEndTime':
+            echo '{"status":true, "message":' . GetTime() . '}';
+            break;
         default:
             ERROR();
             break;
