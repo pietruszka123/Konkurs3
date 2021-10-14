@@ -355,8 +355,8 @@ function getDaysUntilEndOfYear()
 }
 
 
-function getUserComments($userID)
-{ //pobieranie uwag z dziennika
+function  getTimetable()
+{ 
     global $mysqli;
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -508,15 +508,9 @@ function CheckRanks(...$ranks)
 {
     $t = false;
     foreach ($ranks as $value) {
-<<<<<<< Updated upstream
-        if(!in_array($value,$_SESSION["rank"])){
-            $t = true; 
-        }else $t = false;
-=======
         if (!in_array($value, $_SESSION["rank"])) {
             $t = false;
         } else $t = true;
->>>>>>> Stashed changes
     }
     return $t;
 }
