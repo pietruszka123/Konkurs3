@@ -1,15 +1,12 @@
 <?php
 include_once("header.php");
-if(!CheckRanks("nauczyciel")){
-    header('Location: /nauczyciel.php');
-    exit();
-}
+
 ?>
+
 <div class="grades">
     <div class="subjectGradesTable">
         <?php
         getUserGrades();
-
         ?>
 
     </div>
@@ -19,6 +16,11 @@ if(!CheckRanks("nauczyciel")){
     getDaysUntilEndOfYear()
     ?>
 </div>
+<div class="studentComments">
+    <?php
+    getUserComments($_SESSION["id"]);
+    ?>
+</div>
 <script>
     /**skomentyj aby wyłączyć */
     $.ajax({
@@ -26,7 +28,7 @@ if(!CheckRanks("nauczyciel")){
         url: "/api.php/getEndTime",
         contentType: "application/json; charset=utf-8",
         success: function(response) {
-            var endDate = new Date(response.message*1000);
+            var endDate = new Date(response.message * 1000);
             setInterval(() => {
                 const today = new Date();
                 const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
@@ -38,7 +40,16 @@ if(!CheckRanks("nauczyciel")){
         }
     });
 </script>
-
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                
+            <input type="submit" value="Wyloguj!">
+        </form>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    session_destroy();}
+    header('Location: login.php');
+    ?>
 
 <?php
 include_once("footer.php");
