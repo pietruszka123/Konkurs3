@@ -353,3 +353,13 @@ function getDaysUntilEndOfYear()
     echo 'MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . "<br>";
     echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
 }
+function CheckRanks(...$ranks)
+{
+    $t = false;
+    foreach ($ranks as $value) {
+        if(!in_array($value,$_SESSION["rank"])){
+            $t = true; 
+        }else $t = false;
+    }
+    return $t;
+}
