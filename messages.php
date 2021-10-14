@@ -2,8 +2,7 @@
 include_once "header.php";
 ?>
 
-<label for="toggle-1" class="labelaToJeKlasa">I'm a toggle</label>
-<input class="inputek" type="checkbox" id="toggle-1">
+<input type="button" id="Switch" value="Toggle">
 
 <input type="button" value="Odświerz" id="refresh">
 <div class="messageForm">

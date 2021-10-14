@@ -69,3 +69,6 @@ $("#refresh").click(function (e) {
     Refresh();
 });
 initButtons();
+$("#Switch").click((e)=>{
+    $(".sendMessageBox").toggle("fast");
+})
