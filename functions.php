@@ -469,8 +469,8 @@ function CheckRanks(...$ranks)
     $t = false;
     foreach ($ranks as $value) {
         if (!in_array($value, $_SESSION["rank"])) {
-            $t = true;
-        } else $t = false;
+            $t = false;
+        } else $t = true;
     }
     return $t;
 }
