@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Document</title>
 </head>
 
@@ -12,29 +12,30 @@
     <?php
     include_once("header.php");
     ?>
-    
-    <div class="container">
-        <div class="logowanie">
-            <div>
-                <h1 class="h1Default">Logowanie</h1>
-                <h2>Proszę podać e-mail i hasło</h2>
-                <div>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <label for="email">E-mail:</label>
-                        <input class="input" type="text" name="email" required><br>
-                </div>
-                <div>
-                    <label for="Password">Hasło:</label>
-                    <input type="password" name="Password" required><br>
-                </div>
-                <div class="log">
-                    <input type="submit" value="Zaloguj!">
-                </div>
+    <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
+    <img class="bombel" src="bombel.png" alt="">
+    <img class="heksagon"src="heksagon.svg" alt="">
+        <div class="container">
+            <div class="logowanie">  
+                    <h1 class="h1Default">Logowanie</h1>
+                    <h2>Proszę podać e-mail i hasło</h2>
+                    <div class="logowanieDiv">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <label for="email">E-mail:</label>
+                            <input class="input" type="text" name="email" required><br>
+                            <label for="Password">Hasło:</label>
+                            <input type="password" name="Password" required><br>
+                         </div>
+                             <div class="log">
+                                 <input type="submit" value="Zaloguj!">
+                             </div>
+                     </form>
+                
             </div>
         </div>
-        </form>
     </div>
     </div>
+
 </body>
 
 </html>
