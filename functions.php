@@ -501,3 +501,13 @@ function getSchoolInformation() {
 
     echo 'Nazwa Szkoły: ' . $row['schoolName'] . '<br>' . 'Adres Szkoły: ' . $row['schoolAddress'] . '<br>' . 'Numer Teleofnu: ' . $row['schoolPhoneNumber'] . '<br>' . 'Dyrektor: ' . $row['schoolPrincipal'];
 }
+function CheckRanks(...$ranks)
+{
+    $t = false;
+    foreach ($ranks as $value) {
+        if(!in_array($value,$_SESSION["rank"])){
+            $t = true; 
+        }else $t = false;
+    }
+    return $t;
+}

@@ -346,12 +346,4 @@ div input[type="text"], div input[type="password"] {
    height: 100px;
  }
  
- /* Default State */
- .sendMessageBox {
-    display: none;
- }
- 
- /* Toggled State */
- input[type=checkbox]:checked ~ .sendMessageBox {
-    display: block;
- }
+

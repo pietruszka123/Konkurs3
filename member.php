@@ -1,6 +1,9 @@
 <?php
 include_once("header.php");
-
+if(!CheckRanks("nauczyciel")){
+    header('Location: /nauczyciel.php');
+    exit();
+}
 ?>
 
 <div class="grades">
