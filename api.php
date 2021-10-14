@@ -40,7 +40,7 @@
         case 'getMessageData':
             //checkifExists($data["messageId"]);
             header("HTTP/1.1 200 OK");
-            echo '{"status":true, "message":' .json_encode(array_values(viewMessage($data["messageId"],true))) . '}';
+            echo '{"status":true, "message":' .json_encode(array_values(viewMessage((int)$data["messageId"],true))) . '}';
             break;
         case 'getEndTime':
             header("HTTP/1.1 200 OK");

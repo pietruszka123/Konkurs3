@@ -93,8 +93,9 @@ function getUserGrades()
     $stmt->close();
 }
 
-function getUserMessages()
+function getUserMessages($ret = false)
 {
+    if($ret)$rarr = array();
     global $mysqli;
     global $error;
 
@@ -119,11 +120,14 @@ function getUserMessages()
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
+                    $TEMP = "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
                         <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
                     </button>";
+                    if($ret)array_push($rarr,$TEMP);
+                    else echo $TEMP;
                    
                 }
+                if($ret)return $rarr;
             }
             else
             {
@@ -137,8 +141,13 @@ function getUserMessages()
     }
     $stmt->close();
 }
-
-function viewMessage(int $messageId) {
+function getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName){
+    return "<div class=\"tempMessageBox\">
+    <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
+</div>";
+}
+function viewMessage(int $messageId,$ret = false) {
+    if($ret)$rarr = array();
     global $mysqli;
     global $error;
 
@@ -158,16 +167,16 @@ function viewMessage(int $messageId) {
                 while ($stmt->fetch())
                 {
                     $messageDate = strip_tags((string)$messageDate);
-                    $messageId = strip_tags((string)$messageId);
+                    $messageContent = strip_tags((string)$messageContent);
                     $messageTitle = strip_tags((string)$messageTitle);
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    echo "<div class=\"tempMessageBox\">
-                        <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
-                    </div>";
+                    if($ret)array_push($rarr,getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName));
+                    else echo getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName);
                    
                 }
+                if($ret)return $rarr;
             }
             else
             {
@@ -215,31 +224,22 @@ function viewAllReceivers()
     $stmt->close();
 }
 
-function sendMessage() {
+function sendMessage($Receiver,$title,$Content) {
     global $mysqli;
     global $error;
 
     $sql = "INSERT INTO `messages` (`senderId`, `receiverId`, `messageContent`, `messageTitle`) VALUES (?, ?, ?, ?)";
-
     if ($stmt = $mysqli->prepare($sql))
     {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [" . $_SESSION["selectReceiver"] . "]}"  ;
-        $messageContent = $_SESSION["messageInputContent"];
-        $messageTitle = $_SESSION["titleInputBox"];
+        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}"  ;
+        $messageContent = $Content;
+        $messageTitle = $title;
         if ($stmt->execute())
         {
-            $stmt->store_result();
-
-            if ($stmt->num_rows != 0)
-            {
-                echo "działa";
-            }
-            else
-            {
-                $error = $error . "UwU, somethin went wong.";
-            }
+            echo "{\"status\":true}";
+            $error = $error . "UwU, somethin went wong.";
         }
         else
         {
