@@ -355,7 +355,8 @@ function getDaysUntilEndOfYear()
 }
 
 
-function getUserComments($userID){
+function getUserComments($userID)
+{ //pobieranie uwag z dziennika
     global $mysqli;
     global $error;
 
