@@ -54,33 +54,7 @@ header h1{
     overflow-x: auto;
     padding-bottom: 2vw;
 }
-.bombel{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.heksagon{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.gwiazdka{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.plaster{
-    position: fixed;
-    padding-left: 21vw;
-    display: flex;
-    align-content: center;
-    width: 3.2vw;
-    height: 3.2vw;
-;
-}
+/*login i register*/
 .logowanie{
     background-color: rgb(96,145,233,60%);
     max-width: 29%;
@@ -148,8 +122,7 @@ div {
     color: #fff;
     text-align: center;
     background: rgb(136,105,210);
-    background: linear-gradient(
-90deg, rgba(136,105,210,1) 0%, rgba(132,203,234,1) 100%);
+    background: linear-gradient(90deg, rgba(136,105,210,1) 0%, rgba(132,203,234,1) 100%);
     width: 19.5vw;
     padding-left: 1.3vw;
     margin-top: 0.65vw;
@@ -158,6 +131,32 @@ div {
     border: none;
     cursor: pointer;
     filter: drop-shadow(0px 0px 0.06vw #6295EA);
+}
+.bombel{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.heksagon{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.gwiazdka{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.plaster{
+    position: fixed;
+    padding-left: 21vw;
+    display: flex;
+    align-content: center;
+    width: 3.2vw;
+    height: 3.2vw;
 }
 .container{
     padding: 2vw;
@@ -203,7 +202,7 @@ div input[type="text"]{
     justify-content: center;
     align-items: center;
 }
-
+/*chyba member*/
 .button {
     color: rgb(255, 255, 255);
     font-weight: 600;
