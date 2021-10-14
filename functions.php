@@ -14,7 +14,31 @@ if ($mysqli === false) {
 ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 100);
 session_start();
+function getClassSubjectGrades($classId,$subjectId){
+    global $mysqli;
+    global $error;
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? ORDER BY users.userId";
 
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("ss", $subjectId,$classId);
+        if ($stmt->execute()) {
+            $stmt->store_result();
+            if ($stmt->num_rows != 0) {
+                $stmt->bind_result($userFirstName, $userSecondName,$userLastName,$userId,$gradeScale);
+                $lastid = $userId;
+                while ($stmt->fetch()) {
+                    if($lastid != $userId){
+                        $lastid = $userId;
+                        echo "<tr><td>$userFirstName $userSecondName $userLastName</td>";
+                    }
+                    echo '<td><input type="text" value="'. $gradeScale .'"  id=""></td>';
+                }
+                return;
+            }
+        }
+    }
+    return "UwU, somethin went wong.";
+}
 function getUserGrades()
 {
     global $mysqli;
@@ -111,6 +135,8 @@ function getUserMessages($ret = false)
                 }
                 if ($ret) return $rarr;
             } else {
+                if ($ret) return array("0"=>"brak wiadomosci do wyświetlenia");
+                else echo "brak wiadomosci do wyświetlenia";
                 $error = $error . "UwU, somethin went wong.";
             }
         } else {
@@ -281,15 +307,6 @@ function sendMessage($Receiver, $title, $Content)
         }
     }
     $stmt->close();
-}*/
-
-
-/*function getContactData() {
-    global $mysqli;
-    global $error;
-
-    $sql = "SELECT userFirstName, userSecondName, userLastName, userPhoneNumber FROM `users` WHERE userId = ?";
-
 }*/
 function GetTime()
 {

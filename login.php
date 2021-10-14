@@ -74,11 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["email"] = $userEmail;
                             $obj = json_decode($userRank);
                             $_SESSION["rank"] = $obj->{'rank'};
-
-
                             if (in_array("uczen", $_SESSION["rank"])) {
                                 header("location: member.php");
                             } else {
+                                header("location: teacher.php");
                                 echo "nauczyciel";
                             }
                         } else {
