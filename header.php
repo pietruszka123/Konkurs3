@@ -20,6 +20,6 @@ include_once("functions.php");
 
     <div class="main-grid">
         <div class="content">
-        <header><img class="plaster" src="img/plaster.svg" alt="Plaster miodu"><p>Hive Grades</p></header>
+        <header><img class="plaster" src="plaster.svg" alt=""><p>Hive Grades</p></header>
             
         
