@@ -354,7 +354,9 @@ function getDaysUntilEndOfYear()
     echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
 }
 
-function getTimetable() {
+
+function getUserComments($userID)
+{ //pobieranie uwag z dziennika
     global $mysqli;
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
