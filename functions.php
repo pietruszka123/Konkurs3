@@ -7,8 +7,7 @@ define('DB_NAME', 'dziennik');
 
 $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-if ($mysqli === false)
-{
+if ($mysqli === false) {
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
 
@@ -23,21 +22,17 @@ function getUserGrades()
 
     $sql = "SELECT DISTINCT subjects.subjectId, subjects.subjectName FROM subjects, grades, users WHERE subjects.subjectId = grades.subjectId AND grades.studentId = ?";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $_SESSION["id"];
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($subjectId, $subjectName);
                 echo "<h1>Oceny</h1>";
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
 
                     echo "<div class=\"subjectGradesTitle\">";
                     echo "<h3>" . $subjectName . "</h3>";
@@ -49,21 +44,17 @@ function getUserGrades()
                     FROM users, grades WHERE grades.subjectId = ? AND grades.studentId = ? AND users.userId = grades.teacherId ORDER BY grades.gradeDate DESC LIMIT 5 ) 
                     as source order by gradeDate asc ";
 
-                    if ($stmt2 = $mysqli->prepare($sql2))
-                    {
-                        $stmt2->bind_param("ss",$subjectId, $param_id);
+                    if ($stmt2 = $mysqli->prepare($sql2)) {
+                        $stmt2->bind_param("ss", $subjectId, $param_id);
 
-                        if ($stmt2->execute())
-                        {
+                        if ($stmt2->execute()) {
                             $stmt2->store_result();
 
-                            if ($stmt2->num_rows != 0)
-                            {
+                            if ($stmt2->num_rows != 0) {
                                 $stmt2->bind_result($gradeScale, $gradeWeight, $userFirstName, $userSecondName, $userLastName, $gradeDescription, $gradeDate);
 
-                                while ($stmt2->fetch())
-                                {
-                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
+                                while ($stmt2->fetch()) {
+                                    echo "<div class=\"singleGrade grade" . $gradeScale . "\">";
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
@@ -79,14 +70,10 @@ function getUserGrades()
                     echo "</div>";
                     echo "<div class=\"hr\"></div>";
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             echo "UwU, somethin went wong.";
         }
     }
@@ -95,25 +82,21 @@ function getUserGrades()
 
 function getUserMessages($ret = false)
 {
-    if($ret)$rarr = array();
+    if ($ret) $rarr = array();
     global $mysqli;
     global $error;
 
     $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName FROM messages, users WHERE users.userId LIKE messages.senderId AND messages.receiverId LIKE ? ORDER BY messages.messageDate DESC";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = "%" . $_SESSION["id"] . "%";
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     $messageDate = strip_tags((string)$messageDate);
                     $messageId = strip_tags((string)$messageId);
                     $messageTitle = strip_tags((string)$messageTitle);
@@ -121,70 +104,58 @@ function getUserMessages($ret = false)
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
                     $TEMP = "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
                     </button>";
-                    if($ret)array_push($rarr,$TEMP);
+                    if ($ret) array_push($rarr, $TEMP);
                     else echo $TEMP;
-                   
                 }
-                if($ret)return $rarr;
-            }
-            else
-            {
+                if ($ret) return $rarr;
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             echo "UwU, somethin went wong.";
         }
     }
     $stmt->close();
 }
-function getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName){
+function getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName)
+{
     return "<div class=\"tempMessageBox\">
     <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
 </div>";
 }
-function viewMessage(int $messageId,$ret = false) {
-    if($ret)$rarr = array();
+function viewMessage(int $messageId, $ret = false)
+{
+    if ($ret) $rarr = array();
     global $mysqli;
     global $error;
 
     $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName, messages.messageContent FROM messages, users WHERE messages.messageId LIKE ? AND users.userId LIKE messages.senderId";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $messageId;
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName, $messageContent);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     $messageDate = strip_tags((string)$messageDate);
                     $messageContent = strip_tags((string)$messageContent);
                     $messageTitle = strip_tags((string)$messageTitle);
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    if($ret)array_push($rarr,getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName));
-                    else echo getMessageElement($messageContent,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName);
-                   
+                    if ($ret) array_push($rarr, getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName));
+                    else echo getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName);
                 }
-                if($ret)return $rarr;
-            }
-            else
-            {
+                if ($ret) return $rarr;
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             echo "UwU, somethin went wong.";
         }
     }
@@ -197,52 +168,41 @@ function viewAllReceivers()
 
     $sql = "SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName FROM users";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
-        if ($stmt->execute())
-        {
+    if ($stmt = $mysqli->prepare($sql)) {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($teacherId, $teacherFirstName, $teacherSecondName, $teacherLastName);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     echo "<option value=\"$teacherId\">$teacherFirstName $teacherSecondName $teacherLastName</option>";
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             echo "UwU, somethin went wong.";
         }
     }
     $stmt->close();
 }
 
-function sendMessage($Receiver,$title,$Content) {
+function sendMessage($Receiver, $title, $Content)
+{
     global $mysqli;
     global $error;
 
     $sql = "INSERT INTO `messages` (`senderId`, `receiverId`, `messageContent`, `messageTitle`) VALUES (?, ?, ?, ?)";
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}"  ;
+        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}";
         $messageContent = $Content;
         $messageTitle = $title;
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             echo "{\"status\":true}";
             $error = $error . "UwU, somethin went wong.";
-        }
-        else
-        {
+        } else {
             echo "UwU, somethin went wong.";
         }
     }
@@ -331,7 +291,8 @@ function sendMessage($Receiver,$title,$Content) {
     $sql = "SELECT userFirstName, userSecondName, userLastName, userPhoneNumber FROM `users` WHERE userId = ?";
 
 }*/
-function GetTime(){
+function GetTime()
+{
     //POBIERANIE Z BAZY TAK JAK W FUNKCJI NIŻEJ
     $koniecRoku = new DateTime('06/25/2022 12:00 PM');
     return $koniecRoku->getTimestamp();
@@ -355,29 +316,27 @@ function getDaysUntilEndOfYear()
 }
 
 
-function getUserComments($userID)
-{ //pobieranie uwag z dziennika
+function getTimetable()
+{
     global $mysqli;
 
-    if($_SERVER['REQUEST_METHOD'] == "POST") {
-        if(isset($_POST['backward'])) {
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if (isset($_POST['backward'])) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] - 1;
-        } else if(isset($_POST['forward'])) {
+        } else if (isset($_POST['forward'])) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] + 1;
-        } else if(isset($_POST['reset'])) {
+        } else if (isset($_POST['reset'])) {
             $_SESSION['timeTableDate'] = 0;
         }
     }
 
-    $sql="SELECT classId FROM `users` WHERE users.userId = ?";
+    $sql = "SELECT classId FROM `users` WHERE users.userId = ?";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $_SESSION["id"];
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
             $stmt->bind_result($classId);
             $stmt->fetch();
@@ -388,7 +347,7 @@ function getUserComments($userID)
             $result = $mysqli->query($sql);
 
             if ($result->num_rows != 0) {
-                while($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
                     if (!isset($row['substitureTeacherId'])) {
                         echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
                         echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
@@ -427,7 +386,6 @@ function getUserComments($userID)
                         echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
                     }
                 }
-
             } else {
                 echo 'Nie ma informacji';
             }
@@ -441,7 +399,8 @@ function getUserComments($userID)
     $stmt->close();
 }
 
-function getContactData() {
+function getContactData()
+{
     global $mysqli;
     global $error;
 
@@ -453,7 +412,7 @@ function getContactData() {
 
     $sql = "SELECT userFirstName, userSecondName, userLastName, userEmail, userPhoneNumber FROM `users` ORDER BY userLastName ASC ";
     $result = $mysqli->query($sql);
-    
+
     if ($result->num_rows != 0) {
         while ($row = $result->fetch_assoc()) {
             echo 'Nauczyciel: ' . $row['userFirstName'] . ' ' . $row['userSecondName'] . ' ' . $row['userLastName'] . ' ' . 'Email: ' . $row['userEmail'] . 'Numer telefonu: ' . $row['userPhoneNumber'] . '<br>';
@@ -463,9 +422,10 @@ function getContactData() {
     }
 }
 
-function getLuckyNumber() {
+function getLuckyNumber()
+{
     global $mysqli;
-    
+
     $sql = "SELECT * FROM `luckynumbers` ORDER BY databaseDate DESC";
     $result = $mysqli->query($sql);
 
@@ -475,7 +435,7 @@ function getLuckyNumber() {
         if ($row['databaseDate'] != date("Y-m-d")) {
             $luckyNumberFirst = rand(1, 15);
             $luckyNumberSecond = rand(16, 30);
-            
+
             $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
             $mysqli->query($sql);
 
@@ -494,7 +454,8 @@ function getLuckyNumber() {
     }
 }
 
-function getSchoolInformation() {
+function getSchoolInformation()
+{
     global $mysqli;
 
     $sql = "SELECT * FROM `schoolinformation`";
@@ -507,9 +468,9 @@ function CheckRanks(...$ranks)
 {
     $t = false;
     foreach ($ranks as $value) {
-        if(!in_array($value,$_SESSION["rank"])){
-            $t = true; 
-        }else $t = false;
+        if (!in_array($value, $_SESSION["rank"])) {
+            $t = true;
+        } else $t = false;
     }
     return $t;
 }
