@@ -1,23 +1,27 @@
 <?php
 include_once("header.php");
-if(!CheckRanks("nauczyciel")){
+if (!CheckRanks("nauczyciel")) {
     header('Location: /nauczyciel.php');
     exit();
 }
 ?>
-<div class="grades">
-    <div class="subjectGradesTable">
-        <?php
-        getUserGrades();
-
-        ?>
-
+<div class="Home">
+    <div class="element">
+        <div class="grades">
+            <div class="subjectGradesTable">
+                <?php
+                getUserGrades();
+                ?>
+            </div>
+        </div>
     </div>
-</div>
-<div class="daysUntilEndOfYear">
-    <?php
-    getDaysUntilEndOfYear()
-    ?>
+    <div class="element">
+        <div class="daysUntilEndOfYear">
+            <?php
+            getDaysUntilEndOfYear()
+            ?>
+        </div>
+    </div>
 </div>
 <script>
     /**skomentyj aby wyłączyć */
@@ -26,7 +30,7 @@ if(!CheckRanks("nauczyciel")){
         url: "/api.php/getEndTime",
         contentType: "application/json; charset=utf-8",
         success: function(response) {
-            var endDate = new Date(response.message*1000);
+            var endDate = new Date(response.message * 1000);
             setInterval(() => {
                 const today = new Date();
                 const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));

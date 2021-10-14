@@ -54,7 +54,33 @@ header h1{
     overflow-x: auto;
     padding-bottom: 2vw;
 }
-/*login i register*/
+.bombel{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.heksagon{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.gwiazdka{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.plaster{
+    position: fixed;
+    padding-left: 21vw;
+    display: flex;
+    align-content: center;
+    width: 3.2vw;
+    height: 3.2vw;
+;
+}
 .logowanie{
     background-color: rgb(96,145,233,60%);
     max-width: 29%;
@@ -122,7 +148,8 @@ div {
     color: #fff;
     text-align: center;
     background: rgb(136,105,210);
-    background: linear-gradient(90deg, rgba(136,105,210,1) 0%, rgba(132,203,234,1) 100%);
+    background: linear-gradient(
+90deg, rgba(136,105,210,1) 0%, rgba(132,203,234,1) 100%);
     width: 19.5vw;
     padding-left: 1.3vw;
     margin-top: 0.65vw;
@@ -131,32 +158,6 @@ div {
     border: none;
     cursor: pointer;
     filter: drop-shadow(0px 0px 0.06vw #6295EA);
-}
-.bombel{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.heksagon{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.gwiazdka{
-    position: fixed;
-    opacity: 70%;
-    width: 19.5vw;
-    height: 19.5vw;
-}
-.plaster{
-    position: fixed;
-    padding-left: 21vw;
-    display: flex;
-    align-content: center;
-    width: 3.2vw;
-    height: 3.2vw;
 }
 .container{
     padding: 2vw;
@@ -202,7 +203,7 @@ div input[type="text"]{
     justify-content: center;
     align-items: center;
 }
-/*chyba member*/
+
 .button {
     color: rgb(255, 255, 255);
     font-weight: 600;
@@ -212,23 +213,52 @@ div input[type="text"]{
     border-radius: 15px;
     box-shadow: 0px 0px 2px black;
 }
+.Home{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.element {
+    margin: 1vw;
+}
+
+.daysUntilEndOfYear {
+    background-color: rgb(96, 145, 233, 60%);
+    height: max-content;
+    border: white 0.06vw solid;
+    width: max-content;
+    padding: 1.5vw;
+}
+
+.daysUntilEndOfYear p {
+    background-color: rgb(96, 145, 233, 60%);
+    color: white;
+    font-size: 18px;
+}
 
 .grades {
-    background-color: var(--weakerColor);
+    background-color: rgb(96, 145, 233, 60%);
+    border: white 0.06vw solid;
     width: fit-content;
     height: fit-content;
     width: -moz-fit-content;
     height: -moz-fit-content;
-    min-width: 15vw;
+    min-width: 15%;
     padding: 1.5vw;
     filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
     border-radius: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Poppins', sans-serif;
     z-index: 1000;
 }
 
-.subjectGradesTable > h1 {
+.subjectGradesTable>h1 {
     margin-bottom: 10px;
+    color: white;
+}
+
+h3 {
+    color: white;
 }
 
 .subjectGradesTitle {
@@ -311,7 +341,7 @@ div input[type="text"]{
     transition-duration: 0.1s;
 }
 
-.gradeGreaterInfo > p {
+.gradeGreaterInfo>p {
     white-space: pre-wrap;
 }
 
@@ -328,7 +358,7 @@ div input[type="text"]{
     align-items: center;
 }
 
-.messagesButtons > button {
+.messagesButtons>button {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -336,20 +366,20 @@ div input[type="text"]{
     align-items: center;
 }
 
-.messagesButtons > button > p {
+.messagesButtons>button>p {
     font-size: 1.5vw;
 }
 
 .inputek[type=checkbox] {
     position: absolute;
     top: -9999px;
- }
+}
+
 .labelaToJeKlasa {
-   -webkit-appearance: push-button;
-   -moz-appearance: button; 
-   display: inline-block;
-   margin: 60px 0 10px 0;
-   cursor: pointer;
-   height: 100px;
- }
- 
+    -webkit-appearance: push-button;
+    -moz-appearance: button;
+    display: inline-block;
+    margin: 60px 0 10px 0;
+    cursor: pointer;
+    height: 100px;
+}

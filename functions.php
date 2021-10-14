@@ -348,10 +348,7 @@ function getDaysUntilEndOfYear()
     $minuty = $koniecRoku->diff($now)->i;
     $sekundy = $koniecRoku->diff($now)->s;
 
-    echo 'DNI DO KONCA ROKU: ' . $dni . "<br>";
-    echo 'GODZINY DO KONCA ROKU: ' . $godziny + 24 * $dni . "<br>";
-    echo 'MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . "<br>";
-    echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
+    echo '<p>DNI DO KONCA ROKU: ' . $dni .'</p>'. '<p>GODZINY DO KONCA ROKU: ' . $godziny + 24 * $dni . '</p>'.'<p>MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . '</p>'.'<p id="KS">SEKUNDY DO KONCA ROKU: ' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . '</p>';
 }
 
 function getTimetable() {
