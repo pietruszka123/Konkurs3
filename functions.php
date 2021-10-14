@@ -354,20 +354,12 @@ function getDaysUntilEndOfYear()
     echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
 }
 
-function getTimetable() {
+
+function getUserComments($userID){
     global $mysqli;
+    global $error;
 
-    if($_SERVER['REQUEST_METHOD'] == "POST") {
-        if(isset($_POST['backward'])) {
-            $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] - 1;
-        } else if(isset($_POST['forward'])) {
-            $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] + 1;
-        } else if(isset($_POST['reset'])) {
-            $_SESSION['timeTableDate'] = 0;
-        }
-    }
-
-    $sql="SELECT classId FROM `users` WHERE users.userId = ?";
+    $sql = "SELECT comments.commentType, comments.commentWeight, comments.commentContent, comments.commentDate, users.userFirstName, users.userSecondName, users.userLastName FROM comments, users WHERE comments.studentId = ? AND users.userId = comments.teacherId ORDER BY comments.commentDate DESC;";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -377,127 +369,41 @@ function getTimetable() {
         if ($stmt->execute())
         {
             $stmt->store_result();
-            $stmt->bind_result($classId);
-            $stmt->fetch();
 
-            $timeTableDate = $_SESSION['timeTableDate'];
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->bind_result($commentType, $commentWeight, $commentContent, $commentDate, $commentTeacherFirstName, $commentTeacherSecondName, $commentTeacherLastName);
+                while ($stmt->fetch())
+                {
+                    echo "<div class=\"singleComment\">
+                            <div class=\"commentTeacherData\">" . 
+                            $commentTeacherFirstName. " " . $commentTeacherSecondName. " " . $commentTeacherLastName . 
+                            "</div> 
+                            <div class=\"commentWeight\"
+                            <p> Waga: " . $commentWeight . "</p>
+                            </div>                            
+                             <div class=\"commentType\" 
+                             <p> Typ: ". $commentType ."</p>
+                             </div>
+                             <div class=\"commentContent\" 
+                             <p>". $commentContent ."</p> 
+                             </div>
+                             <div class=\"commentDate\" 
+                             <p>". $commentDate ."</p> 
+                             </div>";
 
-            $sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
-            $result = $mysqli->query($sql);
-
-            if ($result->num_rows != 0) {
-                while($row = $result->fetch_assoc()) {
-                    if (!isset($row['substitureTeacherId'])) {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
-
-                        $teacherId = $row['teacherId'];
-                        $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
-
-                        $subjectId = $row['subjectId'];
-                        $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
-                    } else {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
-
-                        $teacherId = $row['substituteTeacherId'];
-                        $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
-
-                        $subjectId = $row['substituteSubjectId'];
-                        $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
-                    }
+                    
                 }
-
-            } else {
-                echo 'Nie ma informacji';
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
             }
         }
+        else
+        {
+            echo "UwU, somethin went wong.";
+        }
     }
-
-    $currentDate = date("Y/m/d");
-    $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
-    echo $date;
-
     $stmt->close();
-}
-
-function getContactData() {
-    global $mysqli;
-    global $error;
-
-    $sql = "SELECT schoolPhoneNumber FROM schoolinformation";
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
-
-    echo 'Numer szkoły: ' . $row['schoolPhoneNumber'] . '<br>';
-
-    $sql = "SELECT userFirstName, userSecondName, userLastName, userEmail, userPhoneNumber FROM `users` ORDER BY userLastName ASC ";
-    $result = $mysqli->query($sql);
-    
-    if ($result->num_rows != 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo 'Nauczyciel: ' . $row['userFirstName'] . ' ' . $row['userSecondName'] . ' ' . $row['userLastName'] . ' ' . 'Email: ' . $row['userEmail'] . 'Numer telefonu: ' . $row['userPhoneNumber'] . '<br>';
-        }
-    } else {
-        $error = $error . "UwU, somethin went wong.";
-    }
-}
-
-function getLuckyNumber() {
-    global $mysqli;
-    
-    $sql = "SELECT * FROM `luckynumbers` ORDER BY databaseDate DESC";
-    $result = $mysqli->query($sql);
-
-    if ($result->num_rows != 0) {
-        $row = $result->fetch_assoc();
-
-        if ($row['databaseDate'] != date("Y-m-d")) {
-            $luckyNumberFirst = rand(1, 15);
-            $luckyNumberSecond = rand(16, 30);
-            
-            $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
-            $mysqli->query($sql);
-
-            echo $luckyNumberFirst . $luckyNumberSecond;
-        } else {
-            echo $row['luckyNumberFirst'] . $row['luckyNumberSecond'];
-        }
-    } else {
-        $luckyNumberFirst = rand(1, 15);
-        $luckyNumberSecond = rand(16, 30);
-
-        $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
-        $mysqli->query($sql);
-
-        echo $luckyNumberFirst . $luckyNumberSecond;
-    }
-}
-
-function getSchoolInformation() {
-    global $mysqli;
-
-    $sql = "SELECT * FROM `schoolinformation`";
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
-
-    echo 'Nazwa Szkoły: ' . $row['schoolName'] . '<br>' . 'Adres Szkoły: ' . $row['schoolAddress'] . '<br>' . 'Numer Teleofnu: ' . $row['schoolPhoneNumber'] . '<br>' . 'Dyrektor: ' . $row['schoolPrincipal'];
 }

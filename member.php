@@ -7,7 +7,6 @@ include_once("header.php");
     <div class="subjectGradesTable">
         <?php
         getUserGrades();
-
         ?>
 
     </div>
@@ -17,6 +16,11 @@ include_once("header.php");
     getDaysUntilEndOfYear()
     ?>
 </div>
+<div class="studentComments">
+    <?php
+    getUserComments($_SESSION["id"]);
+    ?>
+</div>
 <script>
     /**skomentyj aby wyłączyć */
     $.ajax({
@@ -24,7 +28,7 @@ include_once("header.php");
         url: "/api.php/getEndTime",
         contentType: "application/json; charset=utf-8",
         success: function(response) {
-            var endDate = new Date(response.message*1000);
+            var endDate = new Date(response.message * 1000);
             setInterval(() => {
                 const today = new Date();
                 const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
