@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Paź 2021, 15:20
+-- Czas generowania: 02 Wrz 2021, 12:47
 -- Wersja serwera: 10.4.14-MariaDB
--- Wersja PHP: 7.2.34
+-- Wersja PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -180,26 +180,6 @@ INSERT INTO `homework` (`homeworkId`, `subjectId`, `teacherId`, `creationDate`, 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `luckynumbers`
---
-
-CREATE TABLE `luckynumbers` (
-  `databaseDate` date NOT NULL,
-  `luckyNumberFirst` int(11) NOT NULL,
-  `luckyNumberSecond` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `luckynumbers`
---
-
-INSERT INTO `luckynumbers` (`databaseDate`, `luckyNumberFirst`, `luckyNumberSecond`) VALUES
-('2021-10-13', 15, 26),
-('2021-10-14', 15, 19);
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `meetings`
 --
 
@@ -217,7 +197,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`meetingId`, `teacherId`, `meetingDescription`, `meetingDate`, `meetingForm`, `meetingClassroom`) VALUES
-(1, 1, 'Spotykamy się, aby obmówić oralnie ważną sytuację ekonomii Polskiej metaamfetaminy', '2021-07-19 06:46:38', 'Irl', '694201337213769');
+(1, 1, 'Spotykamy się, aby obmówić oralnie ważną sytuację ekonomii Polskiej metamfetaminy', '2021-07-19 06:46:38', 'Irl', '694201337213769');
 
 -- --------------------------------------------------------
 
@@ -264,29 +244,7 @@ INSERT INTO `messages` (`messageId`, `senderId`, `receiverId`, `messageContent`,
 (17, 3, '{ \"id\": [1]}', 'asdfasdf', '2021-07-29 09:50:31', 'asdfasdf'),
 (18, 3, '{ \"id\": [1]}', 'test', '2021-07-29 09:50:37', 'test'),
 (19, 3, '{ \"id\": [1]}', 'test', '2021-07-29 10:51:01', 'test'),
-(20, 3, '{ \"id\": [1]}', 'wybierz auto ', '2021-09-02 12:35:41', 'Elo'),
-(21, 3, '{ \"id\": [3]}', 'jestes chuj', '2021-09-09 10:41:05', 'chuj'),
-(22, 3, '{ \"id\": [3]}', 'jestes chuj', '2021-09-09 10:41:09', 'chuj');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `schoolinformation`
---
-
-CREATE TABLE `schoolinformation` (
-  `schoolName` varchar(255) NOT NULL,
-  `schoolAddress` varchar(255) NOT NULL,
-  `schoolPhoneNumber` varchar(19) NOT NULL,
-  `schoolPrincipal` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Zrzut danych tabeli `schoolinformation`
---
-
-INSERT INTO `schoolinformation` (`schoolName`, `schoolAddress`, `schoolPhoneNumber`, `schoolPrincipal`) VALUES
-('Zespół Szkół Nr 1 im. Ignacego Łukasiewicza w Gorlicach nr 1', 'ul. Wyszyńskiego 18, 38,300 Gorlice, Polska', '(0-18) 353-60-40', 'Janusz Kryca');
+(20, 3, '{ \"id\": [1]}', 'wybierz auto ', '2021-09-02 12:35:41', 'Elo');
 
 -- --------------------------------------------------------
 
@@ -305,7 +263,7 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`subjectId`, `subjectName`, `teacherId`) VALUES
-(1, 'Teoretyczna Metaamfetamina Kwantowa', '{\r\n\"id\": [\"1\"]\r\n}'),
+(1, 'Teoretyczna Metamfetamina Kwantowa', '{\r\n\"id\": [\"1\"]\r\n}'),
 (2, 'Matematyka', '{\r\n\"id\": [\"4\"]\r\n}'),
 (3, 'Wychowanie Fizyczne', '{\r\n\"id\": [\"4\"]\r\n}'),
 (4, 'Polski', '{\r\n\"id\": \"7\"\r\n}'),
@@ -325,29 +283,23 @@ CREATE TABLE `timetables` (
   `subjectId` int(8) NOT NULL,
   `teacherId` int(8) NOT NULL,
   `classId` int(8) NOT NULL,
-  `classDateStart` datetime NOT NULL,
-  `classDateEnd` datetime NOT NULL,
+  `classDate` datetime NOT NULL,
   `classDescription` text DEFAULT NULL,
   `classroom` varchar(255) NOT NULL,
   `obligatory` varchar(255) NOT NULL,
   `substituteTeacherId` int(8) DEFAULT NULL,
   `substituteSubjectId` int(8) DEFAULT NULL,
   `substituteDescription` text DEFAULT NULL,
-  `substituteClassroom` varchar(255) DEFAULT NULL,
-  `cancelled` tinyint(1) NOT NULL
+  `substituteClassroom` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `timetables`
 --
 
-INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDateStart`, `classDateEnd`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`, `cancelled`) VALUES
-(1, 1, 1, 1, '2021-07-19 06:40:15', '2021-07-19 07:40:15', 'Teoretyka tworzenia metaamfetaminy', '42069', 'Tak', NULL, NULL, NULL, NULL, 0),
-(2, 4, 7, 1, '2021-07-30 11:15:16', '2021-07-30 12:15:16', 'Polska Polskość w Polsce na Polskiej Polszczyźnie', '2137', 'Nie', 8, 6, 'FIZYKAAA ', '2137', 0),
-(3, 6, 8, 1, '2021-10-14 14:09:51', '2021-10-14 15:09:51', 'Taka testowa lekcja.', '23', 'Tak', NULL, NULL, NULL, NULL, 0),
-(4, 2, 4, 1, '2021-10-15 14:11:33', '2021-10-15 15:11:33', 'Taka druga testowa lekcja.', '4B', 'Tak', NULL, NULL, NULL, NULL, 0),
-(5, 4, 7, 1, '2021-10-15 16:54:43', '2021-10-15 17:54:43', 'Omawianie Makbeta.', '2B', 'Tak', 1, 8, 'Chemia dziecki.', '3B', 0),
-(6, 3, 4, 1, '2021-10-15 18:57:06', '2021-10-15 19:57:06', 'WF!', 'a32', 'Tak', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDate`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`) VALUES
+(1, 1, 1, 1, '2021-07-19 06:40:15', 'Teoretyka tworzenia metaamfetaminy', '42069', 'Tak', NULL, NULL, NULL, NULL),
+(2, 4, 7, 1, '2021-07-30 11:15:16', 'Polska Polskość w Polsce na Polskiej Polszczyźnie', '2137', 'Nie', 8, 6, 'FIZYKAAA ', '2137');
 
 -- --------------------------------------------------------
 
@@ -490,7 +442,7 @@ ALTER TABLE `users`
   ADD KEY `classId` (`classId`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
@@ -545,19 +497,13 @@ ALTER TABLE `mentors`
 -- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `messageId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `messageId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT dla tabeli `subjects`
 --
 ALTER TABLE `subjects`
   MODIFY `subjectId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT dla tabeli `timetables`
---
-ALTER TABLE `timetables`
-  MODIFY `timetableId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`

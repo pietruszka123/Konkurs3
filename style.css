@@ -4,15 +4,13 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
-
 @import url('http://fonts.cdnfonts.com/css/honey-script');
-body {
+body{
     width: 100%;
 }
-
 :root {
     --darkerDiscordColor: rgb(41, 41, 41);
-    --mainBackgroundColor: rgb(236, 236, 236);
+    --mainBackgroundColor:  rgb(236, 236, 236); 
     --weakerColor: rgb(225, 230, 249);
     --weakColor: rgb(195, 214, 237);
     --mediumColor: rgb(170, 200, 226);
@@ -26,18 +24,16 @@ body {
     grid-template-rows: 1fr;
     height: 100vh;
 }
-
-header {
+header{
     width: 100%;
     height: 11%;
-    background-image: url("img/header.svg");
-    background-repeat: no-repeat;
+    background-image: url("header.svg");
+    background-repeat:no-repeat;
     background-size: 100%;
     display: flex;
     align-items: center;
 }
-
-header p {
+header h1{
     text-align: left;
     padding-left: 25vw;
     align-content: center;
@@ -46,56 +42,54 @@ header p {
     font-family: 'Honey Script', sans-serif;
 }
 
-.main-grid>.header>nav>ul>li {
+
+.main-grid > .header > nav > ul > li {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
 }
-
 .content {
-    background-image: url("img/honeycombbialy.svg"), linear-gradient(130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
+    background-image: url("honeycombbialy.svg"), linear-gradient(130deg, rgba(96,145,233,1) 0%, rgba(117,180,234,1) 50%, rgba(187,201,229,1) 100%);
     overflow: auto;
     overflow-x: auto;
     padding-bottom: 2vw;
 }
-
-.bombel {
+.bombel{
     position: fixed;
-    bottom: 3.2vw;
-    right: -7.48vw;
     opacity: 70%;
     width: 19.5vw;
     height: 19.5vw;
 }
-
-.heksagon {
+.heksagon{
     position: fixed;
     opacity: 70%;
-    left: 22vw;
-    bottom: 6.5vw;
     width: 19.5vw;
     height: 19.5vw;
 }
-
-.plaster {
-    position: absolute;
+.gwiazdka{
+    position: fixed;
+    opacity: 70%;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.plaster{
+    position: fixed;
     padding-left: 21vw;
     display: flex;
     align-content: center;
     width: 3.2vw;
     height: 3.2vw;
-    ;
+;
 }
-
-.logowanie {
-    background-color: rgb(96, 145, 233, 60%);
+.logowanie{
+    background-color: rgb(96,145,233,60%);
     max-width: 29%;
     width: 100%;
     height: fit-content;
     margin: 0 auto;
     margin-top: 4.5vw;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 1.3vw;
     top: 0.65vw;
     left: 0.65vw;
     outline: 0 none;
@@ -104,9 +98,11 @@ header p {
     padding-top: 1vw;
     border-radius: 1.3vw;
     border: white 0.06vw solid;
+    display: grid;
+
 }
 
-.logowanie h2 {
+.logowanie h2{
     font-family: Verdana, sans-serif;
     font-size: 1vw;
     font-weight: normal;
@@ -115,41 +111,35 @@ header p {
     display: block;
     box-shadow: none;
 }
-
-.logowanie div {
+.logowanie div{
     margin-top: 0.78vw;
     padding-left: 1.3vw;
     padding-right: 1.3vw;
     box-shadow: none;
 }
-
 div {
     display: block;
 }
-
-.logowanie label {
+.logowanie label{
     font-family: Verdana, sans-serif;
     font-size: 1.3vw;
     font-weight: normal;
     color: #fff;
     text-align: center;
     display: block;
+    
 }
-
-.logowanie div input,
-.logowanie div label {
+.logowanie div input, .logowanie div label{
     width: 19.5vw;
     text-align: left;
     border-radius: 0.65vw;
     font-size: 1.2vw;
 }
-
-.logowanieDiv {
+.logowanieDiv{
     display: flex;
     justify-content: center;
 }
-
-.logowanie input[type="submit"] {
+.logowanie input[type="submit"]{
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
@@ -157,8 +147,9 @@ div {
     font-style: normal;
     color: #fff;
     text-align: center;
-    background: rgb(136, 105, 210);
-    background: linear-gradient( 90deg, rgba(136, 105, 210, 1) 0%, rgba(132, 203, 234, 1) 100%);
+    background: rgb(136,105,210);
+    background: linear-gradient(
+90deg, rgba(136,105,210,1) 0%, rgba(132,203,234,1) 100%);
     width: 19.5vw;
     padding-left: 1.3vw;
     margin-top: 0.65vw;
@@ -168,24 +159,23 @@ div {
     cursor: pointer;
     filter: drop-shadow(0px 0px 0.06vw #6295EA);
 }
-
-.container {
+.container{
     padding: 2vw;
     display: grid;
     grid-template-columns: 1fr;
 }
-
-.log {
+.log{
     display: flex;
     justify-content: center;
+    
+}
+.log input[type="submit"]{
+border: solid 0.12vw white ;
+border-radius: 0.65vw;
 }
 
-.log input[type="submit"] {
-    border: solid 0.12vw white;
-    border-radius: 0.65vw;
-}
-
-.h1Default {
+.h1Default{
+    
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
     font-size: 3.58vw;
@@ -193,9 +183,7 @@ div {
     text-align: center;
     margin-bottom: 1.3vw;
 }
-
-div input[type="text"],
-div input[type="password"] {
+div input[type="text"], div input[type="password"] {
     border: 0.06vw solid #ffffff;
     margin-top: 0.25vw;
     height: 1.9vw;
@@ -203,6 +191,9 @@ div input[type="password"] {
     padding-left: 0.5vw;
     justify-content: center;
     filter: drop-shadow(0px 0px 0.06vw #6295EA);
+}
+div input[type="text"]{
+    margin-bottom: 0.9vw;
 }
 
 .center {
@@ -237,7 +228,7 @@ div input[type="password"] {
     z-index: 1000;
 }
 
-.subjectGradesTable>h1 {
+.subjectGradesTable > h1 {
     margin-bottom: 10px;
 }
 
@@ -321,7 +312,7 @@ div input[type="password"] {
     transition-duration: 0.1s;
 }
 
-.gradeGreaterInfo>p {
+.gradeGreaterInfo > p {
     white-space: pre-wrap;
 }
 
@@ -338,7 +329,7 @@ div input[type="password"] {
     align-items: center;
 }
 
-.messagesButtons>button {
+.messagesButtons > button {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -346,52 +337,29 @@ div input[type="password"] {
     align-items: center;
 }
 
-.messagesButtons>button>p {
+.messagesButtons > button > p {
     font-size: 1.5vw;
 }
 
 .inputek[type=checkbox] {
     position: absolute;
     top: -9999px;
-}
-
+ }
 .labelaToJeKlasa {
-    -webkit-appearance: push-button;
-    -moz-appearance: button;
-    display: inline-block;
-    margin: 60px 0 10px 0;
-    cursor: pointer;
-    height: 100px;
-}
-
-
-/* Default State */
-
-.sendMessageBox {
+   -webkit-appearance: push-button;
+   -moz-appearance: button; 
+   display: inline-block;
+   margin: 60px 0 10px 0;
+   cursor: pointer;
+   height: 100px;
+ }
+ 
+ /* Default State */
+ .sendMessageBox {
     display: none;
-}
-
-
-/* Toggled State */
-
-input[type=checkbox]:checked~.sendMessageBox {
+ }
+ 
+ /* Toggled State */
+ input[type=checkbox]:checked ~ .sendMessageBox {
     display: block;
-}
-
-.studentComments {
-    background-color: var(--weakerColor);
-    width: fit-content;
-    height: fit-content;
-    width: -moz-fit-content;
-    height: -moz-fit-content;
-    min-width: 15vw;
-    padding: 1.5vw;
-    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
-    border-radius: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
-    z-index: 1000;
-}
-
-.singleComment {
-    background-color: red;
-}
+ }
