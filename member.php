@@ -5,7 +5,6 @@ if(!CheckRanks("nauczyciel")){
     exit();
 }
 ?>
-
 <div class="grades">
     <div class="subjectGradesTable">
         <?php

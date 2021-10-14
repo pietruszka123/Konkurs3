@@ -51,7 +51,7 @@ function getUserGrades()
 
                     if ($stmt2 = $mysqli->prepare($sql2))
                     {
-                        $stmt2->bind_param("ss", $subjectId, $param_id);
+                        $stmt2->bind_param("ss",$subjectId, $param_id);
 
                         if ($stmt2->execute())
                         {
@@ -63,7 +63,7 @@ function getUserGrades()
 
                                 while ($stmt2->fetch())
                                 {
-                                    echo "<div class=\"singleGrade grade" . $gradeScale . "\">";
+                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
@@ -92,14 +92,9 @@ function getUserGrades()
     }
     $stmt->close();
 }
-function getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName){
-    return "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
-    <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName</p>
-</button>";
-}
-function getUserMessages($ret = false)
+
+function getUserMessages()
 {
-    if($ret)$rarr = array();
     global $mysqli;
     global $error;
 
@@ -124,11 +119,11 @@ function getUserMessages($ret = false)
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    if($ret)array_push($rarr,getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName));
-                    else echo getMessageElement($messageId,$messageDate,$messageTitle,$userFirstName,$userSecondName,$userLastName);
-                    
+                    echo "<button name=\"messageId\" value=\"$messageId\" type=\"submit\">
+                        <p>$messageTitle </p> <p>\"". $messageDate ."\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+                    </button>";
+                   
                 }
-                if($ret)return $rarr;
             }
             else
             {
@@ -143,9 +138,7 @@ function getUserMessages($ret = false)
     $stmt->close();
 }
 
-function viewMessage(int $messageId,$ret = false)
-{
-    if($ret)$rarr = array();
+function viewMessage(int $messageId) {
     global $mysqli;
     global $error;
 
@@ -170,17 +163,15 @@ function viewMessage(int $messageId,$ret = false)
                     $userFirstName = strip_tags((string)$userFirstName);
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
-                    $temp = "<div class=\"tempMessageBox\">
+                    echo "<div class=\"tempMessageBox\">
                         <p>$messageTitle</p> <p>$messageDate</p> <p>$userFirstName $userSecondName $userLastName</p> <p>$messageContent</p>
                     </div>";
-                    if($ret)array_push($rarr,$temp);
-                    else echo $temp;
+                   
                 }
-                if($ret)return $rarr;
             }
             else
             {
-                $error .= "UwU, somethin went wong.";
+                $error = $error . "UwU, somethin went wong.";
             }
         }
         else
@@ -224,22 +215,31 @@ function viewAllReceivers()
     $stmt->close();
 }
 
-function sendMessage($Receiver,$title,$Content) {
+function sendMessage() {
     global $mysqli;
     global $error;
 
     $sql = "INSERT INTO `messages` (`senderId`, `receiverId`, `messageContent`, `messageTitle`) VALUES (?, ?, ?, ?)";
+
     if ($stmt = $mysqli->prepare($sql))
     {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}"  ;
-        $messageContent = $Content;
-        $messageTitle = $title;
+        $receiverId = "{ \"id\": [" . $_SESSION["selectReceiver"] . "]}"  ;
+        $messageContent = $_SESSION["messageInputContent"];
+        $messageTitle = $_SESSION["titleInputBox"];
         if ($stmt->execute())
         {
-            echo "{\"status\":true}";
-            $error = $error . "UwU, somethin went wong.";
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0)
+            {
+                echo "działa";
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
+            }
         }
         else
         {
@@ -281,7 +281,7 @@ function sendMessage($Receiver,$title,$Content) {
 
                     if ($stmt2 = $mysqli->prepare($sql2))
                     {
-                        $stmt2->bind_param("ss", $subjectId, $param_id);
+                        $stmt2->bind_param("ss",$subjectId, $param_id);
 
                         if ($stmt2->execute())
                         {
@@ -293,7 +293,7 @@ function sendMessage($Receiver,$title,$Content) {
 
                                 while ($stmt2->fetch())
                                 {
-                                    echo "<div class=\"singleGrade grade" . $gradeScale . "\">";
+                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";

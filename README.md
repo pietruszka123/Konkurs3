@@ -38,7 +38,7 @@ ciąg dalszy informacji
 > - uwagi 
 > - zastępstwa
 > - informacje o szkole
-> - [x] wiadomości
+> - wiadomości
 > - szczęśliwy numerek
-> - [x] Dane kontaktowe do nauczycieli (emaile i nr telefonów) i do sekretariatu
+> - ☑ Dane kontaktowe do nauczycieli (emaile i nr telefonów) i do sekretariatu
 

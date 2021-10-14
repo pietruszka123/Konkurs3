@@ -12,9 +12,9 @@
     <?php
     include_once("header.php");
     ?>
-    <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
-    <img class="bombel" src="bombel.png" alt="">
-    <img class="heksagon"src="heksagon.svg" alt="">
+    <img class="bombel" src="bombel.png" alt=""Style="left: 15vw; bottom: 4.5vw;">
+    <img class="heksagon"src="heksagon.svg" alt=""style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
+    <img class="gwiazdka"src="gwiazdka.svg" alt=""style="top: 5vw; right:20vw;transform:rotate(45deg);">
         <div class="container">
             <div class="logowanie">  
                     <h1 class="h1Default">Logowanie</h1>
@@ -27,7 +27,7 @@
                             <input type="password" name="password" required><br>
                          </div>
                              <div class="log">
-                                 <input type="submit" value="Zaloguj!">
+                                 <input type="submit" value="Zaloguj">
                              </div>
                      </form>
                 

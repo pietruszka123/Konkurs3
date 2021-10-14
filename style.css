@@ -33,7 +33,7 @@ header{
     display: flex;
     align-items: center;
 }
-header p{
+header h1{
     text-align: left;
     padding-left: 25vw;
     align-content: center;
@@ -56,8 +56,6 @@ header p{
 }
 .bombel{
     position: fixed;
-    bottom: 3.2vw;
-    right: -7.48vw;
     opacity: 70%;
     width: 19.5vw;
     height: 19.5vw;
@@ -65,13 +63,17 @@ header p{
 .heksagon{
     position: fixed;
     opacity: 70%;
-    left: 22vw;
-    bottom: 6.5vw;
+    width: 19.5vw;
+    height: 19.5vw;
+}
+.gwiazdka{
+    position: fixed;
+    opacity: 70%;
     width: 19.5vw;
     height: 19.5vw;
 }
 .plaster{
-    position: absolute;
+    position: fixed;
     padding-left: 21vw;
     display: flex;
     align-content: center;
@@ -87,7 +89,7 @@ header p{
     margin: 0 auto;
     margin-top: 4.5vw;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 1.3vw;
     top: 0.65vw;
     left: 0.65vw;
     outline: 0 none;
@@ -96,6 +98,8 @@ header p{
     padding-top: 1vw;
     border-radius: 1.3vw;
     border: white 0.06vw solid;
+    display: grid;
+
 }
 
 .logowanie h2{
@@ -123,6 +127,7 @@ div {
     color: #fff;
     text-align: center;
     display: block;
+    
 }
 .logowanie div input, .logowanie div label{
     width: 19.5vw;
@@ -186,6 +191,9 @@ div input[type="text"], div input[type="password"] {
     padding-left: 0.5vw;
     justify-content: center;
     filter: drop-shadow(0px 0px 0.06vw #6295EA);
+}
+div input[type="text"]{
+    margin-bottom: 0.9vw;
 }
 
 .center {
@@ -346,4 +354,3 @@ div input[type="text"], div input[type="password"] {
    height: 100px;
  }
  
-
