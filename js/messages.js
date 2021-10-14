@@ -36,7 +36,7 @@ function initButtons() {
             $.ajax({
                 type: "post",
                 url: "/api.php/getMessageData",
-                data: JSON.stringify({ messageId: parseInt(this.id) }),
+                data: JSON.stringify({ messageId: this.id }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
