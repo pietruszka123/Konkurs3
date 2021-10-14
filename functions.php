@@ -249,7 +249,7 @@ function sendMessage($Receiver,$title,$Content) {
     $stmt->close();
 }
 
-function getTimetable()
+/*function getTimetable()
 {
     global $mysqli;
     global $error;
@@ -321,7 +321,7 @@ function getTimetable()
         }
     }
     $stmt->close();
-}
+}*/
 
 
 /*function getContactData() {
