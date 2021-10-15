@@ -6,12 +6,12 @@
 }
 
 html {
-    background-image: url("img/honeycombbialy.svg"), linear-gradient(130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
+    background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
     width: 100vw;
     height: 100vh;
 }
 
-@import url('http://fonts.cdnfonts.com/css/honey-script');
+@import url("http://fonts.cdnfonts.com/css/honey-script");
 body {
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@ body {
 
 header {
     width: 100%;
-    height: 11%;
+    height: 20px;
     background-image: url("img/header.svg");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -48,7 +48,7 @@ header h1 {
     align-content: center;
     font-size: 3.5vw;
     font-weight: 400;
-    font-family: 'Honey Script', sans-serif;
+    font-family: "Honey Script", sans-serif;
 }
 
 .bombel {
@@ -79,7 +79,6 @@ header h1 {
     align-content: center;
     width: 3.2vw;
     height: 3.2vw;
-    ;
 }
 
 .logowanie {
@@ -140,7 +139,7 @@ div {
 
 .logowanie input[type="submit"] {
     text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 300;
     font-size: 1.5vw;
     font-style: normal;
@@ -155,7 +154,9 @@ div {
     height: 2.9vw;
     border: none;
     cursor: pointer;
-    filter: drop-shadow(0px 0px 0.06vw #6295EA);
+    filter: drop-shadow(0px 0px 0.06vw #6295ea);
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .container {
@@ -175,7 +176,7 @@ div {
 }
 
 .h1Default {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 300;
     font-size: 3.58vw;
     color: #fff;
@@ -191,7 +192,7 @@ div input[type="password"] {
     font-size: 0.9vw;
     padding-left: 0.5vw;
     justify-content: center;
-    filter: drop-shadow(0px 0px 0.06vw #6295EA);
+    filter: drop-shadow(0px 0px 0.06vw #6295ea);
 }
 
 div input[type="text"] {
@@ -209,7 +210,7 @@ div input[type="text"] {
 .button {
     color: rgb(255, 255, 255);
     font-weight: 600;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     padding: 7px;
     background-color: rgb(63, 63, 63);
     border-radius: 15px;
@@ -226,7 +227,10 @@ div input[type="text"] {
 .element {
     margin: 1vw;
 }
+
+
 /* Wyświetlane divy */
+
 .daysUntilEndOfYear {
     background-color: rgb(96, 145, 233, 60%);
     height: 6.822916666666667vw;
@@ -236,9 +240,11 @@ div input[type="text"] {
     width: 19vw;
     padding: 1.5vw;
 }
-.daysUntilEndOfYear h3{
+
+.daysUntilEndOfYear h3 {
     font-size: 1.17vw;
 }
+
 .daysUntilEndOfYear p {
     color: white;
     font-size: 1.17vw;
@@ -250,15 +256,16 @@ div input[type="text"] {
     border: white 0.06vw solid;
     width: 24vw;
     height: 30.5vw;
-    width: -moz-fit-content;
-    height: -moz-fit-content;
     min-width: 15%;
     padding: 1.5vw;
     filter: drop-shadow(0vw 0vw 0.39vw rgb(109, 109, 109));
     border-radius: 1.3vw;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
+
 .studentComments {
     background-color: rgb(96, 145, 233, 60%);
     font-size: 1vw;
@@ -268,35 +275,67 @@ div input[type="text"] {
     padding: 1.5vw;
     filter: drop-shadow(0vw 0vw 0.39vw rgb(109, 109, 109));
     border-radius: 1.3vw;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     z-index: 1000;
     width: 25%;
     min-width: 26.041666666666668vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-.singleComment div{
+
+.singleComment div {
     color: white;
 }
+
 .singleComment {
     color: white;
-    background-color: rgba(134,97,209,70%);
+    height: max-content;
+    background-color: rgba(134, 97, 209, 100%);
     padding: 0.4vw;
     font-size: 0.9765625vw;
     margin: 0.1vw;
     border: white 0.06vw solid;
     border-radius: 1.3vw;
-    filter: drop-shadow(0vw 0vw 0.5vw green);
+    margin-bottom: 1.953125vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
-.singleCommentNegatywna{
-    color: white;
-    background-color: rgba(134,97,209,70%);
-    padding: 0.4vw;
-    font-size: 0.9765625vw;
-    margin: 0.1vw;
-    border: white 0.06vw solid;
-    border-radius: 1.3vw;
+
+.commentDate {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    margin: 0;
+}
+
+.commentContent {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.singleComment p {
+    color: rgb(199, 199, 174);
+}
+
+.negatywna {
     filter: drop-shadow(0vw 0vw 0.5vw red);
 }
+
+.pozytywna {
+    filter: drop-shadow(0vw 0vw 0.5vw lime);
+}
+
 .subjectGradesTable>h1 {
+    margin-bottom: 0.65vw;
+    color: white;
+}
+
+.Uwagititle h1 {
     margin-bottom: 0.65vw;
     color: white;
 }
@@ -315,9 +354,10 @@ h3 {
 }
 
 .singleGrade {
-    margin-right: 2vw;
-    width: 5vh;
-    height: 5vh;
+    margin-right: 1vw;
+    margin-bottom: 0.5vw;
+    width: 2.5vw;
+    height: 2.5vw;
     min-width: 1.6vw;
     min-height: 1.6vw;
     display: flex;
@@ -335,7 +375,7 @@ h3 {
     height: 0.052vw;
     width: auto;
     border: none;
-    background-color: rgb(56, 56, 56);
+    background-color: rgb(255, 255, 255);
 }
 
 .grade1 {
@@ -366,11 +406,27 @@ h3 {
     position: relative;
 }
 
+.element::-webkit-scrollbar-track {
+    border-radius: 0.6510416666666666vw;
+    height: 80%;
+    margin-top: 0.7vw;
+    margin-bottom: 0.7vw;
+}
+
+.element::-webkit-scrollbar {
+    width: 0.6510416666666666vw;
+}
+
+.element::-webkit-scrollbar-thumb {
+    border-radius: 0.6510416666666666vw;
+    border: 2px rgba(255, 255, 255, 70%) solid;
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.44, rgb(96, 145, 233, 100%)), color-stop(0.86, rgba(134, 97, 209, 100%)));
+}
+
 .gradeGreaterInfo {
     visibility: hidden;
     width: fit-content;
     height: fit-content;
-    background-color: var(--weakColor);
     color: rgb(0, 0, 0);
     text-align: left;
     white-space: nowrap;
@@ -378,11 +434,12 @@ h3 {
     border-radius: 0.19vw;
     padding: 0.65vw;
     position: absolute;
-    z-index: 1000;
+    z-index: 10000;
     left: 2.9vw;
     top: 0.52vw;
     opacity: 0%;
     transition-duration: 0.1s;
+    background-color: #4885f7;
 }
 
 .gradeGreaterInfo>p {
@@ -414,7 +471,7 @@ h3 {
     font-size: 1.5vw;
 }
 
-.inputek[type=checkbox] {
+.inputek[type="checkbox"] {
     position: absolute;
     top: -9999px;
 }
@@ -427,6 +484,7 @@ h3 {
     cursor: pointer;
     height: 6.51vw;
 }
+
 .logReg h2 {
     color: #4885f7;
     -webkit-text-stroke: 1px #d1e0ff;

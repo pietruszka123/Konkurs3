@@ -6,25 +6,41 @@ if (CheckRanks("nauczyciel"))
     exit();
 }
 ?>
-    <div class="grades element">
-        <div class="subjectGradesTable">
-            <?php
-            getUserGrades();
-            ?>
 
-        </div>
-    </div>
-    <div class="daysUntilEndOfYear element">
+<div class="grades element">
+    <div class="subjectGradesTable">
         <?php
-        getDaysUntilEndOfYear()
+        getUserGrades();
         ?>
     </div>
+</div>
+<div class="timeTable element">
 
-    <div class="studentComments element">
-        <?php
-        getUserComments($_SESSION["id"]);
-        ?>
-    </div>
+    <?php
+    getTimetable();
+    ?>
+
+    <form method="POST">
+        <input type="submit" name="backward" value="<">
+        <input type="submit" name="reset" value="Today">
+        <input type="submit" name="forward" value=">">
+    </form>
+</div>
+
+<div class="daysUntilEndOfYear element">
+    <?php
+    getDaysUntilEndOfYear()
+    ?>
+</div>
+
+<div class="studentComments element">
+    <?php
+    getUserComments($_SESSION["id"]);
+    ?>
+</div>
+
+
+
 <script>
     /**skomentyj aby wyłączyć */
     $.ajax({
