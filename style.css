@@ -226,19 +226,20 @@ div input[type="text"] {
 .element {
     margin: 1vw;
 }
-
+/* Wyświetlane divy */
 .daysUntilEndOfYear {
     background-color: rgb(96, 145, 233, 60%);
     height: max-content;
     border: white 0.06vw solid;
+    border-radius: 0.65vw;
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
     width: max-content;
     padding: 1.5vw;
 }
 
 .daysUntilEndOfYear p {
-    background-color: rgb(96, 145, 233, 60%);
     color: white;
-    font-size: 18px;
+    font-size: 1.17vw;
 }
 
 .grades {
@@ -255,7 +256,17 @@ div input[type="text"] {
     font-family: 'Poppins', sans-serif;
     z-index: 1000;
 }
-
+.studentComments {
+    background-color: var(--weakerColor);
+    min-width: 10vw;
+    padding: 1.5vw;
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+    border-radius: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 1000;
+    width: 25%;
+    min-width: 400px;
+}
 .subjectGradesTable>h1 {
     margin-bottom: 10px;
     color: white;
@@ -388,17 +399,7 @@ h3 {
     height: 100px;
 }
 
-.studentComments {
-    background-color: var(--weakerColor);
-    min-width: 10vw;
-    padding: 1.5vw;
-    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
-    border-radius: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
-    z-index: 1000;
-    width: 25%;
-    min-width: 400px;
-}
+
 
 .singleComment {
     background-color: red;
