@@ -511,24 +511,44 @@ function getUserComments($userID){
                 $stmt->bind_result($commentType, $commentWeight, $commentContent, $commentDate, $commentTeacherFirstName, $commentTeacherSecondName, $commentTeacherLastName);
                 while ($stmt->fetch())
                 {
-                    echo "<div class=\"singleComment\">
-                            <div class=\"commentTeacherData\">" . 
-                            $commentTeacherFirstName. " " . $commentTeacherSecondName. " " . $commentTeacherLastName . 
-                            "</div> 
-                            <div class=\"commentWeight\"
-                            <p> Waga: " . $commentWeight . "</p>
-                            </div>                            
-                             <div class=\"commentType\" 
-                             <p> Typ: ". $commentType ."</p>
-                             </div>
-                             <div class=\"commentContent\" 
-                             <p>". $commentContent ."</p> 
-                             </div>
-                             <div class=\"commentDate\" 
-                             <p>". $commentDate ."</p> 
-                             </div></div>";
-
-                    
+                    if($commentType=="Negatywna Uwaga"){
+                        echo "<div class=\"singleCommentNegatywna\" >
+                        <div class=\"commentTeacherData\">" . 
+                        $commentTeacherFirstName. " " . $commentTeacherSecondName. " " . $commentTeacherLastName . 
+                        "</div> 
+                        <div class=\"commentWeight\"
+                        <p> Waga: " . $commentWeight . "</p>
+                        </div>                            
+                         <div class=\"commentType\" 
+                         
+                         <p> Typ: ". $commentType ."</p>
+                         </div>
+                         <div class=\"commentContent\" 
+                         <p>". $commentContent ."</p> 
+                         </div>
+                         <div class=\"commentDate\" 
+                         <p>". $commentDate ."</p> 
+                         </div></div>"; 
+                    }
+                    else{
+                        echo "<div class=\"singleComment\" >
+                        <div class=\"commentTeacherData\">" . 
+                        $commentTeacherFirstName. " " . $commentTeacherSecondName. " " . $commentTeacherLastName . 
+                        "</div> 
+                        <div class=\"commentWeight\"
+                        <p> Waga: " . $commentWeight . "</p>
+                        </div>                            
+                         <div class=\"commentType\" 
+                         
+                         <p> Typ: ". $commentType ."</p>
+                         </div>
+                         <div class=\"commentContent\" 
+                         <p>". $commentContent ."</p> 
+                         </div>
+                         <div class=\"commentDate\" 
+                         <p>". $commentDate ."</p> 
+                         </div></div>"; 
+                    }
                 }
             }
             else
