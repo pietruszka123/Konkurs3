@@ -390,16 +390,14 @@ h3 {
 
 .studentComments {
     background-color: var(--weakerColor);
-    width: fit-content;
-    height: fit-content;
-    width: -moz-fit-content;
-    height: -moz-fit-content;
-    min-width: 15vw;
+    min-width: 10vw;
     padding: 1.5vw;
     filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
     border-radius: 10px;
     font-family: 'Source Sans Pro', sans-serif;
     z-index: 1000;
+    width: 25%;
+    min-width: 400px;
 }
 
 .singleComment {
