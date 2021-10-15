@@ -1,33 +1,30 @@
 <?php
 include_once("header.php");
-if(CheckRanks("nauczyciel")){
+if (CheckRanks("nauczyciel"))
+{
     header('Location: /teacher.php');
     exit();
 }
 ?>
-<div class="Home">
-    <div class="element">
-        <div class="grades">
-            <div class="subjectGradesTable">
-                <?php
-                getUserGrades();
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="element">
-        <div class="daysUntilEndOfYear">
+    <div class="grades element">
+        <div class="subjectGradesTable">
             <?php
-            getDaysUntilEndOfYear()
+            getUserGrades();
             ?>
+
         </div>
     </div>
-    <div class="studentComments">
-    <?php
-    getUserComments($_SESSION["id"]);
-    ?>
-</div>
-</div>
+    <div class="daysUntilEndOfYear element">
+        <?php
+        getDaysUntilEndOfYear()
+        ?>
+    </div>
+
+    <div class="studentComments element">
+        <?php
+        getUserComments($_SESSION["id"]);
+        ?>
+    </div>
 <script>
     /**skomentyj aby wyłączyć */
     $.ajax({
