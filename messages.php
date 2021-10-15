@@ -28,7 +28,7 @@ include_once "header.php";
     <input type="button" class="sendMessageButton" value="wysjil">
 
 </div>
-<script src="/js/messages.js"></script>
+<script src="js/messages.js"></script>
 
 
 
