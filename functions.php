@@ -326,10 +326,10 @@ function getDaysUntilEndOfYear()
     $minuty = $koniecRoku->diff($now)->i;
     $sekundy = $koniecRoku->diff($now)->s;
 
-    echo 'DNI DO KONCA ROKU: ' . $dni . "<br>";
-    echo 'GODZINY DO KONCA ROKU: ' . $godziny + 24 * $dni . "<br>";
-    echo 'MINUTY DO KONCA ROKU: ' . $minuty + $godziny * 60 + 60 * 24 * $dni . "<br>";
-    echo 'SEKUNDY DO KONCA ROKU: <p id="KS">' . $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni . "</p><br>";
+    echo '<h3> Do końca roku szkolnego pozostało:</h3><p>' . $dni . " dni</p><p>" . 
+    $godziny + 24 * $dni . " godziny</p><p>" .
+    $minuty + $godziny * 60 + 60 * 24 * $dni . " minut</p><p>" .
+     $sekundy + 60 * $minuty + 60 * 60 * $godziny + 60 * 60 * 24 * $dni .  " sekund</p>" ;
 }
 
 
@@ -526,7 +526,7 @@ function getUserComments($userID){
                              </div>
                              <div class=\"commentDate\" 
                              <p>". $commentDate ."</p> 
-                             </div>";
+                             </div></div>";
 
                     
                 }

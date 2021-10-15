@@ -23,6 +23,6 @@ include_once("functions.php");
         <h1>Hive Grades</h1>
     </header>
 
-        <div class="content">
+    
 
             <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
