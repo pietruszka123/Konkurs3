@@ -48,10 +48,6 @@ include_once("header.php");
                  minut</p><p>
                 ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}
                  sekund</p>`)
-
-
-
-
                 //`<>DNI DO KONCA ROKU: ${days}<br>GODZINY DO KONCA ROKU: ${hours + 24 * days}<br>;MINUTY DO KONCA ROKU: ${minutes + hours * 60 + 60 * 24 * days}<br>;SEKUNDY DO KONCA ROKU: ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}<br>`)
             }, 1000)
         }
