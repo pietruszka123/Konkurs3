@@ -18,6 +18,7 @@ include_once("header.php");
             <input type="submit" value="Zaloguj">
         </div>
         </form>
+        <h2 style="text-align:center;padding-top:1vw;padding-bottom:0.4vw;">Nie masz jeszcze konta?</h2>             <a href="register.php" class="logReg"><h2>Zarejestruj się, teraz!</h2></a>
 
     </div>
 

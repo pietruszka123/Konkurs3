@@ -404,3 +404,12 @@ h3 {
     background-color: red;
     margin: 1%;
 }
+
+.logReg h2 {
+    color: #4885f7;
+    -webkit-text-stroke: 1px #d1e0ff;
+    font-size: 1.3vw;
+    font-weight: 550;
+    text-align: center;
+    text-decoration: underline;
+}
