@@ -491,3 +491,55 @@ function CheckRanks(...$ranks)
     }
     return $t;
 }
+function getUserComments($userID){
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT comments.commentType, comments.commentWeight, comments.commentContent, comments.commentDate, users.userFirstName, users.userSecondName, users.userLastName FROM comments, users WHERE comments.studentId = ? AND users.userId = comments.teacherId ORDER BY comments.commentDate DESC;";
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        $stmt->bind_param("s", $param_id);
+        $param_id = $_SESSION["id"];
+
+        if ($stmt->execute())
+        {
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->bind_result($commentType, $commentWeight, $commentContent, $commentDate, $commentTeacherFirstName, $commentTeacherSecondName, $commentTeacherLastName);
+                while ($stmt->fetch())
+                {
+                    echo "<div class=\"singleComment\">
+                            <div class=\"commentTeacherData\">" . 
+                            $commentTeacherFirstName. " " . $commentTeacherSecondName. " " . $commentTeacherLastName . 
+                            "</div> 
+                            <div class=\"commentWeight\"
+                            <p> Waga: " . $commentWeight . "</p>
+                            </div>                            
+                             <div class=\"commentType\" 
+                             <p> Typ: ". $commentType ."</p>
+                             </div>
+                             <div class=\"commentContent\" 
+                             <p>". $commentContent ."</p> 
+                             </div>
+                             <div class=\"commentDate\" 
+                             <p>". $commentDate ."</p> 
+                             </div>";
+
+                    
+                }
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
+            }
+        }
+        else
+        {
+            echo "UwU, somethin went wong.";
+        }
+    }
+    $stmt->close();
+}

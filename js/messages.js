@@ -6,12 +6,13 @@ function sendMessage(Content, title, Receiver) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
+            console.log(response)
             document.getElementById("titleInputBox").value = "Succes";
             document.getElementById("messageInputContent").value = "";
             Refresh();
         },
         error: function (jqXHR, exception) {
-            console.error(exception)
+            console.log(exception)
             console.log(jqXHR)
         }
     });
@@ -35,10 +36,11 @@ function initButtons() {
             $.ajax({
                 type: "post",
                 url: "/api.php/getMessageData",
-                data: JSON.stringify({ messageId: this.id }),
+                data: JSON.stringify({ messageId: parseInt(this.id) }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+                    console.log(response)
                     $(".messageContent").html(response.message[0]);
                     
                 }
@@ -52,6 +54,7 @@ function Refresh() {
         url: "/api.php/getMessagesElements",
         contentType: "application/json; charset=utf-8",
         success: function (response) {
+            console.log(response)
             $(".messagesButtons").empty();
             for (let i = 0; i < response.message.length; i++) {
                 var temp = $(response.message[i])
@@ -69,14 +72,4 @@ $("#refresh").click(function (e) {
 initButtons();
 $("#Switch").click((e)=>{
     $(".sendMessageBox").toggle("fast");
-})
-$("#messageInputContent").keydown((e)=>{
-    if(e.key == "Enter" && !e.shiftKey){
-        var title = document.getElementById("titleInputBox").value;
-        var message = document.getElementById("messageInputContent");
-        var Rec = document.getElementById("selectReceiver").value;
-        if (Empty(title) || Empty(message.value) || Empty(Rec)) {
-            sendMessage(message.value, title, Rec);
-        } else message.value = "error";
-    }
 })

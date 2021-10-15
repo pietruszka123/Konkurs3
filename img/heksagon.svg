@@ -4,9 +4,11 @@
 <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="413.115px" height="416.785px" viewBox="0 0 413.115 416.785" enable-background="new 0 0 413.115 416.785"
 	 xml:space="preserve">
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="339.5771" y1="331.0918" x2="149.4131" y2="155.6821">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-199.4634" y1="329.0925" x2="-389.6274" y2="504.5023" gradientTransform="matrix(1 0 0 -1 539.04 660.1851)">
 	<stop  offset="0" style="stop-color:#2EECFF"/>
-	<stop  offset="1" style="stop-color:#F4FF8B"/>
+	<stop  offset="0.4888" style="stop-color:#96F692"/>
+	<stop  offset="0.8384" style="stop-color:#D9FC4A"/>
+	<stop  offset="1" style="stop-color:#F4FF2E"/>
 </linearGradient>
-<polygon fill="url(#SVGID_1_)" points="413.115,267.409 258.727,416.785 52.169,357.769 0,149.376 154.389,0 360.946,59.017 "/>
+<polygon fill="url(#SVGID_1_)" points="413.115,267.409 258.728,416.785 52.169,357.769 0,149.376 154.389,0 360.946,59.017 "/>
 </svg>

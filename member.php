@@ -5,19 +5,28 @@ if(CheckRanks("nauczyciel")){
     exit();
 }
 ?>
-<div class="grades">
-    <div class="subjectGradesTable">
-        <?php
-        getUserGrades();
-
-        ?>
-
+<div class="Home">
+    <div class="element">
+        <div class="grades">
+            <div class="subjectGradesTable">
+                <?php
+                getUserGrades();
+                ?>
+            </div>
+        </div>
     </div>
-</div>
-<div class="daysUntilEndOfYear">
+    <div class="element">
+        <div class="daysUntilEndOfYear">
+            <?php
+            getDaysUntilEndOfYear()
+            ?>
+        </div>
+    </div>
+    <div class="studentComments">
     <?php
-    getDaysUntilEndOfYear()
+    getUserComments($_SESSION["id"]);
     ?>
+</div>
 </div>
 <script>
     /**skomentyj aby wyłączyć */
@@ -26,7 +35,7 @@ if(CheckRanks("nauczyciel")){
         url: "/api.php/getEndTime",
         contentType: "application/json; charset=utf-8",
         success: function(response) {
-            var endDate = new Date(response.message*1000);
+            var endDate = new Date(response.message * 1000);
             setInterval(() => {
                 const today = new Date();
                 const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));

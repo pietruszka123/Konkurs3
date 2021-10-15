@@ -1,3 +1,0 @@
-/*
-cos tu kiedyś będzie
-*/

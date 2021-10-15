@@ -2,7 +2,7 @@
 include_once("header.php");
 ?>
 <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
-    <img class="gwiazdka"src="gwiazdka.svg" alt=""style="top: 5.5vw; left:20vw;transform:rotate(120deg);">
+    <img class="gwiazdka"src="gwiazdka.svg" alt=""style="top: 5vw; left:20vw;transform:rotate(120deg);">
     <img class="bombel" src="bombel.png" alt=""style="right: 18vw; bottom: 8.5vw;transform:rotate(60deg)">
     <img class="heksagon"src="heksagon.svg" alt=""style="left: 4vw;bottom: -4vw;transform:rotate(120deg);">
 <div class="container">

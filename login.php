@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Document</title>
-</head>
-
-<body>
     <?php
     include_once("header.php");
     ?>
-    <img class="bombel" src="/img/bombel.png" alt=""Style="left: 15vw; bottom: 4.5vw;">
-    <img class="heksagon"src="/img/heksagon.svg" alt=""style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
-    <img class="gwiazdka"src="/img/gwiazdka.svg" alt=""style="top: 5vw; right:20vw;transform:rotate(45deg);">
+    <img class="bombel" src="img/bombel.png" alt=""Style="left: 15vw; bottom: 4.5vw;">
+    <img class="heksagon"src="img/heksagon.svg" alt=""style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
+    <img class="gwiazdka"src="img/gwiazdka.svg" alt=""style="top: 5vw; right:20vw;transform:rotate(45deg);">
         <div class="container">
             <div class="logowanie">  
                     <h1 class="h1Default">Logowanie</h1>
@@ -33,12 +23,7 @@
                 
             </div>
         </div>
-    </div>
-    </div>
 
-</body>
-
-</html>
 
 
 <?php
