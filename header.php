@@ -22,7 +22,6 @@ include_once("functions.php");
     <header><img class="plaster" src="img/plaster.svg" alt="">
         <h1>Hive Grades</h1>
     </header>
-    <div class="main-grid">
 
         <div class="content">
 

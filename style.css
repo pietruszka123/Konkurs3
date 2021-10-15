@@ -21,9 +21,6 @@ body {
 }
 
 .main-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
     height: 100vh;
 }
 
@@ -46,19 +43,13 @@ header h1 {
     font-family: 'Honey Script', sans-serif;
 }
 
-.main-grid>.header>nav>ul>li {
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .content {
     background-image: url("img/honeycombbialy.svg"), linear-gradient(130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
     overflow: auto;
     overflow-x: auto;
     padding-bottom: 2vw;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
 }
@@ -103,15 +94,10 @@ header h1 {
     margin-top: 4.5vw;
     position: relative;
     margin-bottom: 1.3vw;
-    top: 0.65vw;
-    left: 0.65vw;
-    outline: 0 none;
-    box-shadow: none;
     padding: 2.5vw;
     padding-top: 1vw;
     border-radius: 1.3vw;
     border: white 0.06vw solid;
-    display: grid;
 }
 
 .logowanie h2 {
@@ -121,14 +107,12 @@ header h1 {
     color: #fff;
     text-align: center;
     display: block;
-    box-shadow: none;
 }
 
 .logowanie div {
     margin-top: 0.78vw;
     padding-left: 1.3vw;
     padding-right: 1.3vw;
-    box-shadow: none;
 }
 
 div {
