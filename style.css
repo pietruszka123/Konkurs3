@@ -299,7 +299,7 @@ div input[type="text"] {
     margin-bottom: 1.953125vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .commentDate {
