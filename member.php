@@ -1,12 +1,11 @@
 <?php
 include_once("header.php");
-if (CheckRanks("nauczyciel"))
+/*if (CheckRanks("nauczyciel"))
 {
     header('Location: /teacher.php');
     exit();
-}
+}*/
 ?>
-
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php
@@ -55,7 +54,16 @@ if (CheckRanks("nauczyciel"))
                 const hours = parseInt(Math.abs(endDate - today) / (1000 * 60 * 60) % 24);
                 const minutes = parseInt(Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60) % 60);
                 const seconds = parseInt(Math.abs(endDate.getTime() - today.getTime()) / (1000) % 60);
-                $(".daysUntilEndOfYear").html(`DNI DO KONCA ROKU: ${days}<br>GODZINY DO KONCA ROKU: ${hours + 24 * days}<br>;MINUTY DO KONCA ROKU: ${minutes + hours * 60 + 60 * 24 * days}<br>;SEKUNDY DO KONCA ROKU: ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}<br>`)
+
+                $(".daysUntilEndOfYear").html(`<h3> Do końca roku szkolnego pozostało:</h3><p>${days}
+                 dni</p><p>
+                ${hours + 24 * days}
+                 godziny</p><p>
+                ${minutes + hours * 60 + 60 * 24 * days}
+                 minut</p><p>
+                ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}
+                 sekund</p>`)
+                //`<>DNI DO KONCA ROKU: ${days}<br>GODZINY DO KONCA ROKU: ${hours + 24 * days}<br>;MINUTY DO KONCA ROKU: ${minutes + hours * 60 + 60 * 24 * days}<br>;SEKUNDY DO KONCA ROKU: ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}<br>`)
             }, 1000)
         }
     });
