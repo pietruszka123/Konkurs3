@@ -6,6 +6,7 @@ include_once("header.php");
     exit();
 }*/
 ?>
+<div class="Contencik">
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php
@@ -13,8 +14,13 @@ include_once("header.php");
         ?>
     </div>
 </div>
+<div>
+<div class="daysUntilEndOfYear element">
+    <?php
+    getDaysUntilEndOfYear()
+    ?>
+</div>
 <div class="timeTable element">
-
     <?php
     getTimetable();
     ?>
@@ -25,19 +31,15 @@ include_once("header.php");
         <input type="submit" name="forward" value=">">
     </form>
 </div>
-
-<div class="daysUntilEndOfYear element">
-    <?php
-    getDaysUntilEndOfYear()
-    ?>
 </div>
+
 
 <div class="studentComments element">
     <?php
     getUserComments($_SESSION["id"]);
     ?>
 </div>
-
+</div>
 
 
 <script>

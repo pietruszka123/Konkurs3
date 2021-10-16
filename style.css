@@ -7,8 +7,8 @@
 
 html {
     background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 @import url("http://fonts.cdnfonts.com/css/honey-script");
@@ -16,6 +16,7 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    overflow-x: hidden;
 }
 
 :root {
@@ -31,24 +32,36 @@ body {
 .main-grid {
     height: 100vh;
 }
-
-header {
+header{
     width: 100%;
-    height: 20px;
+    height: 11.803713527851459vh;
     background-image: url("img/header.svg");
     background-repeat: no-repeat;
     background-size: 100%;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    padding-left: 1vw;
 }
+
 
 header h1 {
     text-align: left;
-    padding-left: 25vw;
     align-content: center;
     font-size: 3.5vw;
     font-weight: 400;
     font-family: "Honey Script", sans-serif;
+}
+.Contencik{
+    padding-top: 11vh;
+    display: flex;
+    flex-wrap:wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: start;
 }
 
 .bombel {
@@ -73,10 +86,8 @@ header h1 {
 }
 
 .plaster {
-    position: fixed;
-    padding-left: 21vw;
-    display: flex;
-    align-content: center;
+    padding-left: 0.65vw;
+    padding-right: 0.65vw;
     width: 3.2vw;
     height: 3.2vw;
 }
@@ -418,6 +429,20 @@ h3 {
 }
 
 .element::-webkit-scrollbar-thumb {
+    border-radius: 0.6510416666666666vw;
+    border: 2px rgba(255, 255, 255, 70%) solid;
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.44, rgb(96, 145, 233, 100%)), color-stop(0.86, rgba(134, 97, 209, 100%)));
+}
+body::-webkit-scrollbar-track {
+    border-radius: 1vw;
+    background-color: transparent;
+}
+
+body::-webkit-scrollbar {
+    width: 1vw;
+    background-color: rgb(96, 145, 233, 60%);}
+
+body::-webkit-scrollbar-thumb {
     border-radius: 0.6510416666666666vw;
     border: 2px rgba(255, 255, 255, 70%) solid;
     background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.44, rgb(96, 145, 233, 100%)), color-stop(0.86, rgba(134, 97, 209, 100%)));
