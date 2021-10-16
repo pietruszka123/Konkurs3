@@ -13,13 +13,13 @@ include_once('header.php');
     getAttendance($_SESSION["id"]);
     ?>
 
-    
-</div>
 <form method="POST">
         <input type="submit" name="back" value="<">
         <input type="submit" name="res" value="Today">
         <input type="submit" name="for" value=">">
     </form>
+</div>
+
 
 <?php
 include_once('footer.php')

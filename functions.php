@@ -427,10 +427,16 @@ function getTimetable()
                         echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
                         echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
+
+
+
                         $teacherId = $row['teacherId'];
                         $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
+
+
+
 
                         echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
                         echo 'Klasa: ' . $row['classroom'] . '<br>';
@@ -440,11 +446,13 @@ function getTimetable()
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
 
+
+                        
                         echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
                     }
                     else
                     {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
+                        echo $row['classStartHour'] . '<br>';
                         echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
                         $teacherId = $row['substituteTeacherId'];
