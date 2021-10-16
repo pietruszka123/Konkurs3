@@ -254,7 +254,15 @@ div input[type="text"] {
     color: white;
     font-size: 1.17vw;
 }
-
+.timeTable{
+    background-color: rgb(96, 145, 233, 60%);
+    height: 6.822916666666667vw;
+    border: white 0.06vw solid;
+    border-radius: 0.65vw;
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+    width: 19vw;
+    padding: 1.5vw;
+}
 .grades {
     background-color: rgb(96, 145, 233, 60%);
     font-size: 1vw;
