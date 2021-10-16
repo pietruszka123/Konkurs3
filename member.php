@@ -6,7 +6,7 @@ include_once("header.php");
     exit();
 }*/
 ?>
-<div class="Contencik">
+<div class="Contencik">  <!-- marcin zostaw -->
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php
