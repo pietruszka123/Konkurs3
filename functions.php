@@ -117,7 +117,8 @@ function getUserGrades()
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -167,7 +168,8 @@ function getUserMessages($ret = false)
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -217,7 +219,8 @@ function viewMessage(int $messageId, $ret = false)
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -250,7 +253,8 @@ function viewAllReceivers()
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -276,7 +280,8 @@ function sendMessage($Receiver, $title, $Content)
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -510,6 +515,7 @@ function getContactData()
     else
     {
         $error = $error . "UwU, somethin went wong.";
+            echo $error;
     }
 }
 
@@ -678,7 +684,8 @@ function getUserComments($userID)
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $stmt->close();
@@ -797,7 +804,8 @@ function getAttendance($userID)
         }
         else
         {
-            echo "UwU, somethin went wong.";
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
         }
     }
     $currentDate = date("Y/m/d");
@@ -806,3 +814,99 @@ function getAttendance($userID)
 
     $stmt->close();
 }
+
+function closestFreeDays()
+{
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT freedays.freeDayDate, freedays.freeDayReason, freedays.freeDayDescription FROM freedays WHERE freeDayDate > CURRENT_DATE ORDER BY freedays.freeDayDate ASC";
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        if ($stmt->execute())
+        {
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->bind_result($freeDayDate, $freeDayReason, $freeDayDescription);
+                while ($stmt->fetch())
+                {
+                    echo 
+                    '<div class="freeDay">
+                        <h1>'.$freeDayReason.'</h1>
+                        <h2>'.$freeDayDate.'</h2>
+                        <p>'.$freeDayDescription.'</p>
+                    </div>';
+                    
+                 
+
+                }
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
+            }
+        }
+        else
+        {
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
+        }
+    }
+    $stmt->close();
+}
+
+
+function closestExams()
+{
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT exams.examDate, subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, exams.examDescription, exams.examType FROM exams, subjects, users WHERE exams.classId = ? AND users.userId = exams.teacherId AND subjects.subjectId = exams.subjectId AND exams.examDate > CURRENT_DATE ORDER BY exams.examDate ASC;    ";
+
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        $stmt->bind_param("s", $param_id);
+        $param_id = $_SESSION["classId"];
+
+        if ($stmt->execute())
+        {
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->bind_result($examDate, $subjectName, $FirstName, $SecondName, $LastName, $examDescription, $examType);
+                echo "<h1>Oceny</h1>";
+                while ($stmt->fetch())
+                {
+
+                    echo'
+                    <div class="singleExam">
+                        <h1>'.$subjectName.'</h1>
+                        <h2>'.$examDescription.'</h2>
+                        <h3>'.$examDate.'</h3>
+                        <h3>'.$examType.'</h3>
+                    </div>
+                    ';
+                    
+                }
+            }
+            else
+            {
+                $error = $error . "UwU, somethin went wong.";
+            }
+        }
+        else
+        {
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
+        }
+    }
+    $stmt->close();
+}
+
+
+//rano dodam najblizsze zadania

@@ -6,59 +6,60 @@ include_once("header.php");
     exit();
 }*/
 ?>
-<div class="Contencik">
-    <!-- marcin zostaw -->
-    <div class="grades element">
-        <div class="subjectGradesTable">
-            <?php
-            getUserGrades();
-            ?>
-        </div>
-    </div>
-    <div class="daysUntilEndOfYear element">
+
+<!-- marcin zostaw | nie -->
+<div class="grades element">
+    <div class="subjectGradesTable">
         <?php
-        getDaysUntilEndOfYear()
+        getUserGrades();
         ?>
     </div>
-    <div class="timeTable element">
-        <?php
-        getTimetable();
-        ?>
+</div>
+<div class="daysUntilEndOfYear element">
+    <?php
+    getDaysUntilEndOfYear()
+    ?>
+</div>
+<div class="timeTable element">
+    <?php
+    getTimetable();
+    ?>
 
-        <form method="POST">
-            <input type="submit" name="backward" value="<">
-            <input type="submit" name="reset" value="Today">
-            <input type="submit" name="forward" value=">">
-        </form>
-    </div>
+    <form method="POST">
+        <input type="submit" name="backward" value="<">
+        <input type="submit" name="reset" value="Today">
+        <input type="submit" name="forward" value=">">
+    </form>
+</div>
 
+<div class="freeDaysTable element">
+    <?php
+    closestFreeDays()
+    ?>
+</div>
+<div class="closestExams">
+    <?php
+closestExams()
+?>
+</div>
 
+<div class="attendanceTable">
 
+    <?php
+    getAttendance($_SESSION["id"]);
+    ?>
 
-    <div class="attendanceTable">
-        <!-- <div class="singleAttendance">
-    <h1>$subjectNumber</h1>
-    <h3>$subjectName</h3>
-    <p>$teacherFirstName, $teacherSecondName, $teacherLastName,</p>
-    <h2>$attendanceState</h2>
-</div> -->
+    <form method="POST">
+        <input type="submit" name="back" value="<">
+        <input type="submit" name="res" value="Today">
+        <input type="submit" name="for" value=">">
+    </form>
+</div>
 
-        <?php
-        getAttendance($_SESSION["id"]);
-        ?>
-
-        <form method="POST">
-            <input type="submit" name="back" value="<">
-            <input type="submit" name="res" value="Today">
-            <input type="submit" name="for" value=">">
-        </form>
-    </div>
-
-    <div class="studentComments element">
-        <?php
-        getUserComments($_SESSION["id"]);
-        ?>
-    </div>
+<div class="studentComments element">
+    <?php
+    getUserComments($_SESSION["id"]);
+    ?>
 </div>
 
 

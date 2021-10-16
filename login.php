@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     if (empty($error))
     {
-        $sql = "SELECT userId, userEmail, userPassword, userRank FROM users WHERE userEmail = ?";
+        $sql = "SELECT userId, userEmail, userPassword, userRank, classId FROM users WHERE userEmail = ?";
 
         if ($stmt = $mysqli->prepare($sql))
         {
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
                 if ($stmt->num_rows == 1)
                 {
-                    $stmt->bind_result($userId, $userEmail, $userPasswordHashed, $userRank); //Nazwa z sqla
+                    $stmt->bind_result($userId, $userEmail, $userPasswordHashed, $userRank, $classId); //Nazwa z sqla
 
                     if ($stmt->fetch())
                     {
@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                             $_SESSION["loggedIn"] = true;
                             $_SESSION["id"] = $userId;
                             $_SESSION["email"] = $userEmail;
+                            $_SESSION["classId"] = $classId;
                             $obj = json_decode($userRank);
                             $_SESSION["rank"] = $obj->{'rank'};
                             if (in_array("uczen", $_SESSION["rank"]))
