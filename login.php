@@ -4,23 +4,25 @@ include_once("header.php");
 <img class="bombel" src="img/bombel.png" alt="" Style="left: 15vw; bottom: 4.5vw;">
 <img class="heksagon" src="img/heksagon.svg" alt="" style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
 <img class="gwiazdka" src="img/gwiazdka.svg" alt="" style="top: 5vw; right:20vw;transform:rotate(45deg);">
-    <div class="logowanie">
-        <h1 class="h1Default">Logowanie</h1>
-        <h2>Proszę podać e-mail i hasło</h2>
-        <div class="logowanieDiv">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <label for="email">E-mail:</label>
-                <input class="input" type="text" name="email" required><br>
-                <label for="Password">Hasło:</label>
-                <input type="password" name="password" required><br>
-        </div>
-        <div class="log">
-            <input type="submit" value="Zaloguj">
-        </div>
-        </form>
-        <h2 style="text-align:center;padding-top:1vw;padding-bottom:0.4vw;">Nie masz jeszcze konta?</h2>             <a href="register.php" class="logReg"><h2>Zarejestruj się, teraz!</h2></a>
-
+<div class="logowanie">
+    <h1 class="h1Default">Logowanie</h1>
+    <h2>Proszę podać e-mail i hasło</h2>
+    <div class="logowanieDiv">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <label for="email">E-mail:</label>
+            <input class="input" type="text" name="email" required><br>
+            <label for="Password">Hasło:</label>
+            <input type="password" name="password" required><br>
     </div>
+    <div class="log">
+        <input type="submit" value="Zaloguj">
+    </div>
+    </form>
+    <h2 style="text-align:center;padding-top:1vw;padding-bottom:0.4vw;">Nie masz jeszcze konta?</h2> <a href="register.php" class="logReg">
+        <h2>Zarejestruj się, teraz!</h2>
+    </a>
+
+</div>
 
 
 
@@ -103,3 +105,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 include_once("footer.php");
 ?>
+
+

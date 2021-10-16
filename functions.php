@@ -675,103 +675,126 @@ function getUserComments($userID)
     }
     $stmt->close();
 }
+
+
 // SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = 3;
 function getAttendance($userID)
 {
     global $mysqli;
-    global $error;
-
-
+    global $error; 
+    $_SESSION['attendanceDate'] = 0;
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
-        if (isset($_POST['backward']))
+        if (isset($_POST['back']))
         {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] - 1;
         }
-        else if (isset($_POST['forward']))
+        else if (isset($_POST['for']))
         {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] + 1;
         }
-        else if (isset($_POST['reset']))
+        else if (isset($_POST['res']))
         {
             $_SESSION['attendanceDate'] = 0;
         }
     }
+    $attendanceDate = $_SESSION['attendanceDate'];
+    
+    $sql = 'SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = ? AND DATE(attendance.attendanceDate) = CURRENT_DATE + INTERVAL ' . strval($attendanceDate).' DAY;';
+    //$sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
 
-    $sql = "SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = 3;";
-
+    
 
     if ($stmt = $mysqli->prepare($sql))
     {
         $stmt->bind_param("s", $param_id);
         $param_id = $userID;
-
+        
         if ($stmt->execute())
         {
             $stmt->store_result();
-            $stmt->bind_result($classId);
-            $stmt->fetch();
 
-            $timeTableDate = $_SESSION['timeTableDate'];
-
-            $sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
-            $result = $mysqli->query($sql);
-
-            if ($result->num_rows != 0)
+            
+            if ($stmt->num_rows != 0)
             {
-                while ($row = $result->fetch_assoc())
+                $stmt->bind_result($subjectName, $teacherFirstName, $teacherSecondName, $teacherLastName, $subjectNumber, $attendanceState, $attendanceDescription, $attendanceDateDate, $attendanceExcuse);
+                
+                while ($stmt->fetch())
                 {
-                    if (!isset($row['substitureTeacherId']))
+                    
+                    if ($attendanceState = "Obecnosc") //$attendanceExcuse
                     {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
+                        echo '<div class="singleAttendance present">
+                        <h1>' . $subjectNumber . '</h1>
+                        <h3>' . $subjectName . '</h3>
+                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2>Obecność</h2>
+                    </div>';
+                    }
+                    elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse))
+                    {
 
-                        $teacherId = $row['teacherId'];
-                        $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
+                        echo '<div class="singleAttendance excusedLateness">
+                        <h1>' . $subjectNumber . '</h1>
+                        <h3>' . $subjectName . '</h3>
+                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2>Spóźnienie Usprawiedliwione</h2>
+                    </div>';
+                    }
+                    elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse))
+                    {
+                        echo '<div class="singleAttendance unexcusedLateness">
+                        <h1>' . $subjectNumber . '</h1>
+                        <h3>' . $subjectName . '</h3>
+                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2>Spóźnienie Niesuprawiedliwione</h2>
+                    </div>';
+                    }
 
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
 
-                        $subjectId = $row['subjectId'];
-                        $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
+                    elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse))
+                    {
 
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
+
+                        echo '<div class="singleAttendance excusedAbsence">
+                        <h1>' . $subjectNumber . '</h1>
+                        <h3>' . $subjectName . '</h3>
+                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2>Nieobecność Usprawiedliwiona</h2>
+                    </div>';
+                    }
+                    elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse))
+                    {
+                        echo '<div class="singleAttendance unexcusedAbsence">
+                        <h1>' . $subjectNumber . '</h1>
+                        <h3>' . $subjectName . '</h3>
+                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2>Nieobecność Niesuprawiedliwiona</h2>
+                    </div>';
                     }
                     else
                     {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
-
-                        $teacherId = $row['substituteTeacherId'];
-                        $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
-
-                        $subjectId = $row['substituteSubjectId'];
-                        $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
-                        $result2 = $mysqli->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
+                        echo '<div class="singleAttendance">
+                            <h1>' . $subjectNumber . '</h1>
+                            <h3>' . $subjectName . '</h3>
+                            <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                            <h2>' . $attendanceState . '</h2>
+                        </div>';
                     }
                 }
             }
             else
             {
-                echo 'Nie ma informacji';
+                $error = $error . "UwU, somethin went wong.";
             }
         }
+        else
+        {
+            echo "UwU, somethin went wong.";
+        }
     }
-
     $currentDate = date("Y/m/d");
-    $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
+    $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
     echo $date;
 
     $stmt->close();
