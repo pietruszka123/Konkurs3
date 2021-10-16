@@ -682,7 +682,6 @@ function getAttendance($userID)
 {
     global $mysqli;
     global $error; 
-    $_SESSION['attendanceDate'] = 0;
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
         if (isset($_POST['back']))
