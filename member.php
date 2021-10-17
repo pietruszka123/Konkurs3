@@ -42,6 +42,11 @@ include_once("header.php");
 closestExams()
 ?>
 </div>
+<div class="closestExams">
+    <?php
+closestHomework()
+?>
+</div>
 
 <div class="attendanceTable">
 

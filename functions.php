@@ -753,7 +753,7 @@ function closestExams()
 
             if ($stmt->num_rows != 0) {
                 $stmt->bind_result($examDate, $subjectName, $FirstName, $SecondName, $LastName, $examDescription, $examType);
-                echo "<h1>Oceny</h1>";
+         
                 while ($stmt->fetch()) {
 
                     echo '
@@ -777,4 +777,43 @@ function closestExams()
 }
 
 
-//rano dodam najblizsze zadania
+function closestHomework()
+{
+    global $mysqli;
+    global $error;
+
+    $sql = "SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, homework.creationDate, homework.deadline, homework.homeworkDescription, homework.obligatory FROM homework, users, subjects WHERE subjects.subjectId = homework.subjectId AND homework.classId = ? AND users.userId = homework.teacherId AND homework.deadline > CURRENT_DATE ORDER BY homework.deadline ASC;";
+
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("s", $param_id);
+        $param_id = $_SESSION["classId"];
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+
+            if ($stmt->num_rows != 0) {
+                $stmt->bind_result($subjectName, $FirstName, $SecondName, $LastName, $creationDate, $deadline, $homeworkDescription, $obligatory);
+              
+                while ($stmt->fetch()) {
+
+                    echo '
+                    <div class="singleExam">
+                        <h1>' . $subjectName . '</h1>
+                        <h2>' . $homeworkDescription . '</h2>
+                        <h3> Dodano: ' . $creationDate . '</h3>
+                        <h3> Do: ' . $deadline . '</h3>
+                        <h3> Obowiązkowe? '. $obligatory .'</h3>
+                    </div>
+                    ';
+                }
+            } else {
+                $error = $error . "UwU, somethin went wong.";
+            }
+        } else {
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
+        }
+    }
+    $stmt->close();
+}
