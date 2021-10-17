@@ -7,8 +7,7 @@ define('DB_NAME', 'dziennik');
 
 $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-if ($mysqli === false)
-{
+if ($mysqli === false) {
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
 
@@ -21,24 +20,21 @@ function getClassSubjectGrades($classId, $subjectId)
     global $error;
     $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? ORDER BY users.userId";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("ss", $subjectId, $classId);
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale);
                 $lastid = $userId;
-                while ($stmt->fetch())
-                {
-                    if ($lastid != $userId)
-                    {
+                while ($stmt->fetch()) {
+                    if ($lastid != $userId) {
+                        echo "</tr>";
                         $lastid = $userId;
                         echo "<tr><td>$userFirstName $userSecondName $userLastName</td>";
                     }
                     echo '<td><input type="text" value="' . $gradeScale . '"  id=""></td>';
+                    echo '<td><input id="gradeI" type="text" value="' . $gradeScale . '"  id=""></td>';
                 }
                 return;
             }
@@ -53,21 +49,17 @@ function getUserGrades()
 
     $sql = "SELECT DISTINCT subjects.subjectId, subjects.subjectName FROM subjects, grades, users WHERE subjects.subjectId = grades.subjectId AND grades.studentId = ?";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $_SESSION["id"];
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($subjectId, $subjectName);
                 echo "<h1>Oceny</h1>";
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
 
                     echo "<div class=\"subjectGradesTitle\">";
                     echo "<h3>" . $subjectName . "</h3>";
@@ -79,20 +71,16 @@ function getUserGrades()
                     FROM users, grades WHERE grades.subjectId = ? AND grades.studentId = ? AND users.userId = grades.teacherId ORDER BY grades.gradeDate DESC  ) 
                     as source order by gradeDate asc ";
 
-                    if ($stmt2 = $mysqli->prepare($sql2))
-                    {
+                    if ($stmt2 = $mysqli->prepare($sql2)) {
                         $stmt2->bind_param("ss", $subjectId, $param_id);
 
-                        if ($stmt2->execute())
-                        {
+                        if ($stmt2->execute()) {
                             $stmt2->store_result();
 
-                            if ($stmt2->num_rows != 0)
-                            {
+                            if ($stmt2->num_rows != 0) {
                                 $stmt2->bind_result($gradeScale, $gradeWeight, $userFirstName, $userSecondName, $userLastName, $gradeDescription, $gradeDate);
 
-                                while ($stmt2->fetch())
-                                {
+                                while ($stmt2->fetch()) {
                                     echo '<div class="singleGrade grade' . $gradeScale . '">';
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
@@ -109,14 +97,10 @@ function getUserGrades()
                     echo "</div>";
                     echo "<div class=\"hr\"></div>";
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -132,19 +116,15 @@ function getUserMessages($ret = false)
 
     $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName FROM messages, users WHERE users.userId LIKE messages.senderId AND messages.receiverId LIKE ? ORDER BY messages.messageDate DESC";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = "%" . $_SESSION["id"] . "%";
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     $messageDate = strip_tags((string)$messageDate);
                     $messageId = strip_tags((string)$messageId);
                     $messageTitle = strip_tags((string)$messageTitle);
@@ -158,16 +138,12 @@ function getUserMessages($ret = false)
                     else echo $TEMP;
                 }
                 if ($ret) return $rarr;
-            }
-            else
-            {
+            } else {
                 if ($ret) return array("0" => "brak wiadomosci do wyświetlenia");
                 else echo "brak wiadomosci do wyświetlenia";
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -188,19 +164,15 @@ function viewMessage(int $messageId, $ret = false)
 
     $sql = "SELECT messages.messageId, messages.messageTitle, messages.messageDate, users.userFirstName, users.userSecondName, users.userLastName, messages.messageContent FROM messages, users WHERE messages.messageId LIKE ? AND users.userId LIKE messages.senderId";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $messageId;
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($messageId, $messageTitle, $messageDate, $userFirstName, $userSecondName, $userLastName, $messageContent);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     $messageDate = strip_tags((string)$messageDate);
                     $messageContent = strip_tags((string)$messageContent);
                     $messageTitle = strip_tags((string)$messageTitle);
@@ -211,14 +183,10 @@ function viewMessage(int $messageId, $ret = false)
                     else echo getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName);
                 }
                 if ($ret) return $rarr;
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -232,27 +200,19 @@ function viewAllReceivers()
 
     $sql = "SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName FROM users";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
-        if ($stmt->execute())
-        {
+    if ($stmt = $mysqli->prepare($sql)) {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($teacherId, $teacherFirstName, $teacherSecondName, $teacherLastName);
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
                     echo "<option value=\"$teacherId\">$teacherFirstName $teacherSecondName $teacherLastName</option>";
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -266,20 +226,16 @@ function sendMessage($Receiver, $title, $Content)
     global $error;
 
     $sql = "INSERT INTO `messages` (`senderId`, `receiverId`, `messageContent`, `messageTitle`) VALUES (?, ?, ?, ?)";
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
         $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}";
         $messageContent = $Content;
         $messageTitle = $title;
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             echo "{\"status\":true}";
             $error = $error . "UwU, somethin went wong.";
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -389,31 +345,23 @@ function getTimetable()
 {
     global $mysqli;
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        if (isset($_POST['backward']))
-        {
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if (isset($_POST['backward'])) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] - 1;
-        }
-        else if (isset($_POST['forward']))
-        {
+        } else if (isset($_POST['forward'])) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] + 1;
-        }
-        else if (isset($_POST['reset']))
-        {
+        } else if (isset($_POST['reset'])) {
             $_SESSION['timeTableDate'] = 0;
         }
     }
 
     $sql = "SELECT classId FROM `users` WHERE users.userId = ?";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $_SESSION["id"];
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
             $stmt->bind_result($classId);
             $stmt->fetch();
@@ -423,12 +371,9 @@ function getTimetable()
             $sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
             $result = $mysqli->query($sql);
 
-            if ($result->num_rows != 0)
-            {
-                while ($row = $result->fetch_assoc())
-                {
-                    if (!isset($row['substitureTeacherId']))
-                    {
+            if ($result->num_rows != 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if (!isset($row['substitureTeacherId'])) {
                         echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
                         echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
@@ -452,11 +397,9 @@ function getTimetable()
                         $row2 = $result2->fetch_assoc();
 
 
-                        
+
                         echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
-                    }
-                    else
-                    {
+                    } else {
                         echo $row['classStartHour'] . '<br>';
                         echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
@@ -476,9 +419,7 @@ function getTimetable()
                         echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
                     }
                 }
-            }
-            else
-            {
+            } else {
                 echo 'Nie ma informacji';
             }
         }
@@ -505,17 +446,13 @@ function getContactData()
     $sql = "SELECT userFirstName, userSecondName, userLastName, userEmail, userPhoneNumber FROM `users` ORDER BY userLastName ASC ";
     $result = $mysqli->query($sql);
 
-    if ($result->num_rows != 0)
-    {
-        while ($row = $result->fetch_assoc())
-        {
+    if ($result->num_rows != 0) {
+        while ($row = $result->fetch_assoc()) {
             echo 'Nauczyciel: ' . $row['userFirstName'] . ' ' . $row['userSecondName'] . ' ' . $row['userLastName'] . ' ' . 'Email: ' . $row['userEmail'] . 'Numer telefonu: ' . $row['userPhoneNumber'] . '<br>';
         }
-    }
-    else
-    {
+    } else {
         $error = $error . "UwU, somethin went wong.";
-            echo $error;
+        echo $error;
     }
 }
 
@@ -526,12 +463,10 @@ function getLuckyNumber()
     $sql = "SELECT * FROM `luckynumbers` ORDER BY databaseDate DESC";
     $result = $mysqli->query($sql);
 
-    if ($result->num_rows != 0)
-    {
+    if ($result->num_rows != 0) {
         $row = $result->fetch_assoc();
 
-        if ($row['databaseDate'] != date("Y-m-d"))
-        {
+        if ($row['databaseDate'] != date("Y-m-d")) {
             $luckyNumberFirst = rand(1, 15);
             $luckyNumberSecond = rand(16, 30);
 
@@ -539,14 +474,10 @@ function getLuckyNumber()
             $mysqli->query($sql);
 
             echo $luckyNumberFirst . $luckyNumberSecond;
-        }
-        else
-        {
+        } else {
             echo $row['luckyNumberFirst'] . $row['luckyNumberSecond'];
         }
-    }
-    else
-    {
+    } else {
         $luckyNumberFirst = rand(1, 15);
         $luckyNumberSecond = rand(16, 30);
 
@@ -570,13 +501,10 @@ function getSchoolInformation()
 function CheckRanks(...$ranks)
 {
     $t = false;
-    foreach ($ranks as $value)
-    {
-        if (!in_array($value, $_SESSION["rank"]))
-        {
+    foreach ($ranks as $value) {
+        if (!in_array($value, $_SESSION["rank"])) {
             $t = false;
-        }
-        else $t = true;
+        } else $t = true;
     }
     return $t;
 }
@@ -587,24 +515,19 @@ function getUserComments($userID)
 
     $sql = "SELECT comments.commentType, comments.commentWeight, comments.commentContent, comments.commentDate, users.userFirstName, users.userSecondName, users.userLastName FROM comments, users WHERE comments.studentId = ? AND users.userId = comments.teacherId ORDER BY comments.commentDate DESC;";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $userID;
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
             echo "<div class=\"subjectGradesTitle\">";
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($commentType, $commentWeight, $commentContent, $commentDate, $commentTeacherFirstName, $commentTeacherSecondName, $commentTeacherLastName);
                 echo "<div class=\"Uwagititle\"><h1>Uwagi</h1></div>";
-                while ($stmt->fetch())
-                {
-                    if ($commentType == "Uwaga Negatywna")
-                    {
+                while ($stmt->fetch()) {
+                    if ($commentType == "Uwaga Negatywna") {
                         echo
                         '<div class="singleComment negatywna">
                            
@@ -626,9 +549,7 @@ function getUserComments($userID)
                             <p>' . $commentDate . '</p>
                            </div>
                      </div>';
-                    }
-                    elseif ($commentType == "Uwaga Pozytywna")
-                    {
+                    } elseif ($commentType == "Uwaga Pozytywna") {
                         echo
                         '<div class="singleComment pozytywna">
                         <div class="commentTeacherData">
@@ -649,10 +570,7 @@ function getUserComments($userID)
                             <p>' . $commentDate . '</p>
                         </div>
                     </div>';
-                    }
-                    else
-                    {
-                        {
+                    } else { {
                             echo
                             '<div class="singleComment">
                         <div class="commentTeacherData">
@@ -676,14 +594,10 @@ function getUserComments($userID)
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -696,46 +610,36 @@ function getUserComments($userID)
 function getAttendance($userID)
 {
     global $mysqli;
-    global $error; 
-    if ($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        if (isset($_POST['back']))
-        {
+    global $error;
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if (isset($_POST['back'])) {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] - 1;
-        }
-        else if (isset($_POST['for']))
-        {
+        } else if (isset($_POST['for'])) {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] + 1;
-        }
-        else if (isset($_POST['res']))
-        {
+        } else if (isset($_POST['res'])) {
             $_SESSION['attendanceDate'] = 0;
         }
     }
     $attendanceDate = $_SESSION['attendanceDate'];
-    
-    $sql = 'SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = ? AND DATE(attendance.attendanceDate) = CURRENT_DATE + INTERVAL ' . strval($attendanceDate).' DAY;';
+
+    $sql = 'SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = ? AND DATE(attendance.attendanceDate) = CURRENT_DATE + INTERVAL ' . strval($attendanceDate) . ' DAY;';
     //$sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
 
-    
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $userID;
-        
-        if ($stmt->execute())
-        {
+
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            
-            if ($stmt->num_rows != 0)
-            {
+
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($subjectName, $teacherFirstName, $teacherSecondName, $teacherLastName, $subjectNumber, $attendanceState, $attendanceDescription, $attendanceDateDate, $attendanceExcuse);
-                
-                while ($stmt->fetch())
-                {
-                    
+
+                while ($stmt->fetch()) {
+
                     if ($attendanceState = "Obecnosc") //$attendanceExcuse
                     {
                         echo '<div class="singleAttendance present">
@@ -744,9 +648,7 @@ function getAttendance($userID)
                         <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
                         <h2>Obecność</h2>
                     </div>';
-                    }
-                    elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse))
-                    {
+                    } elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse)) {
 
                         echo '<div class="singleAttendance excusedLateness">
                         <h1>' . $subjectNumber . '</h1>
@@ -754,20 +656,14 @@ function getAttendance($userID)
                         <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
                         <h2>Spóźnienie Usprawiedliwione</h2>
                     </div>';
-                    }
-                    elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse))
-                    {
+                    } elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse)) {
                         echo '<div class="singleAttendance unexcusedLateness">
                         <h1>' . $subjectNumber . '</h1>
                         <h3>' . $subjectName . '</h3>
                         <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
                         <h2>Spóźnienie Niesuprawiedliwione</h2>
                     </div>';
-                    }
-
-
-                    elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse))
-                    {
+                    } elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse)) {
 
 
                         echo '<div class="singleAttendance excusedAbsence">
@@ -776,18 +672,14 @@ function getAttendance($userID)
                         <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
                         <h2>Nieobecność Usprawiedliwiona</h2>
                     </div>';
-                    }
-                    elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse))
-                    {
+                    } elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse)) {
                         echo '<div class="singleAttendance unexcusedAbsence">
                         <h1>' . $subjectNumber . '</h1>
                         <h3>' . $subjectName . '</h3>
                         <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
                         <h2>Nieobecność Niesuprawiedliwiona</h2>
                     </div>';
-                    }
-                    else
-                    {
+                    } else {
                         echo '<div class="singleAttendance">
                             <h1>' . $subjectNumber . '</h1>
                             <h3>' . $subjectName . '</h3>
@@ -796,14 +688,10 @@ function getAttendance($userID)
                         </div>';
                     }
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -822,35 +710,24 @@ function closestFreeDays()
 
     $sql = "SELECT freedays.freeDayDate, freedays.freeDayReason, freedays.freeDayDescription FROM freedays WHERE freeDayDate > CURRENT_DATE ORDER BY freedays.freeDayDate ASC";
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
-        if ($stmt->execute())
-        {
+    if ($stmt = $mysqli->prepare($sql)) {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($freeDayDate, $freeDayReason, $freeDayDescription);
-                while ($stmt->fetch())
-                {
-                    echo 
+                while ($stmt->fetch()) {
+                    echo
                     '<div class="freeDay">
-                        <h1>'.$freeDayReason.'</h1>
-                        <h2>'.$freeDayDate.'</h2>
-                        <p>'.$freeDayDescription.'</p>
+                        <h1>' . $freeDayReason . '</h1>
+                        <h2>' . $freeDayDate . '</h2>
+                        <p>' . $freeDayDescription . '</p>
                     </div>';
-                    
-                 
-
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }
@@ -867,40 +744,31 @@ function closestExams()
     $sql = "SELECT exams.examDate, subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, exams.examDescription, exams.examType FROM exams, subjects, users WHERE exams.classId = ? AND users.userId = exams.teacherId AND subjects.subjectId = exams.subjectId AND exams.examDate > CURRENT_DATE ORDER BY exams.examDate ASC;    ";
 
 
-    if ($stmt = $mysqli->prepare($sql))
-    {
+    if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("s", $param_id);
         $param_id = $_SESSION["classId"];
 
-        if ($stmt->execute())
-        {
+        if ($stmt->execute()) {
             $stmt->store_result();
 
-            if ($stmt->num_rows != 0)
-            {
+            if ($stmt->num_rows != 0) {
                 $stmt->bind_result($examDate, $subjectName, $FirstName, $SecondName, $LastName, $examDescription, $examType);
                 echo "<h1>Oceny</h1>";
-                while ($stmt->fetch())
-                {
+                while ($stmt->fetch()) {
 
-                    echo'
+                    echo '
                     <div class="singleExam">
-                        <h1>'.$subjectName.'</h1>
-                        <h2>'.$examDescription.'</h2>
-                        <h3>'.$examDate.'</h3>
-                        <h3>'.$examType.'</h3>
+                        <h1>' . $subjectName . '</h1>
+                        <h2>' . $examDescription . '</h2>
+                        <h3>' . $examDate . '</h3>
+                        <h3>' . $examType . '</h3>
                     </div>
                     ';
-                    
                 }
-            }
-            else
-            {
+            } else {
                 $error = $error . "UwU, somethin went wong.";
             }
-        }
-        else
-        {
+        } else {
             $error = $error . "UwU, somethin went wong.";
             echo $error;
         }

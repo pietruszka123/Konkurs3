@@ -20,23 +20,26 @@ include_once("t_header.php");
         <li><a></a></li>
         <li><a></a></li>
     </ul>
-    <h1>Jakies oceny</h1>
-    <!-- <table>
+    <table>
     <tr>
         <td>uczniowie</td>
-        <td><input type="text" value="1"  id=""></td>
-        <td><input type="text" value="2" id=""></td>
-        <td><input type="text" value="3" id=""></td>
-        <td><input type="text" value="4" id=""></td>
-        <td><input type="text" value="5" id=""></td>
-        <td><input type="text" value="6" id=""></td>
-        <td><input type="text" value="7" id=""></td>
-        <td><input type="text" value="8" id=""></td>
+        <?php
+           /*         <td><input type="text" value="1"  id=""></td>
+                    <td><input type="text" value="2" id=""></td>
+                    <td><input type="text" value="3" id=""></td>
+                    <td><input type="text" value="4" id=""></td>
+                    <td><input type="text" value="5" id=""></td>
+                    <td><input type="text" value="6" id=""></td>
+                    <td><input type="text" value="7" id=""></td>
+                    <td><input type="text" value="8" id=""></td>*/
+            //getGradesTitles()
+        ?>
     </tr>
     <?php
-        //getClassSubjectGrades(1,1);
+        getClassSubjectGrades(1,1);
     ?>
-</table> -->
+</table>
+<input type="button" value="Zapisz zmiany">
 <script src="js/grades.js"></script>
 <?php
 include_once("../footer.php");
