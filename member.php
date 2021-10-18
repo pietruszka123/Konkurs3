@@ -38,6 +38,7 @@ include_once("header.php");
     ?>
 </div>
 <div class="closestExams element">
+    <h1>Najbliższe sprawdziany</h1>
     <?php
 closestExams()
 ?>
