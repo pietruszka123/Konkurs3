@@ -6,7 +6,7 @@
 }
 
 html {
-    background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
+    background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%) ;
     width: 100%;
 }
 
@@ -408,7 +408,6 @@ h3 {
 
 .element::-webkit-scrollbar-thumb {
     border-radius: 0.6510416666666666vw;
-    border: 2px rgba(255, 255, 255, 70%) solid;
     background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.44, rgb(96, 145, 233, 100%)), color-stop(0.86, rgba(134, 97, 209, 100%)));
 }
 
@@ -525,9 +524,24 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 1.953125vw;
     border-radius: 1.3vw;
     filter: drop-shadow(0vw 0vw 0.5vw red);
+    display: grid;
+    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+}
+.singleExam h2{
+    color: rgb(199, 199, 174);
 
 }
 .singleExam p {
     color: rgb(199, 199, 174);
 }
-
+.examDescription{
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}  
+.examDate{  
+margin: 0;
+}
