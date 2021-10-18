@@ -8,7 +8,6 @@
 html {
     background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
     width: 100%;
-    height: 100%;
 }
 
 @import url("http://fonts.cdnfonts.com/css/honey-script");
@@ -31,11 +30,6 @@ body {
     --strongerColor: rgb(54, 93, 128);
     --strongestColor: rgb(23, 49, 82);
 }
-
-.main-grid {
-    height: 100vh;
-}
-
 header {
     width: 100%;
     height: 11.803713527851459vh;
@@ -230,7 +224,6 @@ div input[type="text"] {
     background-color: rgb(96, 145, 233, 60%);
     filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
 }
-
 
 /* Wyświetlane divy */
 
@@ -504,4 +497,31 @@ body::-webkit-scrollbar-thumb {
     font-weight: 550;
     text-align: center;
     text-decoration: underline;
+}
+
+.closestExams{
+    font-size: 1vw;
+    width: 24vw;
+    height: 30.5vw;
+    min-width: 15%;
+    padding: 1.5vw;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.singleExam{
+    color: white;
+    height: max-content;
+    background-color: rgba(134, 97, 209, 100%);
+    padding: 0.4vw;
+    font-size: 0.9765625vw;
+    margin: 0.1vw;
+    margin-bottom: 1.953125vw;
+}
+.singleExam h1 {
+    color: white;
+}
+.singleExam h2 {
+    color: white;
 }

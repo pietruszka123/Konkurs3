@@ -37,12 +37,12 @@ include_once("header.php");
     closestFreeDays()
     ?>
 </div>
-<div class="closestExams">
+<div class="closestExams element">
     <?php
 closestExams()
 ?>
 </div>
-<div class="closestExams">
+<div class="closestHomework">
     <?php
 closestHomework()
 ?>
