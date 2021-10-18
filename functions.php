@@ -759,10 +759,10 @@ function closestExams()
 
                     echo '
                     <div class="singleExam">
-                        <h1>' . $subjectName . '</h1>
-                        <h2>' . $examDescription . '</h2>
-                        <h3>' . $examDate . '</h3>
-                        <h3>' . $examType . '</h3>
+                        <p>' . $subjectName . '</p>
+                        <p>' . $examDescription . '</p>
+                        <p>' . $examDate . '</p>
+                        <p>' . $examType . '</p>
                     </div>
                     ';
                 }
