@@ -225,11 +225,36 @@ div input[type="text"] {
 
 .element h1 {
     color: white;
+    padding-bottom: 1.3262599469496021vh;
 }
 
-
-/* Wyświetlane divy */
-
+.element h2 {
+    color: rgb(199, 199, 174);
+}
+.element p {
+    color: rgb(199, 199, 174);
+}
+.freeDay{
+    color: white;
+    height: max-content;
+    background-color: rgba(134, 97, 209, 100%);
+    padding: 0.5vw;
+    font-size: 0.9765625vw;
+    margin: 0.1vw;
+    margin-bottom: 1.953125vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-radius: 1.3vw;
+}
+.freeDayDescription{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    align-items: center;
+    display: flex;
+}
 .daysUntilEndOfYear {
     height: 6.822916666666667vw;
     width: 19vw;
@@ -355,16 +380,6 @@ div input[type="text"] {
     filter: drop-shadow(0vw 0vw 0.5vw rgba(21, 225, 110, 100%));
 }
 
-.subjectGradesTable>h1 {
-    margin-bottom: 0.65vw;
-    color: white;
-}
-
-.Uwagititle h1 {
-    margin-bottom: 0.65vw;
-    color: white;
-}
-
 h3 {
     color: white;
 }
@@ -486,10 +501,10 @@ body::-webkit-scrollbar-thumb {
     white-space: pre-wrap;
 }
 
-.singleGrade:hover .gradeGreaterInfo {
-    /* visibility: visible;
-    opacity: 100%; */
-}
+/* .singleGrade:hover .gradeGreaterInfo {
+    visibility: visible;
+    opacity: 100%;
+} */
 
 .messagesButtons {
     display: flex;
@@ -558,10 +573,6 @@ body::-webkit-scrollbar-thumb {
     overflow-x: hidden;
 }
 
-.closestExams h1 {
-    margin-bottom: 0.65vw;
-    color: white;
-}
 
 .singleExam {
     color: white;
@@ -576,14 +587,6 @@ body::-webkit-scrollbar-thumb {
     display: grid;
     grid-template-columns: 0.3fr 0.7fr;
     grid-template-rows: 1fr 1fr fit-content;
-}
-
-.singleExam h2 {
-    color: rgb(199, 199, 174);
-}
-
-.singleExam p {
-    color: rgb(199, 199, 174);
 }
 
 .examDescription {

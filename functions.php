@@ -837,9 +837,10 @@ function closestFreeDays()
                 {
                     echo
                     '<div class="freeDay">
-                        <h1>' . $freeDayReason . '</h1>
-                        <h2>' . $freeDayDate . '</h2>
-                        <p>' . $freeDayDescription . '</p>
+                        <h2>' . $freeDayReason . '</h2>
+                        <p class="freeDayDescription">' . $freeDayDescription . '</p>
+                        <p>' . $freeDayDate . '</p>
+                        
                     </div>';
                 }
             }
@@ -934,11 +935,11 @@ function closestHomework()
 
                     echo '
                     <div class="singleExam">
-                        <h1>' . $subjectName . '</h1>
-                        <h2>' . $homeworkDescription . '</h2>
-                        <h3> Dodano: ' . $creationDate . '</h3>
-                        <h3> Do: ' . $deadline . '</h3>
-                        <h3> Obowiązkowe? ' . $obligatory . '</h3>
+                        <h2>' . $subjectName . '</h2>
+                        <p>' . $homeworkDescription . '</p>
+                        <p> Dodano: ' . $creationDate . '</p>
+                        <p> Do: ' . $deadline . '</p>
+                        <p> Obowiązkowe?: ' . $obligatory . '</p>
                     </div>
                     ';
                 }
