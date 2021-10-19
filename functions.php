@@ -885,7 +885,7 @@ function closestExams()
 
                     echo '
                     <div class="singleExam">
-                        <h2>' . $subjectName . '</h2>
+                        <h2 class="subjectName">' . $subjectName . '</h2>
                         <p class="examDescription">' . $examDescription . '</p>
                         <p>' . $examType . '</p>
                         <p class="examDate">' . $examDate . '</p>
@@ -934,12 +934,12 @@ function closestHomework()
                 {
 
                     echo '
-                    <div class="singleExam">
-                        <h2>' . $subjectName . '</h2>
-                        <p>' . $homeworkDescription . '</p>
-                        <p> Dodano: ' . $creationDate . '</p>
-                        <p> Do: ' . $deadline . '</p>
-                        <p> Obowiązkowe?: ' . $obligatory . '</p>
+                    <div class="singleHomework">
+                        <h2 class="subjectName">' . $subjectName . '</h2>
+                        <p class="homeworkDescription">' . $homeworkDescription . '</p>
+                        <p class="creationDate"> Dodano: ' . $creationDate . '</p>
+                        <p class="deadline"> Do: ' . $deadline . '</p>
+                        <p class="obligatory"> Obowiązkowe? 🡆 ' . $obligatory . '</p>
                     </div>
                     ';
                 }

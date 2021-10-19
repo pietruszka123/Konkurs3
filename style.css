@@ -407,7 +407,9 @@ h3 {
     align-items: center;
     border-radius: 0.26vw;
 }
-
+.singleGrade p {
+    color: white;
+}
 .hr {
     padding: none;
     margin-top: 0.65vw;
@@ -560,7 +562,47 @@ body::-webkit-scrollbar-thumb {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.singleHomework{
+    color: white;
+    height: max-content;
+    background-color: rgba(126, 108, 215, 255);
+    padding: 0.5vw;
+    font-size: 0.9765625vw;
+    margin: 0.1vw;
+    margin-bottom: 1.953125vw;
+    border-radius: 1.3vw;
+    filter: drop-shadow(0vw 0vw 0.5vw rgba(255, 0, 0, 1));
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: 1fr 1fr fit-content;
 
+}
+.homeworkDescription{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+}
+.subjectName{
+margin-bottom: 8px;
+}
+.creationDate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-bottom: 8px;
+}
+.obligatory{
+    display: flex;
+    justify-content: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 .closestExams {
     font-size: 1vw;
     width: 24vw;

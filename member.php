@@ -54,7 +54,7 @@ include_once("header.php");
 </div>
 
 <div class="attendanceTable element">
-    <h1>Nieobecności</h1>
+    <h1>Obecności</h1>
     <?php
     getAttendance($_SESSION["id"]);
     ?>
