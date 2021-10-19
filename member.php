@@ -33,7 +33,7 @@ include_once("header.php");
 
 <div class="freeDaysTable element">
     <?php
-    //closestFreeDays()
+    closestFreeDays()
     ?>
 </div>
 <div class="closestExams element">
@@ -68,57 +68,7 @@ include_once("header.php");
 </div>
 
 
-<script>
-    function changeTimeTable(i){
-        $.ajax({
-        type: "post",
-        url: "/api.php/getTimeTable",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ direction:i }),
-        success: function(response) {
-            console.log(response)
-            $(".TimeTableE").html(response.message);
-        },
-        error: function(e,i){   
-            $(".TimeTableE").html("UwU, somethin went wong.");
-        }
-        })
-    }
-    $("#backward").click(function(e){
-        changeTimeTable(-1);
-    })
-    $("#reset").click(function(e){
-        changeTimeTable(0);
-    })
-    $("#forward").click(function(e){
-        changeTimeTable(1);
-    })
-    $.ajax({
-        type: "post",
-        url: "/api.php/getEndTime",
-        contentType: "application/json; charset=utf-8",
-        success: function(response) {
-            var endDate = new Date(response.message * 1000);
-            setInterval(() => {
-                const today = new Date();
-                const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
-                const hours = parseInt(Math.abs(endDate - today) / (1000 * 60 * 60) % 24);
-                const minutes = parseInt(Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60) % 60);
-                const seconds = parseInt(Math.abs(endDate.getTime() - today.getTime()) / (1000) % 60);
-
-                $(".daysUntilEndOfYear").html(`<h3> Do końca roku szkolnego pozostało:</h3><p>${days}
-                 dni</p><p>
-                ${hours + 24 * days}
-                 godziny</p><p>
-                ${minutes + hours * 60 + 60 * 24 * days}
-                 minut</p><p>
-                ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}
-                 sekund</p>`)
-                //`<>DNI DO KONCA ROKU: ${days}<br>GODZINY DO KONCA ROKU: ${hours + 24 * days}<br>;MINUTY DO KONCA ROKU: ${minutes + hours * 60 + 60 * 24 * days}<br>;SEKUNDY DO KONCA ROKU: ${seconds + 60 * minutes + 60 * 60 * hours + 60 * 60 * 24 * days}<br>`)
-            }, 1000)
-        }
-    });
-</script>
+<script src="js/member.js"></script>
 
 
 <?php
