@@ -67,7 +67,6 @@ include_once("header.php");
 </div>
 
 <div class="studentComments element">
-    <h1>Uwagi</h1>
     <?php
     getUserComments($_SESSION["id"]);
     ?>
