@@ -256,10 +256,14 @@ div input[type="text"] {
     display: flex;
 }
 .daysUntilEndOfYear {
-    height: 6.822916666666667vw;
+    height: 13.89920424403183vh;
     width: 19vw;
-    margin-right: 5vw;
+    margin-left: 6vw;
     padding: 1.5vw;
+}
+.daysUntilEndOfYear div{
+    display: flex;
+    justify-content: center;
 }
 
 .daysUntilEndOfYear h3 {
@@ -274,7 +278,7 @@ div input[type="text"] {
 .timeTable {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
@@ -286,7 +290,7 @@ div input[type="text"] {
 .grades {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
@@ -298,19 +302,20 @@ div input[type="text"] {
 .freeDaysTable {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 26vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
     z-index: 1000;
     overflow-y: scroll;
     overflow-x: hidden;
+
 }
 
 .attendanceTable {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
@@ -322,7 +327,7 @@ div input[type="text"] {
 .studentComments {
     font-size: 1vw;
     min-width: 10vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     padding: 1.5vw;
     font-family: "Source Sans Pro", sans-serif;
     z-index: 1000;
@@ -554,7 +559,7 @@ body::-webkit-scrollbar-thumb {
 .closestHomework {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
@@ -606,7 +611,7 @@ margin-bottom: 8px;
 .closestExams {
     font-size: 1vw;
     width: 24vw;
-    height: 24vw;
+    height: 48.89124668435013vh;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;

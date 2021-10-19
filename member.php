@@ -27,6 +27,7 @@ include_once("header.php");
     <input type="submit" id="reset" value="Today">
     <input type="submit" id="forward" value=">">
 </div>
+<div>
 <div class="daysUntilEndOfYear element">
     <?php
     getDaysUntilEndOfYear()
@@ -39,6 +40,7 @@ include_once("header.php");
     <?php
     closestFreeDays()
     ?>
+</div>
 </div>
 <div class="closestExams element">
     <h1>Najbliższe sprawdziany</h1>
