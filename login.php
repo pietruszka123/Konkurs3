@@ -10,7 +10,7 @@ include_once("header.php");
     <div class="logowanieDiv">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="email">E-mail:</label>
-            <input class="input" type="text" name="email" required><br>
+            <input class="input" type="email" name="email" required><br>
             <label for="Password">Hasło:</label>
             <input type="password" name="password" required><br>
     </div>
