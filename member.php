@@ -16,13 +16,9 @@ include_once("header.php");
         ?>
     </div>
 </div>
-<div class="daysUntilEndOfYear element">
-    <?php
-    getDaysUntilEndOfYear()
-    ?>
-</div>
 <div class="timeTable element">
     <div class="TimeTableE">
+        <h1>Plan Lekcji</h1>
     <?php
     getTimetable();
     ?>
@@ -31,8 +27,15 @@ include_once("header.php");
     <input type="submit" id="reset" value="Today">
     <input type="submit" id="forward" value=">">
 </div>
+<div class="daysUntilEndOfYear element">
+    <?php
+    getDaysUntilEndOfYear()
+    ?>
+</div>
+
 
 <div class="freeDaysTable element">
+    <h1>Dni Wolne</h1>
     <?php
     closestFreeDays()
     ?>
@@ -43,14 +46,15 @@ include_once("header.php");
     closestExams()
     ?>
 </div>
-<div class="closestHomework">
+<div class="closestHomework element">
+    <h1>Zadania Domowe</h1>
     <?php
     closestHomework()
     ?>
 </div>
 
-<div class="attendanceTable">
-
+<div class="attendanceTable element">
+    <h1>Nieobecności</h1>
     <?php
     getAttendance($_SESSION["id"]);
     ?>
@@ -63,6 +67,7 @@ include_once("header.php");
 </div>
 
 <div class="studentComments element">
+    <h1>Uwagi</h1>
     <?php
     getUserComments($_SESSION["id"]);
     ?>
