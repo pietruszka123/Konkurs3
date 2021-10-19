@@ -483,8 +483,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .singleGrade:hover .gradeGreaterInfo {
-    visibility: visible;
-    opacity: 100%;
+    /* visibility: visible;
+    opacity: 100%; */
 }
 
 .messagesButtons {
