@@ -20,5 +20,5 @@ include_once("functions.php");
 
 <body>
     
-    <header><img class="plaster" src="plaster.svg" alt=""><h1>Hive Grades</h1></header>
+    <header><img class="plaster" src="img/plaster.svg" alt=""><h1>Hive Grades</h1></header>
             <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
