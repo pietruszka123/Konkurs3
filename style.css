@@ -12,7 +12,7 @@ html {
 
 @import url("http://fonts.cdnfonts.com/css/honey-script");
 body {
-    justify-content: start;
+    justify-content: space-evenly;
     overflow-x: hidden;
     padding-top: 11vh;
     display: flex;
@@ -226,12 +226,17 @@ div input[type="text"] {
     filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
 }
 
+.element h1 {
+    color: white;
+}
+
 
 /* Wyświetlane divy */
 
 .daysUntilEndOfYear {
     height: 6.822916666666667vw;
     width: 19vw;
+    margin-right: 5vw;
     padding: 1.5vw;
 }
 
@@ -245,15 +250,45 @@ div input[type="text"] {
 }
 
 .timeTable {
-    height: 6.822916666666667vw;
-    width: 19vw;
+    font-size: 1vw;
+    width: 24vw;
+    height: 24vw;
+    min-width: 15%;
     padding: 1.5vw;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .grades {
     font-size: 1vw;
     width: 24vw;
-    height: 30.5vw;
+    height: 24vw;
+    min-width: 15%;
+    padding: 1.5vw;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.freeDaysTable {
+    font-size: 1vw;
+    width: 24vw;
+    height: 24vw;
+    min-width: 15%;
+    padding: 1.5vw;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.attendanceTable {
+    font-size: 1vw;
+    width: 24vw;
+    height: 24vw;
     min-width: 15%;
     padding: 1.5vw;
     font-family: "Poppins", sans-serif;
@@ -500,6 +535,18 @@ body::-webkit-scrollbar-thumb {
     font-weight: 550;
     text-align: center;
     text-decoration: underline;
+}
+
+.closestHomework {
+    font-size: 1vw;
+    width: 24vw;
+    height: 24vw;
+    min-width: 15%;
+    padding: 1.5vw;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .closestExams {

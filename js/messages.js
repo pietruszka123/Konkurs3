@@ -1,7 +1,7 @@
 function sendMessage(Content, title, Receiver) {
     $.ajax({
         type: "POST",
-        url: "/api.php/sendMessage",
+        url: "api.php/sendMessage",
         data: JSON.stringify({ Content: Content, title: title, Receiver: Receiver }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -35,7 +35,7 @@ function initButtons() {
             $(".messageContent").text("Ładowanie...");
             $.ajax({
                 type: "post",
-                url: "/api.php/getMessageData",
+                url: "api.php/getMessageData",
                 data: JSON.stringify({ messageId: parseInt(this.id) }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
