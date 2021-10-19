@@ -341,19 +341,19 @@ function getDaysUntilEndOfYear()
 }
 
 
-function getTimetable()
+function getTimetable($ret = false,$direction = 0)
 {
     global $mysqli;
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST['backward'])) {
+    //if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($direction == -1) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] - 1;
-        } else if (isset($_POST['forward'])) {
+        } else if ($direction == 1) {
             $_SESSION['timeTableDate'] = $_SESSION['timeTableDate'] + 1;
-        } else if (isset($_POST['reset'])) {
+        } else if ($direction == 0) {
             $_SESSION['timeTableDate'] = 0;
         }
-    }
+   // }
 
     $sql = "SELECT classId FROM `users` WHERE users.userId = ?";
 
@@ -371,11 +371,12 @@ function getTimetable()
             $sql = "SELECT timetables.subjectId, timetables.teacherId, timetables.classDateStart, timetables.classDateEnd, DATE_FORMAT(timetables.classDateStart, \"%H:%i\") as classStartHour, DATE_FORMAT(timetables.classDateEnd, \"%H:%i\") as classEndHour, timetables.classDescription, timetables.classroom, timetables.obligatory, timetables.substituteTeacherId, timetables.substituteSubjectId, timetables.substituteDescription, timetables.substituteClassroom, timetables.cancelled FROM `timetables` WHERE timetables.classId = $classId AND DATE(timetables.classDateStart) = CURRENT_DATE + INTERVAL $timeTableDate DAY";
             $result = $mysqli->query($sql);
 
-            if ($result->num_rows != 0) {
+            if ($result !== false && $result->num_rows != 0) {
                 while ($row = $result->fetch_assoc()) {
                     if (!isset($row['substitureTeacherId'])) {
-                        echo 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
+                        
+                        $TEMP = 'Początek lekcji: ' . $row['classStartHour'] . '<br>';
+                        $TEMP .= 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
 
 
@@ -388,8 +389,8 @@ function getTimetable()
 
 
 
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
+                        $TEMP .= 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
+                        $TEMP .= 'Klasa: ' . $row['classroom'] . '<br>';
 
                         $subjectId = $row['subjectId'];
                         $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
@@ -398,37 +399,38 @@ function getTimetable()
 
 
 
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
+                        $TEMP .= 'Przedmiot: ' . $row2['subjectName'] . '<br>';
                     } else {
-                        echo $row['classStartHour'] . '<br>';
-                        echo 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
+                        $TEMP = $row['classStartHour'] . '<br>';
+                        $TEMP .= 'Koniec lekcji: ' . $row['classEndHour'] . '<br>';
 
                         $teacherId = $row['substituteTeacherId'];
                         $sql2 = "SELECT userFirstName, userSecondName, userLastName FROM `users` WHERE userId = $teacherId";
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
 
-                        echo 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
-                        echo 'Klasa: ' . $row['classroom'] . '<br>';
+                        $TEMP .= 'Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '<br>';
+                        $TEMP .= 'Klasa: ' . $row['classroom'] . '<br>';
 
                         $subjectId = $row['substituteSubjectId'];
                         $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
 
-                        echo 'Przedmiot: ' . $row2['subjectName'] . '<br>';
+                        $TEMP .= 'Przedmiot: ' . $row2['subjectName'] . '<br>';
                     }
                 }
             } else {
-                echo 'Nie ma informacji';
+                $TEMP = 'Nie ma informacji';
             }
         }
     }
 
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
-    echo $date;
-
+    $TEMP .= $date;
+    if($ret)return $TEMP;
+    else echo $TEMP;
     $stmt->close();
 }
 

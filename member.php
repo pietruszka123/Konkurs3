@@ -21,32 +21,31 @@ include_once("header.php");
     ?>
 </div>
 <div class="timeTable element">
+    <div class="TimeTableE">
     <?php
     getTimetable();
     ?>
-
-    <form method="POST">
-        <input type="submit" name="backward" value="<">
-        <input type="submit" name="reset" value="Today">
-        <input type="submit" name="forward" value=">">
-    </form>
+    </div>
+    <input type="submit" id="backward" value="<">
+    <input type="submit" id="reset" value="Today">
+    <input type="submit" id="forward" value=">">
 </div>
 
 <div class="freeDaysTable element">
     <?php
-    closestFreeDays()
+    //closestFreeDays()
     ?>
 </div>
 <div class="closestExams element">
     <h1>Najbliższe sprawdziany</h1>
     <?php
-closestExams()
-?>
+    closestExams()
+    ?>
 </div>
 <div class="closestHomework">
     <?php
-closestHomework()
-?>
+    closestHomework()
+    ?>
 </div>
 
 <div class="attendanceTable">
@@ -70,7 +69,30 @@ closestHomework()
 
 
 <script>
-    /**skomentyj aby wyłączyć */
+    function changeTimeTable(i){
+        $.ajax({
+        type: "post",
+        url: "/api.php/getTimeTable",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ direction:i }),
+        success: function(response) {
+            console.log(response)
+            $(".TimeTableE").html(response.message);
+        },
+        error: function(e,i){   
+            $(".TimeTableE").html("UwU, somethin went wong.");
+        }
+        })
+    }
+    $("#backward").click(function(e){
+        changeTimeTable(-1);
+    })
+    $("#reset").click(function(e){
+        changeTimeTable(0);
+    })
+    $("#forward").click(function(e){
+        changeTimeTable(1);
+    })
     $.ajax({
         type: "post",
         url: "/api.php/getEndTime",
