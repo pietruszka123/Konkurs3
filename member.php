@@ -35,7 +35,7 @@ include_once("header.php");
 
 
 <div class="freeDaysTable element">
-    <h1>Dni Wolne</h1>
+    <h1>Najbliższe Dni Wolne</h1>
     <?php
     closestFreeDays()
     ?>
