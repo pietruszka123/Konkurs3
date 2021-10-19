@@ -8,6 +8,7 @@ include_once("header.php");
 ?>
 
 <!-- marcin zostaw | nie -->
+<!-- o co chodzi? -->
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php

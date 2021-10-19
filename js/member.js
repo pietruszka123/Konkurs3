@@ -1,11 +1,10 @@
 function changeTimeTable(i){
     $.ajax({
     type: "post",
-    url: "/api.php/getTimeTable",
+    url: "api.php/getTimeTable",
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify({ direction:i }),
     success: function(response) {
-        console.log(response)
         $(".TimeTableE").html(response.message);
     },
     error: function(e,i){   
@@ -24,7 +23,7 @@ $("#forward").click(function(e){
 })
 $.ajax({
     type: "post",
-    url: "/api.php/getEndTime",
+    url: "api.php/getEndTime",
     contentType: "application/json; charset=utf-8",
     success: function(response) {
         var endDate = new Date(response.message * 1000);
