@@ -8,14 +8,17 @@
 html {
     background: linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
     width: 100%;
-    height: 100%;
+
+    
 }
 
 @import url("http://fonts.cdnfonts.com/css/honey-script");
 body {
     background-image: url("img/honeycombbialy.svg");
      width: auto;
+     min-height: 100vh;
      height: 100%;
+     background-repeat: repeat-y;
      background-size: cover;
      background-position: center center;
     justify-content: space-evenly;
@@ -23,7 +26,18 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
-
+body2{
+    background-image: url("img/honeycombbialy.svg");
+     width: auto;
+     min-height: 100vh;
+     background-repeat: repeat-y;
+     background-size: cover;
+     background-position: center center;
+    justify-content: space-evenly;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+}
 :root {
     --darkerDiscordColor: rgb(41, 41, 41);
     --mainBackgroundColor: rgb(236, 236, 236);

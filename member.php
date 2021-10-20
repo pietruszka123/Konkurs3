@@ -6,7 +6,8 @@ include_once("header.php");
     exit();
 }*/
 ?>
-
+</body>
+<body2>
 <!-- marcin zostaw | nie -->
 <!-- o co chodzi? -->
 <div class="grades element">
