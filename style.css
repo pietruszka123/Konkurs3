@@ -53,6 +53,14 @@ header h1 {
     font-weight: 400;
     font-family: "Honey Script", sans-serif;
 }
+header a{
+    display: flex;
+    align-items: center;
+}
+.logout{
+    width: 30px;
+    height: 30px;
+}
 
 .bombel {
     position: fixed;
