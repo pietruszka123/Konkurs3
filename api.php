@@ -25,9 +25,9 @@
     $uri = explode( '/', $uri );
     $data = json_decode(file_get_contents('php://input'), true);
     if(count($uri) < 3){
-        ERROR();
-    }
-    switch ($uri[2]) {
+/*         ERROR();
+ */    }
+    switch ($uri[3]) {
         case 'sendMessage':
             header("HTTP/1.1 200 OK");
             //checkifExists($data["Receiver"],$data["title"],$data["Content"]);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2021 at 01:29 AM
+-- Generation Time: Oct 19, 2021 at 10:21 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -130,7 +130,7 @@ CREATE TABLE `freedays` (
   `freeDayId` int(11) NOT NULL,
   `freeDayDate` date NOT NULL,
   `freeDayReason` varchar(255) NOT NULL,
-  `freeDayDescription` text NOT NULL
+  `freeDayDescription` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -138,7 +138,17 @@ CREATE TABLE `freedays` (
 --
 
 INSERT INTO `freedays` (`freeDayId`, `freeDayDate`, `freeDayReason`, `freeDayDescription`) VALUES
-(1, '2021-10-18', 'SPIERDALAJ', 'WYPIERDALANKO DO DOMSKU');
+(1, '2021-10-18', 'SPIERDALAJ', 'WYPIERDALANKO DO DOMSKU'),
+(2, '2021-11-26', 'bo jestem chory byczku', 'no choroba wyszloc o mam poradzic szczylu maly'),
+(3, '2021-10-31', 'bo tak', 'bo mi sie nie chce przychodzi mlody'),
+(4, '0000-00-00', 'tuiy', 'ituy'),
+(5, '0000-00-00', 'swietnie', 'zarabiscie'),
+(6, '0000-00-00', 'swietnie', 'zarabiscie'),
+(7, '0000-00-00', 'tiuyityu', 'tiyutyiu'),
+(8, '0000-00-00', 'test', 'test'),
+(9, '0000-00-00', 'test', 'test'),
+(10, '0000-00-00', 'test', 'test'),
+(11, '0000-00-00', 'fghj', 'fghj');
 
 -- --------------------------------------------------------
 
@@ -200,7 +210,9 @@ CREATE TABLE `homework` (
 --
 
 INSERT INTO `homework` (`homeworkId`, `subjectId`, `teacherId`, `creationDate`, `deadline`, `homeworkDescription`, `obligatory`, `classId`) VALUES
-(1, 1, 1, '2021-07-19 08:46:28', '2021-07-20 06:45:39', 'Przygotuj czystą metamfetaminę', 'Tak', 1);
+(1, 1, 1, '2021-07-19 08:46:28', '2021-07-20 06:45:39', 'Przygotuj czystą metamfetaminę', 'Tak', 1),
+(2, 6, 1, '2021-10-17 19:53:59', '2021-10-28 19:53:20', 'dfsgsdfgsdfg', 'Tak', 1),
+(3, 2, 4, '2021-10-17 19:53:59', '2021-10-26 19:53:20', 'asdfasdfasdfasdf', 'Nie', 1);
 
 -- --------------------------------------------------------
 
@@ -552,7 +564,7 @@ ALTER TABLE `exams`
 -- AUTO_INCREMENT for table `freedays`
 --
 ALTER TABLE `freedays`
-  MODIFY `freeDayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `freeDayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `grades`
@@ -564,7 +576,7 @@ ALTER TABLE `grades`
 -- AUTO_INCREMENT for table `homework`
 --
 ALTER TABLE `homework`
-  MODIFY `homeworkId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `homeworkId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `meetings`
