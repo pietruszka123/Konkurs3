@@ -37,7 +37,7 @@ body {
 
 header {
     width: 100%;
-    height: 11.803713527851459vh;
+    height: 12vh;
     background-image: url("img/header.svg");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -95,14 +95,21 @@ header a{
 }
 
 .logowanie {
+
+    height: 88.9vh;
+    margin: 0 auto;
+    position: relative;
+
+
+}
+.loginPanel{
     background-color: rgb(96, 145, 233, 60%);
-    max-width: 29%;
-    width: 100%;
+    width: 25.1953125vw;
     height: fit-content;
     margin: 0 auto;
-    margin-top: 4.5vw;
     position: relative;
     margin-bottom: 1.3vw;
+    margin-top: 20vh;
     padding: 2.5vw;
     padding-top: 1vw;
     border-radius: 1.3vw;

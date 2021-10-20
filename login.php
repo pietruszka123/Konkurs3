@@ -5,6 +5,7 @@ include_once("header.php");
 <img class="heksagon" src="img/heksagon.svg" alt="" style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
 <img class="gwiazdka" src="img/gwiazdka.svg" alt="" style="top: 5vw; right:20vw;transform:rotate(45deg);">
 <div class="logowanie">
+    <div class="loginPanel">
     <h1 class="h1Default">Logowanie</h1>
     <h2>Proszę podać e-mail i hasło</h2>
     <div class="logowanieDiv">
@@ -21,7 +22,7 @@ include_once("header.php");
     <h2 style="text-align:center;padding-top:1vw;padding-bottom:0.4vw;">Nie masz jeszcze konta?</h2> <a href="register.php" class="logReg">
         <h2>Zarejestruj się, teraz!</h2>
     </a>
-
+    </div>
 </div>
 
 
