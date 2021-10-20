@@ -294,7 +294,67 @@ div input[type="text"] {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.singleLesson{
+    color: white;
+    height: max-content;
+    background-color: rgba(134, 97, 209, 100%);
+    padding: 0.5vw;
+    font-size: 0.9765625vw;
+    margin: 0.1vw;
+    margin-bottom: 1.953125vw;
+    display: grid;
+    grid-template-columns: 0.5fr 0.6fr 0.5fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    border-radius: 1vw;
+}
+.niumer{
+    text-align: center;
+    align-self: center;
+    grid-row-start: 1;
+    grid-row-end: 53;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+h5{
+    color: white;
+    font-size:2em;
+}
+.classStart{
+    align-self: center;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
 
+.classEnd{
+    align-self: center;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.rzeczpospolitapolska{
+    align-self: center;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+.peace{
+    align-self: center;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.ticier{
+    align-self: center;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
 .grades {
     font-size: 1vw;
     width: 24vw;
