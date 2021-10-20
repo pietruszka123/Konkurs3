@@ -12,6 +12,20 @@ function changeTimeTable(i){
     }
     })
 }
+function changeAttendance(i){
+    $.ajax({
+    type: "post",
+    url: "api.php/getAttendance",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify({ direction:i }),
+    success: function(response) {
+        $(".attendanceTableE").html(response.message);
+    },
+    error: function(e,i){   
+        $(".attendanceTableE").html("UwU, somethin went wong.");
+    }
+    })
+}
 $("#backward").click(function(e){
     changeTimeTable(-1);
 })
@@ -20,6 +34,15 @@ $("#reset").click(function(e){
 })
 $("#forward").click(function(e){
     changeTimeTable(1);
+})
+$("#back").click(function(e){
+    changeAttendance(-1);
+})
+$("#res").click(function(e){
+    changeAttendance(0);
+})
+$("#for").click(function(e){
+    changeAttendance(1);
 })
 $.ajax({
     type: "post",
@@ -55,7 +78,7 @@ $(".singleGrade").each(function(i,e){
             marginLeft: 0, marginTop: 0,
             top: p.top, left: p.left,
             visibility: "visible",
-            opacity: "100%"
+            opacity: "100%",
         }).appendTo('body');
         this.comment = el;
     })

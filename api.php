@@ -13,6 +13,7 @@
     }
     function checkifExists(...$elements){
         //echo array_values($elements);
+        
         for ($i=0; $i < count($elements); $i++) { 
             if(isset($elements[$i])){
                 ERROR();
@@ -49,6 +50,10 @@
         case 'getTimeTable':
             header("HTTP/1.1 200 OK");
             echo '{"status":true, "message":"' . getTimetable(true,$data["direction"]) . '"}';
+            break;
+        case 'getAttendance':
+            header("HTTP/1.1 200 OK");
+            echo '{"status":true, "message":' . json_encode(getAttendance($_SESSION["id"],true,$data["direction"])) . '}';       
             break;
         default:
             ERROR();

@@ -55,15 +55,14 @@ include_once("header.php");
 
 <div class="attendanceTable element">
     <h1>Nieobecności</h1>
+    <div class="attendanceTableE">
     <?php
     getAttendance($_SESSION["id"]);
     ?>
-
-    <form method="POST">
-        <input type="submit" name="back" value="<">
-        <input type="submit" name="res" value="Today">
-        <input type="submit" name="for" value=">">
-    </form>
+    </div>
+    <input type="submit" id="back" value="<">
+    <input type="submit" id="res" value="Today">
+    <input type="submit" id="for" value=">">
 </div>
 
 <div class="studentComments element">

@@ -51,7 +51,7 @@ function initButtons() {
 function Refresh() {
     $.ajax({
         type: "post",
-        url: "/api.php/getMessagesElements",
+        url: "api.php/getMessagesElements",
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             console.log(response)

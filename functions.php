@@ -609,20 +609,18 @@ function getUserComments($userID)
 
 
 // SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = 3;
-function getAttendance($userID)
+function getAttendance($userID,$ret = false,$direction = 0)
 {
     global $mysqli;
     global $error;
     $date = date("Y/m/d");
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST['back'])) {
+        if ($direction == -1) {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] - 1;
-        } else if (isset($_POST['for'])) {
+        } else if ($direction == 1) {
             $_SESSION['attendanceDate'] = $_SESSION['attendanceDate'] + 1;
-        } else if (isset($_POST['res'])) {
+        } else if ($direction == 0) {
             $_SESSION['attendanceDate'] = 0;
         }
-    }
     $attendanceDate = $_SESSION['attendanceDate'];
 
     $sql = 'SELECT subjects.subjectName, users.userFirstName, users.userSecondName, users.userLastName, attendance.subjectNumber, attendance.attendanceState, attendance.attendanceDescription, attendance.attendanceDate, attendance.attendanceExcuse FROM subjects, users, attendance WHERE users.userId = attendance.teacherId AND subjects.subjectId = attendance.subjectId AND attendance.studentId = ? AND DATE(attendance.attendanceDate) = CURRENT_DATE + INTERVAL ' . strval($attendanceDate) . ' DAY;';
@@ -637,58 +635,57 @@ function getAttendance($userID)
         if ($stmt->execute()) {
             $stmt->store_result();
 
-
+            $TEMP = "";
             if ($stmt->num_rows != 0) {
                 $stmt->bind_result($subjectName, $teacherFirstName, $teacherSecondName, $teacherLastName, $subjectNumber, $attendanceState, $attendanceDescription, $attendanceDateDate, $attendanceExcuse);
-
+                
                 while ($stmt->fetch()) {
 
                     if ($attendanceState = "Obecnosc") //$attendanceExcuse
                     {
-                        echo '<div class="singleAttendance present">
-                        <h1>' . $subjectNumber . '</h1>
-                        <h3>' . $subjectName . '</h3>
-                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP .= "<div class='singleAttendance present'>
+                        <h1>" . $subjectNumber . "</h1>
+                        <h3>" . $subjectName . "</h3>
+                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                         <h2>Obecność</h2>
-                    </div>';
+                    </div>";
                     } elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse)) {
 
-                        echo '<div class="singleAttendance excusedLateness">
-                        <h1>' . $subjectNumber . '</h1>
-                        <h3>' . $subjectName . '</h3>
-                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP .= "<div class='singleAttendance excusedLateness'>
+                        <h1>" . $subjectNumber . "</h1>
+                        <h3>" . $subjectName . "</h3>
+                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                         <h2>Spóźnienie Usprawiedliwione</h2>
-                    </div>';
+                    </div>";
                     } elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse)) {
-                        echo '<div class="singleAttendance unexcusedLateness">
-                        <h1>' . $subjectNumber . '</h1>
-                        <h3>' . $subjectName . '</h3>
-                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP.= "<div class='singleAttendance unexcusedLateness'>
+                        <h1>" . $subjectNumber . "</h1>
+                        <h3>" . $subjectName . "</h3>
+                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                         <h2>Spóźnienie Niesuprawiedliwione</h2>
-                    </div>';
+                    </div>";
                     } elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse)) {
 
 
-                        echo '<div class="singleAttendance excusedAbsence">
-                        <h1>' . $subjectNumber . '</h1>
-                        <h3>' . $subjectName . '</h3>
-                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP.= "<div class='singleAttendance excusedAbsence'><h1>" . $subjectNumber . "</h1>
+                        <h3>" . $subjectName . "</h3>
+                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                         <h2>Nieobecność Usprawiedliwiona</h2>
-                    </div>';
+                    </div>";
                     } elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse)) {
-                        echo '<div class="singleAttendance unexcusedAbsence">
-                        <h1>' . $subjectNumber . '</h1>
-                        <h3>' . $subjectName . '</h3>
-                        <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP .= "<div class='singleAttendance unexcusedAbsence'>
+                        <h1>" . $subjectNumber . "</h1>
+                        <h3>" . $subjectName . "</h3>
+                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                         <h2>Nieobecność Niesuprawiedliwiona</h2>
-                    </div>';
+                    </div>";
                     } else {
-                        echo '<div class="singleAttendance">
-                            <h1>' . $subjectNumber . '</h1>
-                            <h3>' . $subjectName . '</h3>
-                            <p>' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        $TEMP.= "<div class='singleAttendance'>
+                            <h1>" . $subjectNumber . "</h1>
+                            <h3>" . $subjectName . "</h3>
+                            <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
                             <h2>' . $attendanceState . '</h2>
-                        </div>';
+                        </div>";
                     }
                 }
             } else {
@@ -696,13 +693,15 @@ function getAttendance($userID)
             }
         } else {
             $error = $error . "UwU, somethin went wong.";
-            echo $error;
+            if($ret)return $error;
+            else echo $error;
         }
     }
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
-    echo $date;
-
+    $TEMP.= $date;
+    if($ret)return $TEMP;
+    else echo $TEMP;
     $stmt->close();
 }
 
