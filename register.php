@@ -9,23 +9,19 @@ include_once("header.php");
     <div class="loginPanel">
         <h1 class="h1Default">Rejestracja</h1>
         <h2>Proszę podać e-mail, hasło i potwierdź hasło</h2>
-        <div class="logowanieDiv">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <label for="email">E-mail:</label>
-                <input class="input" type="email" name="email" required><br>
-                <label for="Password">Hasło:</label>
-                <input type="password" name="password" required><br>
-                <label for="Password">Powtórz hasło:</label>
-                <input type="password" name="passwordConfirm" required><br>
-        </div>
-        <div class="log">
-            <input type="submit" value="Zarejestruj">
-        </div>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <label for="email">E-mail:</label>
+            <input class="input" type="email" name="email" required><br>
+            <label for="Password">Hasło:</label>
+            <input type="password" name="password" required><br>
+            <label for="Password">Powtórz hasło:</label>
+            <input type="password" name="passwordConfirm" required><br>
+            <input type="submit" value="Zarejestruj" class="log">
+            <h2 style="text-align:center;padding-top:1vh;">Zarejestrowany?</h2>
+            <a href="login.php" class="logReg">
+                <h2>Zaloguj się :D</h2>
+            </a>
         </form>
-        <h2 style="text-align:center;padding-top:1vw;padding-bottom:0.4vw;">Zarejestrowany?</h2>
-        <a href="login.php" class="logReg">
-            <h2>Zaloguj się :D</h2>
-        </a>
     </div>
 </div>
 

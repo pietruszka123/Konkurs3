@@ -106,14 +106,18 @@ header a{
     background-color: rgb(96, 145, 233, 60%);
     width: 25.1953125vw;
     height: fit-content;
-    margin: 0 auto;
     position: relative;
     margin-bottom: 1.3vw;
     margin-top: 20vh;
     padding: 2.5vw;
-    padding-top: 1vw;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
     border-radius: 1.3vw;
     border: white 0.06vw solid;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 6vh;
 }
 
 .logowanie h2 {
@@ -123,12 +127,7 @@ header a{
     color: #fff;
     text-align: center;
     display: block;
-}
-
-.logowanie div {
-    margin-top: 0.78vw;
-    padding-left: 1.3vw;
-    padding-right: 1.3vw;
+    margin-bottom: 2vh;
 }
 
 div {
@@ -152,10 +151,6 @@ div {
     font-size: 1.2vw;
 }
 
-.logowanieDiv {
-    display: flex;
-    justify-content: center;
-}
 
 .logowanie input[type="submit"] {
     text-align: center;
@@ -168,14 +163,17 @@ div {
     background: linear-gradient( 90deg, rgba(136, 105, 210, 1) 0%, rgba(132, 203, 234, 1) 100%);
     width: 19.5vw;
     padding-left: 1.3vw;
-    margin-top: 0.65vw;
+    margin-top: 1.65vw;
     padding-right: 1.3vw;
     height: 2.9vw;
-    border: none;
+    border: white 1px solid;
+    border-radius: 0.65vw;
     cursor: pointer;
     filter: drop-shadow(0px 0px 0.06vw #6295ea);
 }
-
+.input{
+    margin-bottom: 2vh;
+}
 .container {
     padding: 2vw;
     display: grid;
@@ -185,9 +183,11 @@ div {
 .log {
     display: flex;
     justify-content: center;
+    
 }
 
 .log input[type="submit"] {
+    margin-top: 0.78vw;
     border: solid 0.12vw white;
     border-radius: 0.65vw;
 }
@@ -201,7 +201,7 @@ div {
     margin-bottom: 1.3vw;
 }
 
-div input[type="text"],
+div input[type="email"],
 div input[type="password"] {
     border: 0.06vw solid #ffffff;
     margin-top: 0.25vw;
