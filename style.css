@@ -13,14 +13,13 @@ html {
 
 @import url("http://fonts.cdnfonts.com/css/honey-script");
 body {
-    background-image: url("img/honeycombbialy.svg"), linear-gradient( 130deg, rgba(96, 145, 233, 1) 0%, rgba(117, 180, 234, 1) 50%, rgba(187, 201, 229, 1) 100%);
-
+    background-image: url("img/honeycombbialy.svg");
      width: auto;
+     height: 100%;
      background-size: cover;
      background-position: center center;
     justify-content: space-evenly;
     overflow-x: hidden;
-    padding-top: 11vh;
     display: flex;
     flex-wrap: wrap;
 }
@@ -100,7 +99,7 @@ header a{
     width: 100%;
     height: fit-content;
     margin: 0 auto;
-    margin-top: 4.5vw;
+    margin-top: 12vw;
     position: relative;
     margin-bottom: 1.3vw;
     padding: 2.5vw;
@@ -194,7 +193,7 @@ div {
     margin-bottom: 1.3vw;
 }
 
-div input[type="text"],
+div input[type="email"],
 div input[type="password"] {
     border: 0.06vw solid #ffffff;
     margin-top: 0.25vw;
@@ -241,10 +240,10 @@ div input[type="text"] {
 }
 
 .element h2 {
-    color: rgb(199, 199, 174);
+    color: white;
 }
 .element p {
-    color: rgb(199, 199, 174);
+    color: white;
 }
 .freeDay{
     color: white;
