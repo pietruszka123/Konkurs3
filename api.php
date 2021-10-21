@@ -31,7 +31,7 @@
         case 'sendMessage':
             header("HTTP/1.1 200 OK");
             //checkifExists($data["Receiver"],$data["title"],$data["Content"]);
-            sendMessage($data["Receiver"],$data["title"],$data["Content"]);
+            sendMessage($data["Receivers"],$data["title"],$data["Content"]);
             //getMessageElement("?","now",$data["title"],$data["Content"]);
             break;
         case 'getMessagesElements':

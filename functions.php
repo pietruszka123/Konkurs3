@@ -276,7 +276,7 @@ function viewAllReceivers()
                 $stmt->bind_result($teacherId, $teacherFirstName, $teacherSecondName, $teacherLastName);
                 while ($stmt->fetch())
                 {
-                    echo "<option value=\"$teacherId\">$teacherFirstName $teacherSecondName $teacherLastName</option>";
+                    echo "<div id='$teacherId'>$teacherFirstName $teacherSecondName $teacherLastName</div>";
                 }
             }
             else
@@ -293,7 +293,7 @@ function viewAllReceivers()
     $stmt->close();
 }
 
-function sendMessage($Receiver, $title, $Content)
+function sendMessage($Receivers, $title, $Content)
 {
     global $mysqli;
     global $error;
@@ -303,7 +303,11 @@ function sendMessage($Receiver, $title, $Content)
     {
         $stmt->bind_param("ssss", $senderId, $receiverId, $messageContent, $messageTitle);
         $senderId = $_SESSION["id"];
-        $receiverId = "{ \"id\": [\"" . $Receiver . "\"]}";
+        $receiverId = "{ \"id\": [";
+        foreach ($Receivers as $element) {
+            $receiverId .= "" . $element . ",";
+        }
+        $receiverId .= "]}";
         $messageContent = $Content;
         $messageTitle = $title;
         if ($stmt->execute())

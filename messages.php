@@ -6,12 +6,12 @@ include_once "header.php";
 
 <input type="button" value="Odświerz" id="refresh">
 <div class="messageForm">
-        <input type="hidden" name="viewMessage" value="messageId" />
-        <div class="messagesButtons">
-            <?php
-            getUserMessages();
-            ?>
-        </div>
+    <input type="hidden" name="viewMessage" value="messageId" />
+    <div class="messagesButtons">
+        <?php
+        getUserMessages();
+        ?>
+    </div>
 </div>
 <div class="messageContent">
 </div>
@@ -31,18 +31,24 @@ include_once "header.php";
 <script src="js/messages.js" type="module"></script>
 <div id="popUp" class="popUp">
     <div class="popUp-content">
-      <span class="popUp-close">&times;</span>
-      <div>
-          <select name="selectReceiverType" id="selectReceiverType">
-              <option value="b">a</option>
-              <option value="b">b</option>
-          </select>
-      <?php
-        //viewAllReceivers();
-        ?>
-      </div>
+        <span class="popUp-close">&times;</span>
+        <div>
+            <select id="selectReceiverType">
+                <option value="uczen">a</option>
+                <option value="nauczyciel">b</option>
+            </select>
+
+            <div class="notSelected">
+                <?php
+                viewAllReceivers();
+                ?>
+            </div>
+            <div class="Selected">
+            </div>
+            <input id="subbmit" type="button" value="zatwierdź wybrane samochody">
+        </div>
     </div>
-  </div>
+</div>
 
 
 <?php
