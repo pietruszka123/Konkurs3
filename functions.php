@@ -19,7 +19,7 @@ function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? ORDER BY users.userId";
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.studentId = users.userId ORDER BY users.userId";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -435,7 +435,7 @@ function getTimetable($ret = false, $direction = 0)
                     {
                         
                         $TEMP .= "<div class='singleLesson'>";
-                        $TEMP .= "<h5 class='niumer'>'.$i.'</h5>";
+                        $TEMP .= "<h5 class='niumer'>".$i."</h5>";
                         $TEMP.=  "<p class='classStart'>" . $row['classStartHour'] . '</p>';
                         $TEMP .= "<p class='classEnd'>" . $row['classEndHour'] . '</p>';
 
@@ -465,7 +465,7 @@ function getTimetable($ret = false, $direction = 0)
                     else
                     {
                         $TEMP .= "<div class='singleLesson'>";
-                        $TEMP .= "<h5 class='niumer'>".$i.'</h5>';
+                        $TEMP .= "<h5 class='niumer'>".$i."</h5>";
                         $TEMP = '<p>Początek lekcji: ' . $row['classStartHour'] . '</p>';
                         $TEMP .= '<p>Koniec lekcji: ' . $row['classEndHour'] . '</p>';
 
