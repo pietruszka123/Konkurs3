@@ -8,3 +8,15 @@ ul {
   li {
     display: inline;
   }
+  .uczenDebil{
+    width: 12vw;
+    background-color: white;
+}
+input[type="text" i] {
+  align-self: center;
+  display: flex;
+  
+  padding: 1px 2px;
+  width: 1vw;
+  height: 2vh;
+}

@@ -1,5 +1,5 @@
 <?php
-include_once("header.php");
+include_once("headerTeacher.php");
 include_once("views/t_header.php");
 ?>
 <style>
@@ -21,6 +21,7 @@ include_once("views/t_header.php");
         height: 100%;
         background-color: indigo;
     }
+
 </style>
 <ul class="HorizontalNavBar">
     <li id="messages">wiadomosci</li>

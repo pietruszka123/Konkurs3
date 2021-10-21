@@ -7,4 +7,7 @@ $("[id=gradeI]").each(function(i,e){
         console.log("?")
         console.log(this)    
     });
+    $(this).keypress(function (e) { 
+        
+    });
 })
