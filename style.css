@@ -65,6 +65,47 @@ header a{
     width: 1.953125vw;
     height: 3.9787798408488064vh;
 }
+nav {
+    border: white 1xp solid;
+    position: fixed;
+    top: 6.389776357827476vh;
+    right: 39.761904761904763vw;
+}
+
+.HorizontalNavBar ol {
+    list-style-type: none;
+
+    display:grid;
+    grid-template-rows: 2fr;
+    grid-template-columns: auto auto auto auto;
+    gap: 1.1904761904761905vw;
+    
+}
+
+.HorizontalNavBar {
+    display: inline-block;
+
+}
+.HorizontalNavBar li{
+    background-color: rgb(136, 105, 210);
+    width: fit-content;
+    border-radius: 1.3vw;
+    padding: 0.65vw;
+    font-size: 1vw;
+    color: white;
+    text-align: center;
+    align-self: center;
+
+}
+.inframe{
+    border: white 0.06vw solid;
+    height: 85vh;
+    width: 100vw;
+    border-radius: 1.3vw;
+    margin: 1vw;
+    background-color: rgb(96, 145, 233, 60%);
+    filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+}
 
 .bombel {
     position: fixed;

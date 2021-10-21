@@ -1,4 +1,4 @@
-$(".HorizontalNavBar").children("li").each(function(i,e){
+$(".HorizontalNavBar > ol").children("li").each(function(i,e){
     $(this).click(function(e){
         $("iframe")[0].src = `views/${this.id}.php`
     })

@@ -37,10 +37,10 @@ function getClassSubjectGrades($classId, $subjectId)
                     {
                         echo "</tr>";
                         $lastid = $userId;
-                        echo "<tr><td>$userFirstName $userSecondName $userLastName</td>";
+                        echo "<tr><td class='uczenDebil'>$userFirstName $userSecondName $userLastName</td>";
                     }
-                    echo '<td><input type="text" value="' . $gradeScale . '"  id=""></td>';
-                    echo '<td><input id="gradeI" type="text" value="' . $gradeScale . '"  id=""></td>';
+                    echo "<td class='ocenadupa'><input type='text' value='" . $gradeScale . "'></td>";
+                    echo "<td><input id='gradeI' type='text' value='" . $gradeScale . "'></td>";
                 }
                 return;
             }
