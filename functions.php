@@ -434,10 +434,10 @@ function getTimetable($ret = false, $direction = 0)
                     if (!isset($row['substitureTeacherId']))
                     {
                         
-                        $TEMP .= '<div class="singleLesson">';
-                        $TEMP .= '<h5 class="niumer">'.$i.'</h5>';
-                        $TEMP.=  '<p class="classStart">' . $row['classStartHour'] . '</p>';
-                        $TEMP .= '<p class="classEnd">' . $row['classEndHour'] . '</p>';
+                        $TEMP .= "<div class='singleLesson'>";
+                        $TEMP .= "<h5 class='niumer'>'.$i.'</h5>";
+                        $TEMP.=  "<p class='classStart'>" . $row['classStartHour'] . '</p>';
+                        $TEMP .= "<p class='classEnd'>" . $row['classEndHour'] . '</p>';
 
 
 
@@ -450,8 +450,8 @@ function getTimetable($ret = false, $direction = 0)
 
 
 
-                        $TEMP .= '<p class="ticier">' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
-                        $TEMP .= '<p class="peace">' . $row['classroom'] . '</p>';
+                        $TEMP .= "<p class='ticier'>" . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
+                        $TEMP .= "<p class='peace'>" . $row['classroom'] . '</p>';
 
                         $subjectId = $row['subjectId'];
                         $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
@@ -460,12 +460,12 @@ function getTimetable($ret = false, $direction = 0)
 
 
                         
-                        $TEMP .= '<p class="rzeczpospolitapolska">Przedmiot: ' . $row2['subjectName'] . '</p></div>';
+                        $TEMP .= "<p class='rzeczpospolitapolska'>Przedmiot: " . $row2['subjectName'] . '</p></div>';
                     }
                     else
                     {
-                        $TEMP .= '<div class="singleLesson">';
-                        $TEMP .= '<h5 class="niumer">'.$i.'</h5>';
+                        $TEMP .= "<div class='singleLesson'>";
+                        $TEMP .= "<h5 class='niumer'>".$i.'</h5>';
                         $TEMP = '<p>Początek lekcji: ' . $row['classStartHour'] . '</p>';
                         $TEMP .= '<p>Koniec lekcji: ' . $row['classEndHour'] . '</p>';
 
@@ -474,15 +474,15 @@ function getTimetable($ret = false, $direction = 0)
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
 
-                        $TEMP .= '<p class="ticier"> Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
-                        $TEMP .= '<p class="peace">Klasa: ' . $row['classroom'] . '</p>';
+                        $TEMP .= "<p class='ticier'> Nauczyciel: " . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
+                        $TEMP .= "<p class='peace'>Klasa: " . $row['classroom'] . '</p>';
 
                         $subjectId = $row['substituteSubjectId'];
                         $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
                         $TEMP .= $i;
-                        $TEMP .= '<p class="rzeczpospolitapolska"> Przedmiot: ' . $row2['subjectName'] . '</p></div>';
+                        $TEMP .= "<p class='rzeczpospolitapolska'> Przedmiot: " . $row2['subjectName'] . '</p></div>';
                     }
                     $i++;
                 }
