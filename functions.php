@@ -15,6 +15,26 @@ if ($mysqli === false)
 ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 100);
 session_start();
+function hasId($arr,$s)
+{
+    foreach ($arr as $element) {
+        if ($element->userId == $s){
+            return true;
+        }
+    }
+    return false;
+}
+function getaId($arr,$s)
+{
+    $i = 0;
+    foreach ($arr as $element) {
+        if ($element->userId == $s){
+            return $i;
+        }
+        $i++;
+    }
+    return -1;
+}
 function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
@@ -31,16 +51,27 @@ function getClassSubjectGrades($classId, $subjectId)
             {
                 $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale);
                 $lastid = $userId;
+                $t = array();
+                $max = 0;
                 while ($stmt->fetch())
                 {
-                    if ($lastid != $userId)
-                    {
-                        echo "</tr>";
-                        $lastid = $userId;
-                        echo "<tr><td class='uczenDebil'>$userFirstName $userSecondName $userLastName</td>";
+                    if(hasId($t,$userId)){
+                        $id = getaId($t,$userId);
+                        array_push($t[$id]->gradeScales,$gradeScale);
+                        if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
+                    }else array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                }
+                echo "<p id='max' hidden>" . $max . "</p>";
+                echo "<p id='users' hidden>" . count($t) . "</p>";
+                $ii = 0;
+                foreach ($t as $element) {
+                    echo "<tr><td class='uczenDebil'>$userFirstName $userSecondName $userLastName</td>";
+                    for ($i=0; $i < $max; $i++) {
+                        if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
+                        else echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text'></td>";
+                        $ii++;
                     }
-                    //echo "<td class='ocenadupa'><input type='text' value='" . $gradeScale . "'></td>";
-                    echo "<td><input id='gradeI' type='text' value='" . $gradeScale . "'></td>";
+                    echo "</tr>";
                 }
                 return;
             }
