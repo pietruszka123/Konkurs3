@@ -464,7 +464,9 @@ function getTimetable($ret = false, $direction = 0)
                     }
                     else
                     {
-                        $TEMP = '<div class="singleLesson"><p>Początek lekcji: ' . $row['classStartHour'] . '</p>';
+                        $TEMP .= '<div class="singleLesson">';
+                        $TEMP .= '<h5 class="niumer">'.$i.'</h5>';
+                        $TEMP = '<p>Początek lekcji: ' . $row['classStartHour'] . '</p>';
                         $TEMP .= '<p>Koniec lekcji: ' . $row['classEndHour'] . '</p>';
 
                         $teacherId = $row['substituteTeacherId'];
@@ -472,15 +474,15 @@ function getTimetable($ret = false, $direction = 0)
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
 
-                        $TEMP .= '<p>Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
-                        $TEMP .= '<p>Klasa: ' . $row['classroom'] . '</p>';
+                        $TEMP .= '<p class="ticier"> Nauczyciel: ' . $row2['userFirstName'] . ' ' . $row2['userSecondName'] . ' ' . $row2['userLastName'] . '</p>';
+                        $TEMP .= '<p class="peace">Klasa: ' . $row['classroom'] . '</p>';
 
                         $subjectId = $row['substituteSubjectId'];
                         $sql2 = "SELECT subjectName FROM `subjects` WHERE subjectId = $subjectId";
                         $result2 = $mysqli->query($sql2);
                         $row2 = $result2->fetch_assoc();
                         $TEMP .= $i;
-                        $TEMP .= '<p>Przedmiot: ' . $row2['subjectName'] . '</p></div>';
+                        $TEMP .= '<p class="rzeczpospolitapolska"> Przedmiot: ' . $row2['subjectName'] . '</p></div>';
                     }
                     $i++;
                 }
