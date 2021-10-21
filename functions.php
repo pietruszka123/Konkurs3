@@ -549,11 +549,11 @@ function getLuckyNumber()
             $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
             $mysqli->query($sql);
 
-            echo $luckyNumberFirst . $luckyNumberSecond;
+            echo "<div><h1 class='luckynumber'>".$luckyNumberFirst ."</h1><h1 class='luckynumber'>". $luckyNumberSecond."</h1></div>";
         }
         else
         {
-            echo $row['luckyNumberFirst'] . $row['luckyNumberSecond'];
+            echo "<div><h1 class='luckynumber'>".$row['luckyNumberFirst']."</h1><h1 class='luckynumber'>" . $row['luckyNumberSecond']."</h1></div>";
         }
     }
     else
