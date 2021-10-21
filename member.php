@@ -47,7 +47,6 @@ include_once("header.php");
     </div>
 </div>
 <div class="luckyNumbers element">
-    <h1>Szczęśliwe numerki</h1>
     <?php
         getLuckyNumber();
     ?>

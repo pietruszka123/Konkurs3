@@ -563,6 +563,7 @@ function getContactData()
 
 function getLuckyNumber()
 {
+    echo rand(0,1000000) == 2005 ? "<h1>Szczęśliwe znaki drogowe</h1>" : "<h1>Szczęśliwe numerki</h1>";
     global $mysqli;
 
     $sql = "SELECT * FROM `luckynumbers` ORDER BY databaseDate DESC";
