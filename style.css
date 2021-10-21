@@ -351,11 +351,10 @@ div input[type="text"] {
   z-index: 1000;
   overflow-y: scroll;
   overflow-x: hidden;
-  
 }
-.luckyNumbers>div{
-    display: flex;
-    justify-content: space-evenly;
+.luckyNumbers > div {
+  display: flex;
+  justify-content: space-evenly;
 }
 .luckynumber {
   padding: 1vw;
@@ -465,6 +464,7 @@ h5 {
   overflow-x: hidden;
 }
 
+
 .attendanceTable {
   font-size: 1vw;
   width: 24vw;
@@ -475,6 +475,40 @@ h5 {
   z-index: 1000;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.singleAttendance {
+  color: white;
+  height: max-content;
+  background-color: rgba(134, 97, 209, 100%);
+  padding: 1vw;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  font-size: 0.9765625vw;
+  margin: 0.1vw;
+  margin-bottom: 1.953125vw;
+  border-radius: 1.3vw;
+  display: grid;
+  grid-template-columns: 0.45fr 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+.attendanceType {
+  grid-area: 1 / 1 / span 2 / 1;
+  align-self: center;
+  justify-content: center;
+}
+.svg-inline--fa {
+  width: 30px;
+  height: 30px;
+}
+.ticzer {
+  grid-area: 1/3;
+}
+.subjectName2 {
+  grid-area: 1/2/2 / span 2;
+  align-self: center;
+}
+.subjectNumber2 {
+  grid-area: 2/2/2 / span 2;
 }
 
 .studentComments {
