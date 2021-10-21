@@ -772,44 +772,44 @@ function getAttendance($userID,$ret = false,$direction = 0)
 
                     if ($attendanceState = "Obecnosc") //$attendanceExcuse
                     {
-                        $TEMP .= "<div class='singleAttendance present'>
-                        <h1>" . $subjectNumber . "</h1>
-                        <h3>" . $subjectName . "</h3>
-                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
-                        <h2>Obecność</h2>
-                    </div>";
+                        $TEMP .= '<div class="singleAttendance present">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="attendanceType svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="lime" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    <h3 class="subjectName2">' . $subjectName . '<p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p> </h3>
+                                    <h3 class="subjectNumber2">' . $subjectNumber .". 8:00 - 8-45 dodaj ktos". '</h3>
+                                    </div>';
                     } elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse)) {
 
-                        $TEMP .= "<div class='singleAttendance excusedLateness'>
-                        <h1>" . $subjectNumber . "</h1>
-                        <h3>" . $subjectName . "</h3>
-                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
-                        <h2>Spóźnienie Usprawiedliwione</h2>
-                    </div>";
+                        $TEMP .= '<div class="singleAttendance excusedLateness">
+                        <h1 class="subjectNumber">' . $subjectNumber . '</h1>
+                        <h3 class="subjectName">' . $subjectName . '</h3>
+                        <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2 class="attendanceType>Spóźnienie Usprawiedliwione</h2>
+                    </div>';
                     } elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse)) {
-                        $TEMP.= "<div class='singleAttendance unexcusedLateness'>
-                        <h1>" . $subjectNumber . "</h1>
-                        <h3>" . $subjectName . "</h3>
-                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
-                        <h2>Spóźnienie Niesuprawiedliwione</h2>
-                    </div>";
+                        $TEMP .= '<div class="singleAttendance unexcusedLateness">
+                        <h1 class="subjectNumber">' . $subjectNumber . '</h1>
+                        <h3 class="subjectName">' . $subjectName . '</h3>
+                        <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2 class="attendanceType>Spóźnienie Niesuprawiedliwione</h2>
+                    </div>';
                     } elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse)) {
 
 
-                        $TEMP.= "<div class='singleAttendance excusedAbsence'><h1>" . $subjectNumber . "</h1>
-                        <h3>" . $subjectName . "</h3>
-                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
-                        <h2>Nieobecność Usprawiedliwiona</h2>
-                    </div>";
+                        $TEMP .= '<div class="singleAttendance excusedAbsence">
+                        <h1 class="subjectNumber">' . $subjectNumber . '</h1>
+                        <h3 class="subjectName">' . $subjectName . '</h3>
+                        <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2 class="attendanceType>Nieobecność Usprawiedliwiona</h2>
+                    </div>';
                     } elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse)) {
-                        $TEMP .= "<div class='singleAttendance unexcusedAbsence'>
-                        <h1>" . $subjectNumber . "</h1>
-                        <h3>" . $subjectName . "</h3>
-                        <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
-                        <h2>Nieobecność Niesuprawiedliwiona</h2>
-                    </div>";
+                        $TEMP .= '<div class="singleAttendance unexcusedAbsence">
+                        <h1 class="subjectNumber">' . $subjectNumber . '</h1>
+                        <h3 class="subjectName">' . $subjectName . '</h3>
+                        <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
+                        <h2 class="attendanceType>Nieobecność Niesuprawiedliwiona</h2>
+                    </div>';
                     } else {
-                        $TEMP.= "<div class='singleAttendance'>
+                        $TEMP .= "<div class='singleAttendance'>
                             <h1>" . $subjectNumber . "</h1>
                             <h3>" . $subjectName . "</h3>
                             <p>" . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . "</p>
