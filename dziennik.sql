@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2021 at 10:21 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Czas generowania: 21 Paź 2021, 12:34
+-- Wersja serwera: 10.4.14-MariaDB
+-- Wersja PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dziennik`
+-- Baza danych: `dziennik`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attendance`
+-- Struktura tabeli dla tabeli `attendance`
 --
 
 CREATE TABLE `attendance` (
@@ -40,7 +40,7 @@ CREATE TABLE `attendance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `attendance`
+-- Zrzut danych tabeli `attendance`
 --
 
 INSERT INTO `attendance` (`attendanceId`, `studentId`, `teacherId`, `subjectId`, `subjectNumber`, `attendanceState`, `attendanceDescription`, `attendanceDate`, `attendanceExcuse`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `attendance` (`attendanceId`, `studentId`, `teacherId`, `subjectId`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classes`
+-- Struktura tabeli dla tabeli `classes`
 --
 
 CREATE TABLE `classes` (
@@ -64,7 +64,7 @@ CREATE TABLE `classes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `classes`
+-- Zrzut danych tabeli `classes`
 --
 
 INSERT INTO `classes` (`classId`, `classStartYear`, `classGrade`, `classLetter`, `classProfile`, `classType`, `mentorId`) VALUES
@@ -73,7 +73,7 @@ INSERT INTO `classes` (`classId`, `classStartYear`, `classGrade`, `classLetter`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktura tabeli dla tabeli `comments`
 --
 
 CREATE TABLE `comments` (
@@ -87,7 +87,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Zrzut danych tabeli `comments`
 --
 
 INSERT INTO `comments` (`commentId`, `commentType`, `commentWeight`, `commentContent`, `commentDate`, `teacherId`, `studentId`) VALUES
@@ -99,7 +99,7 @@ INSERT INTO `comments` (`commentId`, `commentType`, `commentWeight`, `commentCon
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exams`
+-- Struktura tabeli dla tabeli `exams`
 --
 
 CREATE TABLE `exams` (
@@ -113,7 +113,7 @@ CREATE TABLE `exams` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `exams`
+-- Zrzut danych tabeli `exams`
 --
 
 INSERT INTO `exams` (`examId`, `examDate`, `subjectId`, `teacherId`, `examDescription`, `examType`, `classId`) VALUES
@@ -123,7 +123,7 @@ INSERT INTO `exams` (`examId`, `examDate`, `subjectId`, `teacherId`, `examDescri
 -- --------------------------------------------------------
 
 --
--- Table structure for table `freedays`
+-- Struktura tabeli dla tabeli `freedays`
 --
 
 CREATE TABLE `freedays` (
@@ -134,7 +134,7 @@ CREATE TABLE `freedays` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `freedays`
+-- Zrzut danych tabeli `freedays`
 --
 
 INSERT INTO `freedays` (`freeDayId`, `freeDayDate`, `freeDayReason`, `freeDayDescription`) VALUES
@@ -153,7 +153,7 @@ INSERT INTO `freedays` (`freeDayId`, `freeDayDate`, `freeDayReason`, `freeDayDes
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grades`
+-- Struktura tabeli dla tabeli `grades`
 --
 
 CREATE TABLE `grades` (
@@ -169,7 +169,7 @@ CREATE TABLE `grades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `grades`
+-- Zrzut danych tabeli `grades`
 --
 
 INSERT INTO `grades` (`gradeId`, `studentId`, `gradeScale`, `gradeWeight`, `teacherId`, `gradeDescription`, `subjectId`, `gradeDate`, `classId`) VALUES
@@ -191,7 +191,7 @@ INSERT INTO `grades` (`gradeId`, `studentId`, `gradeScale`, `gradeWeight`, `teac
 -- --------------------------------------------------------
 
 --
--- Table structure for table `homework`
+-- Struktura tabeli dla tabeli `homework`
 --
 
 CREATE TABLE `homework` (
@@ -206,7 +206,7 @@ CREATE TABLE `homework` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `homework`
+-- Zrzut danych tabeli `homework`
 --
 
 INSERT INTO `homework` (`homeworkId`, `subjectId`, `teacherId`, `creationDate`, `deadline`, `homeworkDescription`, `obligatory`, `classId`) VALUES
@@ -217,7 +217,7 @@ INSERT INTO `homework` (`homeworkId`, `subjectId`, `teacherId`, `creationDate`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `luckynumbers`
+-- Struktura tabeli dla tabeli `luckynumbers`
 --
 
 CREATE TABLE `luckynumbers` (
@@ -227,7 +227,7 @@ CREATE TABLE `luckynumbers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `luckynumbers`
+-- Zrzut danych tabeli `luckynumbers`
 --
 
 INSERT INTO `luckynumbers` (`databaseDate`, `luckyNumberFirst`, `luckyNumberSecond`) VALUES
@@ -237,7 +237,7 @@ INSERT INTO `luckynumbers` (`databaseDate`, `luckyNumberFirst`, `luckyNumberSeco
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meetings`
+-- Struktura tabeli dla tabeli `meetings`
 --
 
 CREATE TABLE `meetings` (
@@ -250,7 +250,7 @@ CREATE TABLE `meetings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `meetings`
+-- Zrzut danych tabeli `meetings`
 --
 
 INSERT INTO `meetings` (`meetingId`, `teacherId`, `meetingDescription`, `meetingDate`, `meetingForm`, `meetingClassroom`) VALUES
@@ -259,7 +259,7 @@ INSERT INTO `meetings` (`meetingId`, `teacherId`, `meetingDescription`, `meeting
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mentors`
+-- Struktura tabeli dla tabeli `mentors`
 --
 
 CREATE TABLE `mentors` (
@@ -268,7 +268,7 @@ CREATE TABLE `mentors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `mentors`
+-- Zrzut danych tabeli `mentors`
 --
 
 INSERT INTO `mentors` (`mentorId`, `teacherId`) VALUES
@@ -278,7 +278,7 @@ INSERT INTO `mentors` (`mentorId`, `teacherId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Struktura tabeli dla tabeli `messages`
 --
 
 CREATE TABLE `messages` (
@@ -291,7 +291,7 @@ CREATE TABLE `messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `messages`
+-- Zrzut danych tabeli `messages`
 --
 
 INSERT INTO `messages` (`messageId`, `senderId`, `receiverId`, `messageContent`, `messageDate`, `messageTitle`) VALUES
@@ -308,27 +308,28 @@ INSERT INTO `messages` (`messageId`, `senderId`, `receiverId`, `messageContent`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schoolinformation`
+-- Struktura tabeli dla tabeli `schoolinformation`
 --
 
 CREATE TABLE `schoolinformation` (
   `schoolName` varchar(255) NOT NULL,
   `schoolAddress` varchar(255) NOT NULL,
   `schoolPhoneNumber` varchar(19) NOT NULL,
-  `schoolPrincipal` varchar(255) NOT NULL
+  `schoolPrincipal` varchar(255) NOT NULL,
+  `schoolEndYear` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `schoolinformation`
+-- Zrzut danych tabeli `schoolinformation`
 --
 
-INSERT INTO `schoolinformation` (`schoolName`, `schoolAddress`, `schoolPhoneNumber`, `schoolPrincipal`) VALUES
-('Zespół Szkół Nr 1 im. Ignacego Łukasiewicza w Gorlicach nr 1', 'ul. Wyszyńskiego 18, 38,300 Gorlice, Polska', '(0-18) 353-60-40', 'Janusz Kryca');
+INSERT INTO `schoolinformation` (`schoolName`, `schoolAddress`, `schoolPhoneNumber`, `schoolPrincipal`, `schoolEndYear`) VALUES
+('Zespół Szkół Nr 1 im. Ignacego Łukasiewicza w Gorlicach nr 1', 'ul. Wyszyńskiego 18, 38,300 Gorlice, Polska', '(0-18) 353-60-40', 'Janusz Kryca', '2021-10-30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subjects`
+-- Struktura tabeli dla tabeli `subjects`
 --
 
 CREATE TABLE `subjects` (
@@ -338,7 +339,7 @@ CREATE TABLE `subjects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `subjects`
+-- Zrzut danych tabeli `subjects`
 --
 
 INSERT INTO `subjects` (`subjectId`, `subjectName`, `teacherId`) VALUES
@@ -354,7 +355,7 @@ INSERT INTO `subjects` (`subjectId`, `subjectName`, `teacherId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `timetables`
+-- Struktura tabeli dla tabeli `timetables`
 --
 
 CREATE TABLE `timetables` (
@@ -375,7 +376,7 @@ CREATE TABLE `timetables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `timetables`
+-- Zrzut danych tabeli `timetables`
 --
 
 INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDateStart`, `classDateEnd`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`, `cancelled`) VALUES
@@ -389,7 +390,7 @@ INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabeli dla tabeli `users`
 --
 
 CREATE TABLE `users` (
@@ -413,7 +414,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Zrzut danych tabeli `users`
 --
 
 INSERT INTO `users` (`userId`, `userRank`, `userEmail`, `userPassword`, `userPesel`, `userCreationDate`, `userFirstName`, `userSecondName`, `userLastName`, `userAddress`, `userLegitimationNumber`, `userBirthDate`, `userJoinDate`, `userLeaveDate`, `userPhoneNumber`, `userGender`, `classId`) VALUES
@@ -425,11 +426,11 @@ INSERT INTO `users` (`userId`, `userRank`, `userEmail`, `userPassword`, `userPes
 (11, '{\r\n\"rank\": [\"uczen\"]\r\n}', 'uczen2original@gmail.com', '$2y$10$lGnXnZRlEQgg.GP2Z6iD2u3K7fLZBrDg9CIUy.7ALUTTo6EE2vsci', 12345678951, '2021-07-21 11:24:37', 'Gabriela', NULL, 'Dzban', 'Wójtowa 420', 654321, '2005-11-17', '2030-08-17', '2021-07-20', '+48721738192', 'Kobieta', 1);
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `attendance`
+-- Indeksy dla tabeli `attendance`
 --
 ALTER TABLE `attendance`
   ADD PRIMARY KEY (`attendanceId`),
@@ -438,14 +439,14 @@ ALTER TABLE `attendance`
   ADD KEY `teacherId` (`teacherId`);
 
 --
--- Indexes for table `classes`
+-- Indeksy dla tabeli `classes`
 --
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`classId`),
   ADD KEY `ids` (`mentorId`) USING BTREE;
 
 --
--- Indexes for table `comments`
+-- Indeksy dla tabeli `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`commentId`),
@@ -453,7 +454,7 @@ ALTER TABLE `comments`
   ADD KEY `studentId` (`studentId`);
 
 --
--- Indexes for table `exams`
+-- Indeksy dla tabeli `exams`
 --
 ALTER TABLE `exams`
   ADD PRIMARY KEY (`examId`),
@@ -462,13 +463,13 @@ ALTER TABLE `exams`
   ADD KEY `classId` (`classId`);
 
 --
--- Indexes for table `freedays`
+-- Indeksy dla tabeli `freedays`
 --
 ALTER TABLE `freedays`
   ADD PRIMARY KEY (`freeDayId`);
 
 --
--- Indexes for table `grades`
+-- Indeksy dla tabeli `grades`
 --
 ALTER TABLE `grades`
   ADD PRIMARY KEY (`gradeId`),
@@ -478,7 +479,7 @@ ALTER TABLE `grades`
   ADD KEY `classId` (`classId`);
 
 --
--- Indexes for table `homework`
+-- Indeksy dla tabeli `homework`
 --
 ALTER TABLE `homework`
   ADD PRIMARY KEY (`homeworkId`),
@@ -487,34 +488,34 @@ ALTER TABLE `homework`
   ADD KEY `subjectId` (`subjectId`);
 
 --
--- Indexes for table `meetings`
+-- Indeksy dla tabeli `meetings`
 --
 ALTER TABLE `meetings`
   ADD PRIMARY KEY (`meetingId`),
   ADD KEY `ids` (`teacherId`) USING BTREE;
 
 --
--- Indexes for table `mentors`
+-- Indeksy dla tabeli `mentors`
 --
 ALTER TABLE `mentors`
   ADD PRIMARY KEY (`mentorId`),
   ADD KEY `ids` (`teacherId`) USING BTREE;
 
 --
--- Indexes for table `messages`
+-- Indeksy dla tabeli `messages`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`messageId`),
   ADD KEY `ids` (`senderId`) USING BTREE;
 
 --
--- Indexes for table `subjects`
+-- Indeksy dla tabeli `subjects`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`subjectId`);
 
 --
--- Indexes for table `timetables`
+-- Indeksy dla tabeli `timetables`
 --
 ALTER TABLE `timetables`
   ADD PRIMARY KEY (`timetableId`),
@@ -525,7 +526,7 @@ ALTER TABLE `timetables`
   ADD KEY `substituteSubjectId` (`substituteSubjectId`);
 
 --
--- Indexes for table `users`
+-- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`userId`),
@@ -537,89 +538,89 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `attendance`
+-- AUTO_INCREMENT dla tabeli `attendance`
 --
 ALTER TABLE `attendance`
   MODIFY `attendanceId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `classes`
+-- AUTO_INCREMENT dla tabeli `classes`
 --
 ALTER TABLE `classes`
   MODIFY `classId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT dla tabeli `comments`
 --
 ALTER TABLE `comments`
   MODIFY `commentId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `exams`
+-- AUTO_INCREMENT dla tabeli `exams`
 --
 ALTER TABLE `exams`
   MODIFY `examId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `freedays`
+-- AUTO_INCREMENT dla tabeli `freedays`
 --
 ALTER TABLE `freedays`
   MODIFY `freeDayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `grades`
+-- AUTO_INCREMENT dla tabeli `grades`
 --
 ALTER TABLE `grades`
   MODIFY `gradeId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `homework`
+-- AUTO_INCREMENT dla tabeli `homework`
 --
 ALTER TABLE `homework`
   MODIFY `homeworkId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `meetings`
+-- AUTO_INCREMENT dla tabeli `meetings`
 --
 ALTER TABLE `meetings`
   MODIFY `meetingId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `mentors`
+-- AUTO_INCREMENT dla tabeli `mentors`
 --
 ALTER TABLE `mentors`
   MODIFY `mentorId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `messages`
+-- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
   MODIFY `messageId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `subjects`
+-- AUTO_INCREMENT dla tabeli `subjects`
 --
 ALTER TABLE `subjects`
   MODIFY `subjectId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `timetables`
+-- AUTO_INCREMENT dla tabeli `timetables`
 --
 ALTER TABLE `timetables`
   MODIFY `timetableId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
   MODIFY `userId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Constraints for dumped tables
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
--- Constraints for table `attendance`
+-- Ograniczenia dla tabeli `attendance`
 --
 ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `users` (`userId`),
@@ -627,20 +628,20 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_3` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`);
 
 --
--- Constraints for table `classes`
+-- Ograniczenia dla tabeli `classes`
 --
 ALTER TABLE `classes`
   ADD CONSTRAINT `classes_ibfk_1` FOREIGN KEY (`mentorId`) REFERENCES `mentors` (`mentorId`);
 
 --
--- Constraints for table `comments`
+-- Ograniczenia dla tabeli `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `users` (`userId`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`studentId`) REFERENCES `users` (`userId`);
 
 --
--- Constraints for table `exams`
+-- Ograniczenia dla tabeli `exams`
 --
 ALTER TABLE `exams`
   ADD CONSTRAINT `exams_ibfk_1` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`),
@@ -648,7 +649,7 @@ ALTER TABLE `exams`
   ADD CONSTRAINT `exams_ibfk_3` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);
 
 --
--- Constraints for table `grades`
+-- Ograniczenia dla tabeli `grades`
 --
 ALTER TABLE `grades`
   ADD CONSTRAINT `grades_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `users` (`userId`),
@@ -657,7 +658,7 @@ ALTER TABLE `grades`
   ADD CONSTRAINT `grades_ibfk_4` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);
 
 --
--- Constraints for table `homework`
+-- Ograniczenia dla tabeli `homework`
 --
 ALTER TABLE `homework`
   ADD CONSTRAINT `homework_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `users` (`userId`),
@@ -665,25 +666,25 @@ ALTER TABLE `homework`
   ADD CONSTRAINT `homework_ibfk_3` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);
 
 --
--- Constraints for table `meetings`
+-- Ograniczenia dla tabeli `meetings`
 --
 ALTER TABLE `meetings`
   ADD CONSTRAINT `meetings_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `users` (`userId`);
 
 --
--- Constraints for table `mentors`
+-- Ograniczenia dla tabeli `mentors`
 --
 ALTER TABLE `mentors`
   ADD CONSTRAINT `mentors_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `users` (`userId`);
 
 --
--- Constraints for table `messages`
+-- Ograniczenia dla tabeli `messages`
 --
 ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`senderId`) REFERENCES `users` (`userId`);
 
 --
--- Constraints for table `timetables`
+-- Ograniczenia dla tabeli `timetables`
 --
 ALTER TABLE `timetables`
   ADD CONSTRAINT `timetables_ibfk_1` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`),
@@ -693,7 +694,7 @@ ALTER TABLE `timetables`
   ADD CONSTRAINT `timetables_ibfk_5` FOREIGN KEY (`substituteSubjectId`) REFERENCES `subjects` (`subjectId`);
 
 --
--- Constraints for table `users`
+-- Ograniczenia dla tabeli `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);

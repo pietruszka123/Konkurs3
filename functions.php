@@ -972,7 +972,7 @@ function addFreeDay(
 
         if ($stmt = $mysqli->prepare($sql))
         {
-            $stmt->bind_param("iss",$param_date, $param_reason, $param_desc);
+            $stmt->bind_param("sss",$param_date, $param_reason, $param_desc);
 
             $param_date = strval(date("Y-m-d",strtotime($freeDayDate))); //prawie dziala ale daty nie wysyla
             
@@ -1001,4 +1001,136 @@ function addFreeDay(
     $error = "";
 
     $mysqli->close();
+}
+
+function setExam()
+{
+    global $mysqli;
+    global $error;
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $sql = "INSERT INTO `exams` (`examId`, `examDate`, `subjectId`, `teacherId`, `examDescription`, `examType`, `classId`) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("ssssss", $_POST['examDate'], $_POST['examSubject'], $param_id, $_POST['examDescription'], $_POST['examType'], $_POST['examClass']);
+            $param_id = $_SESSION['id'];
+
+            if ($stmt->execute()) {
+                echo 'Dodano!';
+            } else {
+                $error = $error . "Nie powiodło się.";
+            }
+        } else {
+            $error = $error . "UwU, somethin went wong.";
+            echo $error;
+        }
+    }
+}
+
+function getTeachersSubjects()
+{
+    global $mysqli;
+
+    $sql = "SELECT * FROM `subjects`";
+    $result = $mysqli->query($sql);
+
+    echo 'test';
+
+    while ($row = $result->fetch_assoc()) {
+        $obj = json_decode($row['teacherId']);
+        if (in_array("4", $obj->{'id'})) {
+            echo '<option value="' . $row['subjectId'] . '">' . $row['subjectName'] . '</option>';
+        } else {
+            echo 'Nie!';
+        }
+    }
+}
+
+function getTeachersClasses()
+{
+    global $mysqli;
+
+    $sql = "SELECT classId, classGrade, classLetter, classType FROM `classes` ";
+    $result = $mysqli->query($sql);
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<option value="' . $row['classId'] . '">' . $row['classGrade'] . $row['classLetter'] . ' ' . $row['classType'] . '</option>';
+    }
+}
+
+function setComment()
+{
+    global $mysqli;
+    global $error;
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $sql = "INSERT INTO `comments` (`commentId`, `commentType`, `commentWeight`, `commentContent`, `commentDate`, `teacherId`, `studentId`) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+        $currentDate = date("Y/m/d H:i:s");
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("sissii", $_POST['commentType'], $_POST['commentWeight'], $_POST['commentContent'], $currentDate, $param_id, $_POST['studentId']);
+            $param_id = $_SESSION['id'];
+
+            if ($stmt->execute()) {
+                echo 'Dodano!';
+            } else {
+                $error = $error . "Nie powiodło się.";
+            }
+        } else {
+            $error = $error . "UwU, somethin went wong.";
+        }
+        echo $error;
+    }
+}
+
+function getTeachersStudents()
+{
+    global $mysqli;
+
+    $sql = "SELECT * FROM `users` ORDER BY userLastName ASC";
+    $result = $mysqli->query($sql);
+
+    echo 'test';
+
+    while ($row = $result->fetch_assoc()) {
+        $obj = json_decode($row['userRank']);
+        if (in_array("uczen", $obj->{'rank'})) {
+            echo '<option value="' . $row['userId'] . '">' . $row['userFirstName'] . ' ' . $row['userSecondName'] . ' ' . $row['userLastName'] . ' ' . '</option>';
+        } else {
+            echo 'Nie!';
+        }
+    }
+}
+
+function editSchoolInformation()
+{
+    global $mysqli;
+    global $error;
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $sql = "UPDATE `schoolinformation` SET `schoolName` = ?, `schoolAddress` = ?, `schoolPhoneNumber` = ?, `schoolPrincipal` = ?, `schoolEndYear` = ?";
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param('sssss', $_POST['schoolName'], $_POST['schoolAddress'], $_POST['schoolPhoneNumber'], $_POST['schoolPrincipal'], $_POST['schoolEndYear']);
+
+            if ($stmt->execute()) {
+                echo 'Zmieniono!';
+            } else {
+                echo 'Nie działa QwQ';
+            }
+        } else {
+            $error = $error . "UwU, somethin went wong.";
+        }
+    }
+
+    $sql = "SELECT * FROM `schoolinformation`";
+    $result = $mysqli->query($sql);
+    $row = $result->fetch_assoc();
+
+    echo '<form method="POST"><input type="text" name="schoolName" value="' . $row['schoolName'] . '" placeholder="' . $row['schoolName'] . '">
+    <input type="text" name="schoolAddress" value="' . $row['schoolAddress'] . '" placeholder="' . $row['schoolAddress'] . '">
+    <input type="text" name="schoolPhoneNumber" value="' . $row['schoolPhoneNumber'] . '" placeholder="' . $row['schoolPhoneNumber'] . '">
+    <input type="text" name="schoolPrincipal" value="' . $row['schoolPrincipal'] . '" placeholder="' . $row['schoolPrincipal'] . '">
+    <input type="date" name="schoolEndYear" value="' . $row['schoolEndYear'] . '" placeholder="' . $row['schoolEndYear'] . '">
+    <input type="submit" name="submit" value="Edytuj"></form>';
 }

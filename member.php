@@ -9,6 +9,14 @@ include_once("header.php");
 
 <!-- marcin zostaw | nie -->
 <!-- o co chodzi? -->
+
+<div class="luckyNumbers element">
+    <h1>Sz numerki</h1>
+    <?php
+        getLuckyNumber();
+    ?>
+</div>
+
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php

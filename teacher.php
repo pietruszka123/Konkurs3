@@ -6,6 +6,7 @@ include_once("views/t_header.php");
     body {
         display: flexbox;
     }
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -13,6 +14,7 @@ include_once("views/t_header.php");
         width: 100%;
         height: 20%;
     }
+
     li {
         display: inline-flex;
         width: 20%;
@@ -23,8 +25,8 @@ include_once("views/t_header.php");
 <ul class="HorizontalNavBar">
     <li id="messages">wiadomosci</li>
     <li id="grades">oceny</li>
-    <li id="?">jakies inne rzeczy</li>
-    <li id="??">jakies inne rzeczy 2.0</li>
+    <li id="?">cos tam</li>
+    <li id="??">cos tam jeszcze</li>
 </ul>
 <iframe src="views/grades.php" frameborder="0"></iframe>
 <script src="js/teacher.js"></script>
