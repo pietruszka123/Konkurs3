@@ -14,12 +14,12 @@ include_once("t_header.php");
 </head>
 
 <body>
-    <ul>
+    <ol>
         <li><a id>Klasa 1</a></li>
         <li><a></a></li>
         <li><a></a></li>
         <li><a></a></li>
-    </ul>
+    </ol>
     <table>
     <tr>
         <td>uczniowie</td>
