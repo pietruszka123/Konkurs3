@@ -154,7 +154,7 @@ function getUserMessages($ret = false)
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
                     $TEMP = "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName&gt</p>
+                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName</p>
                     </button>";
                     if ($ret) array_push($rarr, $TEMP);
                     else echo $TEMP;

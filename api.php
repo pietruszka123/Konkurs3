@@ -24,10 +24,10 @@
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri = explode( '/', $uri );
     $data = json_decode(file_get_contents('php://input'), true);
-    if(count($uri) < 3){
+    ///if(count($uri) < 3){
 /*         ERROR();
- */    }
-    switch ($uri[3]) {
+ */  //  }
+    switch ($uri[count($uri)-1]) {
         case 'sendMessage':
             header("HTTP/1.1 200 OK");
             //checkifExists($data["Receiver"],$data["title"],$data["Content"]);
