@@ -849,3 +849,7 @@ body::-webkit-scrollbar-thumb {
   grid-row-end: 5;
   margin: 0;
 }
+
+.Selected{ /* Do testów*/
+  background-color: red;
+}

@@ -1,8 +1,9 @@
+var Receivers = []
 function sendMessage(Content, title, Receiver) {
     $.ajax({
         type: "POST",
         url: "api.php/sendMessage",
-        data: JSON.stringify({ Content: Content, title: title, Receiver: Receiver }),
+        data: JSON.stringify({ Content: Content, title: title, Receivers: Receiver }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -24,9 +25,9 @@ document.getElementsByClassName("sendMessageButton")[0].addEventListener("click"
     console.log("?")
     var title = document.getElementById("titleInputBox").value;
     var message = document.getElementById("messageInputContent");
-    var Rec = document.getElementById("selectReceiver").value;
-    if (Empty(title) || Empty(message.value) || Empty(Rec)) {
-        sendMessage(message.value, title, Rec);
+    if (Empty(title) || Empty(message.value) || Rec.length > 0) {
+        sendMessage(message.value, title, Receivers);
+        console.log(Receivers)
     } else message.value = "error";
 })
 function initButtons() {
@@ -73,3 +74,43 @@ initButtons();
 $("#Switch").click((e)=>{
     $(".sendMessageBox").toggle("fast");
 })
+$("#selectReciver").click(function(e){
+   
+})
+function initRec(){
+    $("Selected").empty();
+    $(".notSelected").children("div").each(function(i,e){
+        console.log(this)
+        this.HiddenId = this.id;
+        $(this).click(function(e){
+            var element = $(this).detach();
+            if(!$(this).hasClass("selected")){
+                $('.Selected').append(element);
+            }else{
+                $('.notSelected').append(element);
+            }
+            element.toggleClass( "selected" );
+        })
+    })
+}
+$("#selectReceiverType").on("change",function(e){
+    console.log(this.value)
+})
+function getSelected(){
+    var t = []
+    $(".Selected").children("div").each(function(i,e){
+        t.push(this.HiddenId)
+    })
+    console.log(t)
+    return t;
+}
+$("#subbmit").click(function(e){
+    console.log($(".Selected").children("div").length)
+    if($(".Selected").children("div").length == 0){
+        alert("wybierz przynajmniej jeden samochód")
+    }else{
+        Receivers = getSelected();
+        console.log(Receivers)
+    }
+})
+initRec()
