@@ -73,3 +73,6 @@ initButtons();
 $("#Switch").click((e)=>{
     $(".sendMessageBox").toggle("fast");
 })
+$("#selectReciver").click(function(e){
+   
+})

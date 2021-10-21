@@ -18,18 +18,31 @@ include_once "header.php";
 <div class="sendMessageBox">
     <label for="selectReceiver">Choose a car:</label>
 
-    <select name="selectReceiver" id="selectReceiver">
+    <!-- <select name="selectReceiver" id="selectReceiver">
         <?php
-        viewAllReceivers();
+        //viewAllReceivers();
         ?>
-    </select>
+    </select> -->
+    <input type="button" id="selectReciver" value="Choose cars to send">
     <input type="text" id="titleInputBox" name="titleInputBox">
     <input type="text" id="messageInputContent" name="messageInputContent">
     <input type="button" class="sendMessageButton" value="wysjil">
-
 </div>
-<script src="js/messages.js"></script>
-
+<script src="js/messages.js" type="module"></script>
+<div id="popUp" class="popUp">
+    <div class="popUp-content">
+      <span class="popUp-close">&times;</span>
+      <div>
+          <select name="selectReceiverType" id="selectReceiverType">
+              <option value="b">a</option>
+              <option value="b">b</option>
+          </select>
+      <?php
+        //viewAllReceivers();
+        ?>
+      </div>
+    </div>
+  </div>
 
 
 <?php
