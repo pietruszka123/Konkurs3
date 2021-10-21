@@ -35,7 +35,8 @@ function getaId($arr,$s)
     }
     return -1;
 }
-function getClassSubjectGrades($classId, $subjectId)
+
+/*function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
@@ -78,7 +79,8 @@ function getClassSubjectGrades($classId, $subjectId)
         }
     }
     return "UwU, somethin went wong.";
-}
+}*/
+
 function getUserGrades()
 {
     global $mysqli;
@@ -320,79 +322,6 @@ function sendMessage($Receiver, $title, $Content)
     $stmt->close();
 }
 
-/*function getTimetable()
-{
-    global $mysqli;
-    global $error;
-
-    $sql = "SELECT DISTINCT subjects.subjectId, subjects.subjectName FROM subjects, grades, users WHERE subjects.subjectId = grades.subjectId AND grades.studentId = ?";
-
-    if ($stmt = $mysqli->prepare($sql))
-    {
-        $stmt->bind_param("s", $param_id);
-        $param_id = $_SESSION["id"];
-
-        if ($stmt->execute())
-        {
-            $stmt->store_result();
-
-            if ($stmt->num_rows != 0)
-            {
-                $stmt->bind_result($subjectId, $subjectName);
-                echo "<h1>Oceny</h1>";
-                while ($stmt->fetch())
-                {
-
-                    echo "<div class=\"subjectGradesTitle\">";
-                    echo "<h3>" . $subjectName . "</h3>";
-                    echo "</div>";
-                    echo  "<div class=\"subjectGradesGrades\">";
-
-                    $sql2 = "SELECT DISTINCT grades.gradeScale, grades.gradeWeight, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeDescription, grades.gradeDate FROM users, grades WHERE grades.subjectId = ? AND grades.studentId = ? AND users.userId = grades.teacherId ORDER BY grades.gradeDate DESC LIMIT 5";
-
-                    if ($stmt2 = $mysqli->prepare($sql2))
-                    {
-                        $stmt2->bind_param("ss",$subjectId, $param_id);
-
-                        if ($stmt2->execute())
-                        {
-                            $stmt2->store_result();
-
-                            if ($stmt2->num_rows != 0)
-                            {
-                                $stmt2->bind_result($gradeScale, $gradeWeight, $userFirstName, $userSecondName, $userLastName, $gradeDescription, $gradeDate);
-
-                                while ($stmt2->fetch())
-                                {
-                                    echo "<div class=\"singleGrade grade". $gradeScale ."\">";
-                                    echo "<p>" . $gradeScale  . "</p>";
-                                    echo "<span class=\"gradeGreaterInfo\">";
-                                    echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
-                                    echo "Data: " . $gradeDate . "<br>";
-                                    echo "<p>Opis: " . $gradeDescription . "</p>";
-                                    echo "Waga: " . $gradeWeight;
-                                    echo "</span>";
-                                    echo "</div>";
-                                }
-                            }
-                        }
-                    }
-                    echo "</div>";
-                    echo "<div class=\"hr\"></div>";
-                }
-            }
-            else
-            {
-                $error = $error . "UwU, somethin went wong.";
-            }
-        }
-        else
-        {
-            echo "UwU, somethin went wong.";
-        }
-    }
-    $stmt->close();
-}*/
 function GetTime()
 {
     //POBIERANIE Z BAZY TAK JAK W FUNKCJI NIŻEJ
@@ -1164,4 +1093,11 @@ function editSchoolInformation()
     <input type="text" name="schoolPrincipal" value="' . $row['schoolPrincipal'] . '" placeholder="' . $row['schoolPrincipal'] . '">
     <input type="date" name="schoolEndYear" value="' . $row['schoolEndYear'] . '" placeholder="' . $row['schoolEndYear'] . '">
     <input type="submit" name="submit" value="Edytuj"></form>';
+}
+
+function getClassSubjectGrades() {
+    global $mysqli;
+
+    $sql="SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeScale, subjects.subjectName, gradecolumns.columnPosition FROM `grades` NATURAL JOIN `users` NATURAL JOIN `gradecolumns`, `subjects` WHERE subjects.subjectId = grades.subjectId AND users.userId = grades.studentId ORDER BY users.userLastName ASC, gradecolumns.columnPosition ASC ";
+
 }

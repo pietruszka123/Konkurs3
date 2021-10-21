@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Paź 2021, 12:34
+-- Czas generowania: 21 Paź 2021, 19:37
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.10
 
@@ -140,15 +140,29 @@ CREATE TABLE `freedays` (
 INSERT INTO `freedays` (`freeDayId`, `freeDayDate`, `freeDayReason`, `freeDayDescription`) VALUES
 (1, '2021-10-18', 'SPIERDALAJ', 'WYPIERDALANKO DO DOMSKU'),
 (2, '2021-11-26', 'bo jestem chory byczku', 'no choroba wyszloc o mam poradzic szczylu maly'),
-(3, '2021-10-31', 'bo tak', 'bo mi sie nie chce przychodzi mlody'),
-(4, '0000-00-00', 'tuiy', 'ituy'),
-(5, '0000-00-00', 'swietnie', 'zarabiscie'),
-(6, '0000-00-00', 'swietnie', 'zarabiscie'),
-(7, '0000-00-00', 'tiuyityu', 'tiyutyiu'),
-(8, '0000-00-00', 'test', 'test'),
-(9, '0000-00-00', 'test', 'test'),
-(10, '0000-00-00', 'test', 'test'),
-(11, '0000-00-00', 'fghj', 'fghj');
+(3, '2021-10-31', 'bo tak', 'bo mi sie nie chce przychodzi mlody');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `gradecolumns`
+--
+
+CREATE TABLE `gradecolumns` (
+  `columnId` int(11) NOT NULL,
+  `gradeWeight` int(3) NOT NULL,
+  `gradeDescription` varchar(255) NOT NULL,
+  `classId` int(11) NOT NULL,
+  `columnPosition` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `gradecolumns`
+--
+
+INSERT INTO `gradecolumns` (`columnId`, `gradeWeight`, `gradeDescription`, `classId`, `columnPosition`) VALUES
+(1, 2, 'Kartkówka z trójkąta', 1, 1),
+(2, 3, 'Pytanie z kwadratu', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -165,28 +179,31 @@ CREATE TABLE `grades` (
   `gradeDescription` text NOT NULL,
   `subjectId` int(8) NOT NULL,
   `gradeDate` datetime NOT NULL DEFAULT current_timestamp(),
-  `classId` int(8) NOT NULL
+  `classId` int(8) NOT NULL,
+  `columnId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `grades`
 --
 
-INSERT INTO `grades` (`gradeId`, `studentId`, `gradeScale`, `gradeWeight`, `teacherId`, `gradeDescription`, `subjectId`, `gradeDate`, `classId`) VALUES
-(1, 3, 6, 420, 1, 'Zdał sprawdzian oralny', 1, '2021-07-19 08:44:08', 1),
-(2, 3, 4, 1, 4, 'Sprawdzian z mnożenia.', 2, '2021-07-20 09:55:50', 1),
-(3, 11, 3, 1, 7, 'Sprawdzian z robienia lodów', 5, '2021-07-21 11:35:35', 1),
-(4, 11, 4, 2, 8, 'Sprawdzian z globusa Polski', 7, '2021-07-21 11:36:23', 1),
-(12, 3, 2, 1, 7, 'Dwójeczka na prośbę mojego ulubionego ucznia, ponieważ jest pierwszy.', 4, '2021-07-22 14:07:45', 1),
-(13, 3, 6, 2, 1, 'Bardzo dobrze zapoznał się z procesem tworzenia metamfetaminy.', 1, '2021-07-22 14:07:45', 1),
-(14, 3, 6, 6, 1, 'No i kolejna szósteczka', 1, '2021-07-23 08:58:16', 1),
-(15, 3, 3, 1, 7, 'Za tą zimną kawę', 4, '2021-07-23 08:58:16', 1),
-(16, 3, 6, 2, 1, 'Najlepszy uczeń na świecie', 1, '2021-07-23 08:59:41', 1),
-(17, 3, 5, 1, 1, 'Panie Pawle, co się stało? 5 a nie 6?', 1, '2021-07-23 08:59:41', 1),
-(18, 3, 1, 3, 8, 'Nie wie gdzie jest Polsza', 7, '2021-07-23 09:01:23', 1),
-(19, 3, 4, 2, 8, 'Ummm fizics', 6, '2021-07-23 09:01:23', 1),
-(20, 3, 6, 1, 1, 'No i teraz lepiej Panie Pawle', 1, '2021-07-23 09:02:45', 1),
-(21, 3, 3, 1, 1, 'Nie znamy się więcej Panie X', 1, '2021-07-23 09:02:45', 1);
+INSERT INTO `grades` (`gradeId`, `studentId`, `gradeScale`, `gradeWeight`, `teacherId`, `gradeDescription`, `subjectId`, `gradeDate`, `classId`, `columnId`) VALUES
+(1, 3, 6, 420, 1, 'Zdał sprawdzian oralny', 1, '2021-07-19 08:44:08', 1, 0),
+(2, 3, 4, 1, 4, 'Sprawdzian z mnożenia.', 2, '2021-07-20 09:55:50', 1, 0),
+(3, 11, 3, 1, 7, 'Sprawdzian z robienia lodów', 5, '2021-07-21 11:35:35', 1, 0),
+(4, 11, 4, 2, 8, 'Sprawdzian z globusa Polski', 7, '2021-07-21 11:36:23', 1, 0),
+(12, 3, 2, 1, 7, 'Dwójeczka na prośbę mojego ulubionego ucznia, ponieważ jest pierwszy.', 4, '2021-07-22 14:07:45', 1, 0),
+(13, 3, 6, 2, 1, 'Bardzo dobrze zapoznał się z procesem tworzenia metamfetaminy.', 1, '2021-07-22 14:07:45', 1, 0),
+(14, 3, 6, 6, 1, 'No i kolejna szósteczka', 1, '2021-07-23 08:58:16', 1, 0),
+(15, 3, 3, 1, 7, 'Za tą zimną kawę', 4, '2021-07-23 08:58:16', 1, 0),
+(16, 3, 6, 2, 1, 'Najlepszy uczeń na świecie', 1, '2021-07-23 08:59:41', 1, 0),
+(17, 3, 5, 1, 1, 'Panie Pawle, co się stało? 5 a nie 6?', 1, '2021-07-23 08:59:41', 1, 0),
+(18, 3, 1, 3, 8, 'Nie wie gdzie jest Polsza', 7, '2021-07-23 09:01:23', 1, 0),
+(19, 3, 4, 2, 8, 'Ummm fizics', 6, '2021-07-23 09:01:23', 1, 0),
+(20, 3, 6, 1, 1, 'No i teraz lepiej Panie Pawle', 1, '2021-07-23 09:02:45', 1, 0),
+(21, 3, 3, 1, 1, 'Nie znamy się więcej Panie X', 1, '2021-07-23 09:02:45', 1, 0),
+(22, 3, 4, 2, 4, 'Kartkówka z trójkąta', 2, '2021-10-21 19:14:11', 1, 1),
+(23, 3, 5, 3, 4, 'Pytanie z kwadratu', 2, '2021-10-21 19:14:11', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -232,7 +249,8 @@ CREATE TABLE `luckynumbers` (
 
 INSERT INTO `luckynumbers` (`databaseDate`, `luckyNumberFirst`, `luckyNumberSecond`) VALUES
 ('2021-10-13', 15, 26),
-('2021-10-14', 15, 19);
+('2021-10-14', 15, 19),
+('2021-10-21', 15, 18);
 
 -- --------------------------------------------------------
 
@@ -372,20 +390,21 @@ CREATE TABLE `timetables` (
   `substituteSubjectId` int(8) DEFAULT NULL,
   `substituteDescription` text DEFAULT NULL,
   `substituteClassroom` varchar(255) DEFAULT NULL,
-  `cancelled` tinyint(1) NOT NULL
+  `cancelled` tinyint(1) NOT NULL,
+  `subjectNumber` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `timetables`
 --
 
-INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDateStart`, `classDateEnd`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`, `cancelled`) VALUES
-(1, 1, 1, 1, '2021-07-19 06:40:15', '2021-07-19 07:40:15', 'Teoretyka tworzenia metaamfetaminy', '42069', 'Tak', NULL, NULL, NULL, NULL, 0),
-(2, 4, 7, 1, '2021-07-30 11:15:16', '2021-07-30 12:15:16', 'Polska Polskość w Polsce na Polskiej Polszczyźnie', '2137', 'Nie', 8, 6, 'FIZYKAAA ', '2137', 0),
-(3, 6, 8, 1, '2021-10-14 14:09:51', '2021-10-14 15:09:51', 'Taka testowa lekcja.', '23', 'Tak', NULL, NULL, NULL, NULL, 0),
-(4, 2, 4, 1, '2021-10-15 14:11:33', '2021-10-15 15:11:33', 'Taka druga testowa lekcja.', '4B', 'Tak', NULL, NULL, NULL, NULL, 0),
-(5, 4, 7, 1, '2021-10-15 16:54:43', '2021-10-15 17:54:43', 'Omawianie Makbeta.', '2B', 'Tak', 1, 8, 'Chemia dziecki.', '3B', 0),
-(6, 3, 4, 1, '2021-10-15 18:57:06', '2021-10-15 19:57:06', 'WF!', 'a32', 'Tak', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDateStart`, `classDateEnd`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`, `cancelled`, `subjectNumber`) VALUES
+(1, 1, 1, 1, '2021-07-19 06:40:15', '2021-07-19 07:40:15', 'Teoretyka tworzenia metaamfetaminy', '42069', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
+(2, 4, 7, 1, '2021-07-30 11:15:16', '2021-07-30 12:15:16', 'Polska Polskość w Polsce na Polskiej Polszczyźnie', '2137', 'Nie', 8, 6, 'FIZYKAAA ', '2137', 0, 0),
+(3, 6, 8, 1, '2021-10-14 14:09:51', '2021-10-14 15:09:51', 'Taka testowa lekcja.', '23', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
+(4, 2, 4, 1, '2021-10-15 14:11:33', '2021-10-15 15:11:33', 'Taka druga testowa lekcja.', '4B', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
+(5, 4, 7, 1, '2021-10-15 16:54:43', '2021-10-15 17:54:43', 'Omawianie Makbeta.', '2B', 'Tak', 1, 8, 'Chemia dziecki.', '3B', 0, 0),
+(6, 3, 4, 1, '2021-10-15 18:57:06', '2021-10-15 19:57:06', 'WF!', 'a32', 'Tak', NULL, NULL, NULL, NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -467,6 +486,13 @@ ALTER TABLE `exams`
 --
 ALTER TABLE `freedays`
   ADD PRIMARY KEY (`freeDayId`);
+
+--
+-- Indeksy dla tabeli `gradecolumns`
+--
+ALTER TABLE `gradecolumns`
+  ADD PRIMARY KEY (`columnId`),
+  ADD KEY `classId` (`classId`);
 
 --
 -- Indeksy dla tabeli `grades`
@@ -568,10 +594,16 @@ ALTER TABLE `freedays`
   MODIFY `freeDayId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT dla tabeli `gradecolumns`
+--
+ALTER TABLE `gradecolumns`
+  MODIFY `columnId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT dla tabeli `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `gradeId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `gradeId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT dla tabeli `homework`
@@ -647,6 +679,12 @@ ALTER TABLE `exams`
   ADD CONSTRAINT `exams_ibfk_1` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`),
   ADD CONSTRAINT `exams_ibfk_2` FOREIGN KEY (`teacherId`) REFERENCES `users` (`userId`),
   ADD CONSTRAINT `exams_ibfk_3` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);
+
+--
+-- Ograniczenia dla tabeli `gradecolumns`
+--
+ALTER TABLE `gradecolumns`
+  ADD CONSTRAINT `gradecolumns_ibfk_1` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`);
 
 --
 -- Ograniczenia dla tabeli `grades`
