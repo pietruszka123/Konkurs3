@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 html {
@@ -39,6 +39,7 @@ gridzio{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 1vw;
+  
 }
 :root {
   --darkerDiscordColor: rgb(41, 41, 41);
@@ -71,6 +72,7 @@ header h1 {
   font-size: 3.5vw;
   font-weight: 400;
   font-family: "Honey Script", sans-serif;
+  color: #f7d61f;
 }
 header a {
   display: flex;
@@ -116,7 +118,7 @@ nav {
   border-radius: 1.3vw;
   margin: 1vw;
   background-color: rgb(136, 105, 210);
-  filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+  filter: drop-shadow(0px 0px 0.390625vw rgb(109, 109, 109));
 }
 
 .bombel {
@@ -148,7 +150,7 @@ nav {
 }
 
 .logowanie {
-  height: 88.9vh;
+  height: 43.63971354166667vw;
   margin: 0 auto;
   position: relative;
 }
@@ -158,18 +160,20 @@ nav {
   height: fit-content;
   position: relative;
   margin-bottom: 1.3vw;
-  margin-top: 20vh;
+  margin-top: 9.817708333333334vw;
   padding: 2.5vw;
-  padding-bottom: 2vh;
-  padding-top: 2vh;
+  padding-bottom: 0.9817708333333334vw;
+  padding-top: 0.9817708333333334vw;
   border-radius: 1.3vw;
   border: white 0.06vw solid;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 6vh;
+  margin-top: 2.9453125vw;
 }
-
+.logowanie h1{
+  color: white;
+}
 .logowanie h2 {
   font-family: Verdana, sans-serif;
   font-size: 1vw;
@@ -177,7 +181,7 @@ nav {
   color: #fff;
   text-align: center;
   display: block;
-  margin-bottom: 2vh;
+  margin-bottom: 0.9765625vw;
 }
 
 div {
@@ -208,7 +212,6 @@ div {
   font-size: 1.5vw;
   font-style: normal;
   color: #fff;
-  background: rgb(136, 105, 210);
   background: linear-gradient(
     90deg,
     rgba(136, 105, 210, 1) 0%,
@@ -225,7 +228,7 @@ div {
   filter: drop-shadow(0px 0px 0.06vw #6295ea);
 }
 .input {
-  margin-bottom: 2vh;
+  margin-bottom: 0.9765625vw;
 }
 .container {
   padding: 2vw;
@@ -248,7 +251,7 @@ div {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   font-size: 3.58vw;
-  color: #fff;
+  color: #f7d61f;
   text-align: center;
   margin-bottom: 1.3vw;
 }
@@ -262,6 +265,7 @@ div input[type="password"] {
   padding-left: 0.5vw;
   justify-content: center;
   filter: drop-shadow(0px 0px 0.06vw #6295ea);
+  color: black;
 }
 
 div input[type="text"] {
@@ -280,9 +284,9 @@ div input[type="text"] {
   color: rgb(255, 255, 255);
   font-weight: 600;
   font-family: "Source Sans Pro", sans-serif;
-  padding: 7px;
+  padding: 0.4557291666666667vw;
   background-color: rgb(63, 63, 63);
-  border-radius: 15px;
+  border-radius: 0.9765625vw;
   box-shadow: 0px 0px 2px black;
 }
 
@@ -291,11 +295,11 @@ div input[type="text"] {
   border-radius: 1.3vw;
   margin: 1vw;
   background-color: rgb(96, 145, 233, 60%);
-  filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+  filter: drop-shadow(0px 0px 2px rgb(109, 109, 109));
 }
 
 .element h1 {
-  color: white;
+  color: #f7d61f;
   padding-bottom: 1.3262599469496021vh;
 }
 
@@ -645,7 +649,7 @@ h3 {
 }
 
 .element::-webkit-scrollbar-track {
-  border-radius: 0.6510416666666666vw;
+  border-radius: 0.06510416666666666vw;
   height: 80%;
   margin-top: 0.7vw;
   margin-bottom: 0.7vw;
@@ -678,7 +682,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   border-radius: 0.6510416666666666vw;
-  border: 2px rgba(255, 255, 255, 70%) solid;
+  border: 0.13020833333333334vw rgba(255, 255, 255, 70%) solid;
   background-image: -webkit-gradient(
     linear,
     left bottom,
@@ -695,7 +699,7 @@ body::-webkit-scrollbar-thumb {
   color: rgb(0, 0, 0);
   text-align: left;
   white-space: nowrap;
-  filter: drop-shadow(0px 0px 6px rgb(109, 109, 109));
+  filter: drop-shadow(0px 0px 0.390625vw rgb(109, 109, 109));
   border-radius: 0.19vw;
   padding: 0.65vw;
   position: absolute;
@@ -752,7 +756,7 @@ body::-webkit-scrollbar-thumb {
 
 .logReg h2 {
   color: #4885f7;
-  -webkit-text-stroke: 1px #d1e0ff;
+  -webkit-text-stroke: 0.065vw #d1e0ff;
   font-size: 1.3vw;
   font-weight: 550;
   text-align: center;
@@ -791,7 +795,7 @@ body::-webkit-scrollbar-thumb {
   grid-row-end: 4;
 }
 .subjectName {
-  margin-bottom: 8px;
+  margin-bottom: 0.5208333333333334vw;
 }
 .creationDate {
   display: flex;
@@ -801,7 +805,7 @@ body::-webkit-scrollbar-thumb {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  margin-bottom: 8px;
+  margin-bottom: 0.5208333333333334vw;
 }
 .obligatory {
   display: flex;
@@ -865,4 +869,18 @@ padding: 0;
 margin: 0;
 bottom: 1vw;
 left: 0;
+color: white;
+}
+.strzalkiZmienne>input{
+  background-color: rgba(134, 97, 209, 100%);
+  border: 0.065vw white solid;
+  border-radius: 0.65vw;
+  padding: 0.5vw;
+  padding-top:0.2vw;
+  padding-bottom:0.2vw;
+  font-size: 1vw;
+  color: white;
+}
+.strzalkiZmienne>span{
+  font-size: 1.2vw
 }

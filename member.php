@@ -27,9 +27,11 @@ include_once("header.php");
         getTimetable();
         ?>
     </div>
-    <input type="submit" id="backward" value="<">
-    <input type="submit" id="reset" value="Today">
-    <input type="submit" id="forward" value=">">
+    <div class='strzalkiZmienne T'>
+        <input type="submit" id="backward" value="<">
+        <input type="submit" id="reset" value="Today">
+        <input type="submit" id="forward" value=">">
+    </div>
 </div>
 <div>
     <div class="daysUntilEndOfYear element">
@@ -71,8 +73,8 @@ include_once("header.php");
     getAttendance($_SESSION["id"]);
     ?>
     </div>
-    <div class='strzalkiZmienne'>
-    <br><input type='submit' id='back' value='<'>
+    <div class='strzalkiZmienne A'>
+    <input type='submit' id='back' value='<'>
     <input type='submit' id='res' value='Today'>
     <input type='submit' id='for' value='>'>
     </div>
