@@ -1,3 +1,4 @@
+$(".strzalkiZmienne").prepend($("#AttendenceDate").detach().attr("id","AttendenceDateS"));
 function changeTimeTable(i){
     $.ajax({
     type: "post",
@@ -20,6 +21,11 @@ function changeAttendance(i){
     data: JSON.stringify({ direction:i }),
     success: function(response) {
         $(".attendanceTableE").html(response.message);
+        
+        $("#AttendenceDateS").remove();
+        var date = $("#AttendenceDate").detach();
+        date.attr("id","AttendenceDateS")
+        $(".strzalkiZmienne").prepend(date);
     },
     error: function(e,i){   
         $(".attendanceTableE").html("UwU, somethin went wong.");

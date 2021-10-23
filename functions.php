@@ -780,7 +780,7 @@ function getAttendance($userID,$ret = false,$direction = 0)
     }
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
-    $TEMP .= "<span id='AttendenceDate'><p>" . $date . "</p></span>";
+    $TEMP .= "<span id='AttendenceDate'>" . $date . "</span>";
     if ($ret){
         $stmt->close();
         return $TEMP;
