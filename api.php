@@ -34,6 +34,10 @@
             sendMessage($data["Receivers"],$data["title"],$data["Content"]);
             //getMessageElement("?","now",$data["title"],$data["Content"]);
             break;
+        case 'UpdateGrades':
+            header("HTTP/1.1 200 OK");
+            UpdateGrades($data);
+            break;
         case 'getMessagesElements':
             header("HTTP/1.1 200 OK");
             echo '{"status":true, "message":' .json_encode(array_values(getUserMessages(true))) . '}';

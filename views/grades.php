@@ -25,7 +25,7 @@ include_once("t_header.php");
         getClassSubjectGrades(1,1);
     ?>
 </table>
-<input type="button" value="Zapisz zmiany">
+<input id="saveGrads" type="button" value="Zapisz zmiany">
 <script src="js/grades.js"></script>
 <?php
 include_once("../footer.php");

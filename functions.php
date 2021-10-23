@@ -35,7 +35,24 @@ function getaId($arr,$s)
     }
     return -1;
 }
-
+function UpdateGrades($data){
+    global $mysqli;
+    global $error;
+    $GradesCodes = array("+1"=>7,"+2"=>8,"+3"=>9,"+4"=>10,"+5"=>11,"+6"=>12,"+"=>13,"-"=>14);
+    foreach ($data as $key => $value) {
+        foreach ($value["grades"] as $gKey => $gValue) {
+            if($gValue["edited"] && (is_numeric($gValue["value"]) || array_key_exists($gValue["value"],$GradesCodes))){
+                if(array_key_exists($gValue["value"],$GradesCodes)){
+                    $gValue["value"] = $GradesCodes[$gValue["value"]];
+                }
+                echo $gValue["value"] . " ";
+            }
+        }
+        $sql = "INSERT INTO grades (studentId, gradeScale, gradeWeight,teacherId,gradeDescription,subjectId,classId,columnId)
+        VALUES (?,?,?,?,?,?,?,?);";
+        
+    }
+}
 function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
@@ -56,25 +73,29 @@ function getClassSubjectGrades($classId, $subjectId)
                 $max = 0;
                 $maxColl =0; 
                 echo "<tr><td>uczniowie</td>";
+                $ids = array();
                 while ($stmt->fetch())
                 {
                     if(hasId($t,$userId)){
                         $id = getaId($t,$userId);
                         array_push($t[$id]->gradeScales,$gradeScale);
                         if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
-                    }else array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                    }else{
+                        array_push($ids,$userId);
+                    array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                    }
                     if($columnPosition > $maxColl){
                         echo "<td class='?'>$gradeDescription</td>";
                         $maxColl = $columnPosition;
                     }
                 }
-                echo "</tr><p id='max' hidden>" . $max . "</p><p id='users' hidden>" . count($t) . "</p>";
+                echo "<td><input id='addLabel' type='button' value='+'></td>";
                 $ii = 0;
                 foreach ($t as $key=>$element) {
-                    echo "<tr id='t$key'><td class='uczenDebil'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
+                    echo "<tr data-id='".$ids[$key]."' id='t$key'><td class='uczenDebil'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
                     for ($i=0; $i < $max; $i++) {
-                        if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
-                        else echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text'></td>";
+                        if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input autocomplete='off' class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
+                        else echo "<td class='ocenadupa'><input data-empty='true' class='ocenaI' id='i".$ii."' type='text'></td>";
                         $ii++;
                     }
                     echo "</tr>";
