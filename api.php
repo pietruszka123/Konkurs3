@@ -51,6 +51,10 @@
             header("HTTP/1.1 200 OK");
             echo '{"status":true, "message":' . GetTime() . '}';
             break;
+        case 'AddLabel':
+            header("HTTP/1.1 200 OK");
+            addLabel();
+            break;
         case 'getTimeTable':
             header("HTTP/1.1 200 OK");
             echo '{"status":true, "message":"' . getTimetable(true,$data["direction"]) . '"}';

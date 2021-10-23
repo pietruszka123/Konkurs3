@@ -35,29 +35,63 @@ function getaId($arr,$s)
     }
     return -1;
 }
+function parseGrade($grade){
+    $GradesCodes = array(7=>"+1",8=>"+2",9=>"+3",10=>"+4",11=>"+5",12=>"+6",13=>"+",14=>"-");
+    if(array_key_exists($grade,$GradesCodes)){
+        return $GradesCodes[$grade];
+    }else
+    return $grade;
+}
 function UpdateGrades($data){
     global $mysqli;
     global $error;
     $GradesCodes = array("+1"=>7,"+2"=>8,"+3"=>9,"+4"=>10,"+5"=>11,"+6"=>12,"+"=>13,"-"=>14);
-    foreach ($data as $key => $value) {
+    $queries = "";
+    if(array_key_exists("Labels",$data)){
+        echo "labels";
+        $sql = 'INSERT INTO gradecolumns(gradeWeight,gradeDescription,classId,columnPosition) VALUES(6,"a",1,3);';
+    }
+    foreach ($data["Users"] as $key => $value) {
         foreach ($value["grades"] as $gKey => $gValue) {
-            if($gValue["edited"] && (is_numeric($gValue["value"]) || array_key_exists($gValue["value"],$GradesCodes))){
+            if(is_numeric($gValue["value"]) || array_key_exists($gValue["value"],$GradesCodes)){
                 if(array_key_exists($gValue["value"],$GradesCodes)){
                     $gValue["value"] = $GradesCodes[$gValue["value"]];
                 }
-                echo $gValue["value"] . " ";
+                if($gValue["empty"]){
+                    $queries .= "INSERT INTO grades (studentId, gradeScale, gradeWeight,teacherId,gradeDescription,subjectId,classId,columnId) VALUES (".$value["id"].",".$gValue["value"].",".$gValue["GradesData"]["weight"].",".$_SESSION["id"].",'".$gValue["GradesData"]["desc"]."',".$data["SubjectId"].",".$data["ClassId"].",".$gKey+1 .");";
+                }else{
+                    
+                }
             }
         }
-        $sql = "INSERT INTO grades (studentId, gradeScale, gradeWeight,teacherId,gradeDescription,subjectId,classId,columnId)
-        VALUES (?,?,?,?,?,?,?,?);";
-        
+    }
+    echo $queries;
+    if($mysqli->multi_query($queries)){
+        echo "{'status':true}";
+    }else{
+
+        echo "{'status':false,'message':$mysqli->error}";
+    }
+}
+function addLabel()
+{
+    global $mysqli;
+    global $error;
+    $sql = "";
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        $stmt->bind_param("ss", $subjectId, $classId);
+        if ($stmt->execute()){
+
+        }
     }
 }
 function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -67,8 +101,7 @@ function getClassSubjectGrades($classId, $subjectId)
             $stmt->store_result();
             if ($stmt->num_rows != 0)
             {
-                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight);
-                $lastid = $userId;
+                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight,$gradeId);
                 $t = array();
                 $max = 0;
                 $maxColl =0; 
@@ -79,10 +112,11 @@ function getClassSubjectGrades($classId, $subjectId)
                     if(hasId($t,$userId)){
                         $id = getaId($t,$userId);
                         array_push($t[$id]->gradeScales,$gradeScale);
+                        array_push($t[$id]->gradeIds,$gradeId);
                         if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
                     }else{
                         array_push($ids,$userId);
-                    array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                    array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeIds'=>array(0=> $gradeId),'gradeScales'=> array(0=> $gradeScale)]);
                     }
                     if($columnPosition > $maxColl){
                         echo "<td class='?'>$gradeDescription</td>";
@@ -92,10 +126,10 @@ function getClassSubjectGrades($classId, $subjectId)
                 echo "<td><input id='addLabel' type='button' value='+'></td>";
                 $ii = 0;
                 foreach ($t as $key=>$element) {
-                    echo "<tr data-id='".$ids[$key]."' id='t$key'><td class='uczenDebil'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
+                    echo "<tr data-id='".$ids[$key]."' id='t$key'><td class='User'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
                     for ($i=0; $i < $max; $i++) {
-                        if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input autocomplete='off' class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
-                        else echo "<td class='ocenadupa'><input data-empty='true' class='ocenaI' id='i".$ii."' type='text'></td>";
+                        if(count($element->gradeScales) > $i)echo "<td class='Grade'><input data-id='".$element->gradeIds[$i]."' autocomplete='off' class='ocenaI' id='i".$ii."' type='text' value='" . parseGrade($element->gradeScales[$i]) . "'></td>";
+                        else echo "<td class='Grade'><input autocomplete='off' data-empty='true' class='ocenaI' id='i".$ii."' type='text'></td>";
                         $ii++;
                     }
                     echo "</tr>";
@@ -155,7 +189,8 @@ function getUserGrades()
 
                                 while ($stmt2->fetch())
                                 {
-                                    echo '<div class="singleGrade grade' . $gradeScale . '">';
+                                    $gradeScale = parseGrade($gradeScale);
+                                    echo '<div class="singleGrade grade' . str_replace(array("-","+"), "", $gradeScale) . '">';
                                     echo "<p>" . $gradeScale  . "</p>";
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
@@ -348,7 +383,6 @@ function sendMessage($Receivers, $title, $Content)
         if ($stmt->execute())
         {
             echo "{\"status\":true}";
-            $error = $error . "UwU, somethin went wong.";
         }
         else
         {
