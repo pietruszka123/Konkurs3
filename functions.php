@@ -36,7 +36,7 @@ function getaId($arr,$s)
     return -1;
 }
 
-/*function getClassSubjectGrades($classId, $subjectId)
+function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
@@ -79,7 +79,7 @@ function getaId($arr,$s)
         }
     }
     return "UwU, somethin went wong.";
-}*/
+}
 
 function getUserGrades()
 {
@@ -192,7 +192,10 @@ function getUserMessages($ret = false)
                     if ($ret) array_push($rarr, $TEMP);
                     else echo $TEMP;
                 }
-                if ($ret) return $rarr;
+                if ($ret){ 
+                    $stmt->close();
+                    return $rarr;
+                }
             }
             else
             {
@@ -245,7 +248,10 @@ function viewMessage(int $messageId, $ret = false)
                     if ($ret) array_push($rarr, getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName));
                     else echo getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName);
                 }
-                if ($ret) return $rarr;
+                if ($ret){ 
+                    $stmt->close();
+                    return $rarr;
+                }
             }
             else
             {
@@ -461,7 +467,10 @@ function getTimetable($ret = false, $direction = 0)
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
     $TEMP .= $date;
-    if ($ret) return $TEMP;
+    if ($ret){
+        $stmt->close();
+        return $TEMP;
+    } 
     else echo $TEMP;
     $stmt->close();
 }
@@ -765,9 +774,13 @@ function getAttendance($userID,$ret = false,$direction = 0)
     }
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
-    $TEMP.= $date;
-    if($ret)return $TEMP;
+    $TEMP .= "<span id='AttendenceDate'>" . $date . "</span>";
+    if ($ret){
+        $stmt->close();
+        return $TEMP;
+    }
     else echo $TEMP;
+    //Działa
     $stmt->close();
 }
 
@@ -1100,9 +1113,9 @@ function editSchoolInformation()
     <input type="submit" name="submit" value="Edytuj"></form>';
 }
 
-function getClassSubjectGrades() {
-    global $mysqli;
+// function getClassSubjectGrades() {
+//     global $mysqli;
 
-    $sql="SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeScale, subjects.subjectName, gradecolumns.columnPosition FROM `grades` NATURAL JOIN `users` NATURAL JOIN `gradecolumns`, `subjects` WHERE subjects.subjectId = grades.subjectId AND users.userId = grades.studentId ORDER BY users.userLastName ASC, gradecolumns.columnPosition ASC ";
+//     $sql="SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeScale, subjects.subjectName, gradecolumns.columnPosition FROM `grades` NATURAL JOIN `users` NATURAL JOIN `gradecolumns`, `subjects` WHERE subjects.subjectId = grades.subjectId AND users.userId = grades.studentId ORDER BY users.userLastName ASC, gradecolumns.columnPosition ASC ";
 
-}
+// }

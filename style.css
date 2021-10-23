@@ -35,7 +35,11 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
-
+gridzio{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 1vw;
+}
 :root {
   --darkerDiscordColor: rgb(41, 41, 41);
   --mainBackgroundColor: rgb(236, 236, 236);
@@ -48,7 +52,7 @@ body {
 
 header {
   width: 100%;
-  height: 12vh;
+  height: 12%;
   background-image: url("img/header.svg");
   background-repeat: no-repeat;
   background-size: 100%;
@@ -74,12 +78,12 @@ header a {
 }
 .logout {
   width: 1.953125vw;
-  height: 3.9787798408488064vh;
+  height: 3.9787798408488064%;
 }
 nav {
-  border: white 1xp solid;
+  border: white 0.65% solid;
   position: fixed;
-  top: 6.389776357827476vh;
+  top: 6.389776357827476%;
   right: 39.761904761904763vw;
 }
 
@@ -296,10 +300,13 @@ div input[type="text"] {
 }
 
 .element h2 {
-  color: rgb(199, 199, 174);
+  color: white;
 }
 .element p {
-  color: rgb(199, 199, 174);
+  color: white;
+}
+.element text{
+  color: white;
 }
 .freeDay {
   color: white;
@@ -443,7 +450,7 @@ h5 {
 .grades {
   font-size: 1vw;
   width: 24vw;
-  height: 48.89124668435013vh;
+  height: 24vw;
   min-width: 15%;
   padding: 1.5vw;
   font-family: "Poppins", sans-serif;
@@ -560,9 +567,6 @@ h5 {
   grid-column-end: 3;
 }
 
-.singleComment p {
-  color: rgb(199, 199, 174);
-}
 
 .negatywna {
   filter: drop-shadow(0vw 0vw 0.5vw rgba(255, 77, 77, 1));
@@ -852,4 +856,13 @@ body::-webkit-scrollbar-thumb {
 
 .Selected{ /* Do testów*/
   background-color: red;
+}
+.strzalkiZmienne{
+text-align: center;
+width: 100%;
+position: absolute;
+padding: 0;
+margin: 0;
+bottom: 1vw;
+left: 0;
 }

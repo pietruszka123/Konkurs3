@@ -11,7 +11,7 @@ include_once("header.php");
 <!-- o co chodzi? -->
 
 
-
+<gridzio>
 <div class="grades element">
     <div class="subjectGradesTable">
         <?php
@@ -71,9 +71,11 @@ include_once("header.php");
     getAttendance($_SESSION["id"]);
     ?>
     </div>
-    <input type="submit" id="back" value="<">
-    <input type="submit" id="res" value="Today">
-    <input type="submit" id="for" value=">">
+    <div class='strzalkiZmienne'>
+    <br><input type='submit' id='back' value='<'>
+    <input type='submit' id='res' value='Today'>
+    <input type='submit' id='for' value='>'>
+    </div>
 </div>
 
 <div class="studentComments element">
@@ -81,7 +83,7 @@ include_once("header.php");
     getUserComments($_SESSION["id"]);
     ?>
 </div>
-
+</gridzio>
 
 <script src="js/member.js"></script>
 
