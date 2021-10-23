@@ -36,11 +36,11 @@ function getaId($arr,$s)
     return -1;
 }
 
-/*function getClassSubjectGrades($classId, $subjectId)
+function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.studentId = users.userId ORDER BY users.userId";
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -50,10 +50,12 @@ function getaId($arr,$s)
             $stmt->store_result();
             if ($stmt->num_rows != 0)
             {
-                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale);
+                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight);
                 $lastid = $userId;
                 $t = array();
                 $max = 0;
+                $maxColl =0; 
+                echo "<tr><td>uczniowie</td>";
                 while ($stmt->fetch())
                 {
                     if(hasId($t,$userId)){
@@ -61,12 +63,15 @@ function getaId($arr,$s)
                         array_push($t[$id]->gradeScales,$gradeScale);
                         if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
                     }else array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                    if($columnPosition > $maxColl){
+                        echo "<td class='?'>$gradeDescription</td>";
+                        $maxColl = $columnPosition;
+                    }
                 }
-                echo "<p id='max' hidden>" . $max . "</p>";
-                echo "<p id='users' hidden>" . count($t) . "</p>";
+                echo "</tr><p id='max' hidden>" . $max . "</p><p id='users' hidden>" . count($t) . "</p>";
                 $ii = 0;
-                foreach ($t as $element) {
-                    echo "<tr><td class='uczenDebil'>$userFirstName $userSecondName $userLastName</td>";
+                foreach ($t as $key=>$element) {
+                    echo "<tr id='t$key'><td class='uczenDebil'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
                     for ($i=0; $i < $max; $i++) {
                         if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
                         else echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text'></td>";
@@ -74,12 +79,13 @@ function getaId($arr,$s)
                     }
                     echo "</tr>";
                 }
+                
                 return;
             }
         }
     }
     return "UwU, somethin went wong.";
-}*/
+}
 
 function getUserGrades()
 {
@@ -192,7 +198,10 @@ function getUserMessages($ret = false)
                     if ($ret) array_push($rarr, $TEMP);
                     else echo $TEMP;
                 }
-                if ($ret) return $rarr;
+                if ($ret){ 
+                    $stmt->close();
+                    return $rarr;
+                }
             }
             else
             {
@@ -245,7 +254,10 @@ function viewMessage(int $messageId, $ret = false)
                     if ($ret) array_push($rarr, getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName));
                     else echo getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName);
                 }
-                if ($ret) return $rarr;
+                if ($ret){ 
+                    $stmt->close();
+                    return $rarr;
+                }
             }
             else
             {
@@ -461,7 +473,10 @@ function getTimetable($ret = false, $direction = 0)
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
     $TEMP .= $date;
-    if ($ret) return $TEMP;
+    if ($ret){
+        $stmt->close();
+        return $TEMP;
+    } 
     else echo $TEMP;
     $stmt->close();
 }
@@ -765,9 +780,13 @@ function getAttendance($userID,$ret = false,$direction = 0)
     }
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
-    $TEMP.= $date;
-    if($ret)return $TEMP;
+    $TEMP .= "<span id='AttendenceDate'><p>" . $date . "</p></span>";
+    if ($ret){
+        $stmt->close();
+        return $TEMP;
+    }
     else echo $TEMP;
+    //Działa
     $stmt->close();
 }
 
@@ -1100,9 +1119,9 @@ function editSchoolInformation()
     <input type="submit" name="submit" value="Edytuj"></form>';
 }
 
-function getClassSubjectGrades() {
-    global $mysqli;
+// function getClassSubjectGrades() {
+//     global $mysqli;
 
-    $sql="SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeScale, subjects.subjectName, gradecolumns.columnPosition FROM `grades` NATURAL JOIN `users` NATURAL JOIN `gradecolumns`, `subjects` WHERE subjects.subjectId = grades.subjectId AND users.userId = grades.studentId ORDER BY users.userLastName ASC, gradecolumns.columnPosition ASC ";
+//     $sql="SELECT users.userId, users.userFirstName, users.userSecondName, users.userLastName, grades.gradeScale, subjects.subjectName, gradecolumns.columnPosition FROM `grades` NATURAL JOIN `users` NATURAL JOIN `gradecolumns`, `subjects` WHERE subjects.subjectId = grades.subjectId AND users.userId = grades.studentId ORDER BY users.userLastName ASC, gradecolumns.columnPosition ASC ";
 
-}
+// }

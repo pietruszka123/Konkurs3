@@ -31,8 +31,10 @@ include_once("functions.php");
             <ol>
                 <li id="messages">wiadomosci</li>
                 <li id="grades">oceny</li>
-                <li id="?">jakies inne rzeczy</li>
-                <li id="??">jakies inne rzeczy 2.0</li>
+                <li id="comments">Uwagi</li>
+                <li id="exams">sprawdziany</li>
+                <li id="?">cos innego</li>
+                <li id="?">cos innego</li>
             </ol>
         </nav>
     </header>
