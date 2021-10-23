@@ -865,4 +865,18 @@ padding: 0;
 margin: 0;
 bottom: 1vw;
 left: 0;
+color: white;
+}
+.strzalkiZmienne>input{
+  background-color: rgba(134, 97, 209, 100%);
+  border: 1px white solid;
+  border-radius: 0.65vw;
+  padding: 0.5vw;
+  padding-top:0.2vw;
+  padding-bottom:0.2vw;
+  font-size: 1vw;
+  color: white;
+}
+.strzalkiZmienne>span{
+  font-size: 1.2vw
 }

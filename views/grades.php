@@ -21,20 +21,6 @@ include_once("t_header.php");
         <li><a></a></li>
     </ol>
     <table>
-    <tr>
-        <td>uczniowie</td>
-        <?php
-           /*         <td><input type="text" value="1"  id=""></td>
-                    <td><input type="text" value="2" id=""></td>
-                    <td><input type="text" value="3" id=""></td>
-                    <td><input type="text" value="4" id=""></td>
-                    <td><input type="text" value="5" id=""></td>
-                    <td><input type="text" value="6" id=""></td>
-                    <td><input type="text" value="7" id=""></td>
-                    <td><input type="text" value="8" id=""></td>*/
-            //getGradesTitles()
-        ?>
-    </tr>
     <?php
         getClassSubjectGrades(1,1);
     ?>

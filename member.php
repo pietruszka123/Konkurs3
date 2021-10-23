@@ -72,7 +72,7 @@ include_once("header.php");
     ?>
     </div>
     <div class='strzalkiZmienne'>
-    <br><input type='submit' id='back' value='<'>
+    <input type='submit' id='back' value='<'>
     <input type='submit' id='res' value='Today'>
     <input type='submit' id='for' value='>'>
     </div>

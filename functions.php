@@ -40,7 +40,7 @@ function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale FROM subjects, grades, users WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.studentId = users.userId ORDER BY users.userId";
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -50,10 +50,12 @@ function getClassSubjectGrades($classId, $subjectId)
             $stmt->store_result();
             if ($stmt->num_rows != 0)
             {
-                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale);
+                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight);
                 $lastid = $userId;
                 $t = array();
                 $max = 0;
+                $maxColl =0; 
+                echo "<tr><td>uczniowie</td>";
                 while ($stmt->fetch())
                 {
                     if(hasId($t,$userId)){
@@ -61,12 +63,15 @@ function getClassSubjectGrades($classId, $subjectId)
                         array_push($t[$id]->gradeScales,$gradeScale);
                         if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
                     }else array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeScales'=> array(0=> $gradeScale)]);
+                    if($columnPosition > $maxColl){
+                        echo "<td class='?'>$gradeDescription</td>";
+                        $maxColl = $columnPosition;
+                    }
                 }
-                echo "<p id='max' hidden>" . $max . "</p>";
-                echo "<p id='users' hidden>" . count($t) . "</p>";
+                echo "</tr><p id='max' hidden>" . $max . "</p><p id='users' hidden>" . count($t) . "</p>";
                 $ii = 0;
                 foreach ($t as $element) {
-                    echo "<tr><td class='uczenDebil'>$userFirstName $userSecondName $userLastName</td>";
+                    echo "<tr><td class='uczenDebil'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
                     for ($i=0; $i < $max; $i++) {
                         if(count($element->gradeScales) > $i)echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text' value='" . $element->gradeScales[$i] . "'></td>";
                         else echo "<td class='ocenadupa'><input class='ocenaI' id='i".$ii."' type='text'></td>";
@@ -74,6 +79,7 @@ function getClassSubjectGrades($classId, $subjectId)
                     }
                     echo "</tr>";
                 }
+                
                 return;
             }
         }
@@ -774,7 +780,7 @@ function getAttendance($userID,$ret = false,$direction = 0)
     }
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['attendanceDate'] . ' days'));
-    $TEMP .= "<span id='AttendenceDate'>" . $date . "</span>";
+    $TEMP .= "<span id='AttendenceDate'><p>" . $date . "</p></span>";
     if ($ret){
         $stmt->close();
         return $TEMP;
