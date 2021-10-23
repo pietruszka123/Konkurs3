@@ -1,4 +1,5 @@
-$(".strzalkiZmienne").prepend($("#AttendenceDate").detach().attr("id","AttendenceDateS"));
+$(".A").prepend($("#AttendenceDate").detach().attr("id","AttendenceDateS"));
+$(".T").prepend($("#TDate").detach().attr("id","TDateS"));
 function changeTimeTable(i){
     $.ajax({
     type: "post",
@@ -7,6 +8,10 @@ function changeTimeTable(i){
     data: JSON.stringify({ direction:i }),
     success: function(response) {
         $(".TimeTableE").html(response.message);
+        $("#TDateS").remove();
+        var date = $("#TDate").detach();
+        date.attr("id","TDateS")
+        $(".T").prepend(date);
     },
     error: function(e,i){   
         $(".TimeTableE").html("UwU, somethin went wong.");
@@ -25,7 +30,7 @@ function changeAttendance(i){
         $("#AttendenceDateS").remove();
         var date = $("#AttendenceDate").detach();
         date.attr("id","AttendenceDateS")
-        $(".strzalkiZmienne").prepend(date);
+        $(".A").prepend(date);
     },
     error: function(e,i){   
         $(".attendanceTableE").html("UwU, somethin went wong.");

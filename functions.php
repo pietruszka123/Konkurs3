@@ -472,7 +472,7 @@ function getTimetable($ret = false, $direction = 0)
 
     $currentDate = date("Y/m/d");
     $date = date("Y-m-d", strtotime($currentDate . $_SESSION['timeTableDate'] . ' days'));
-    $TEMP .= $date;
+    $TEMP .= "<span id='TDate'><p>" . $date . "</p></span>";
     if ($ret){
         $stmt->close();
         return $TEMP;
@@ -529,11 +529,11 @@ function getLuckyNumber()
             $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
             $mysqli->query($sql);
 
-            echo "<div><h1 class='luckynumber'>".$luckyNumberFirst ."</h1><h1 class='luckynumber'>". $luckyNumberSecond."</h1></div>";
+            echo "<div><h1 class='luckynumber' style='color: white;'>".$luckyNumberFirst ."</h1><h1 class='luckynumber' style='color: white;'>". $luckyNumberSecond."</h1></div>";
         }
         else
         {
-            echo "<div><h1 class='luckynumber'>".$row['luckyNumberFirst']."</h1><h1 class='luckynumber'>" . $row['luckyNumberSecond']."</h1></div>";
+            echo "<div><h1 class='luckynumber' style='color: white;'>".$row['luckyNumberFirst']."</h1><h1 class='luckynumber' style='color: white;'>" . $row['luckyNumberSecond']."</h1></div>";
         }
     }
     else
