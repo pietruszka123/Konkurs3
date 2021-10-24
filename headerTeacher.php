@@ -30,11 +30,12 @@ include_once("functions.php");
         <nav class="HorizontalNavBar">
             <ol>
                 <li id="messages">wiadomosci</li>
-                <li id="grades">oceny</li>
-                <li id="comments">Uwagi</li>
-                <li id="exams">sprawdziany</li>
-                <li id="?">cos innego</li>
-                <li id="?">cos innego</li>
+                <li id="views/grades">oceny</li>
+                <li id="views/comments">Uwagi</li>
+                <li id="views/addFreeDay">Dni Wolne</li>
+                <li id="views/exams">sprawdziany</li>
+                <li id="views/attendance">obecnosc</li>
+                <li id="views/schoolInformation">obecnosc</li>
             </ol>
         </nav>
     </header>

@@ -1,6 +1,31 @@
 # Konkurs3
 
-- [Podział pracy](##Podział-pracy)<br>
+# jak Używać
+[link do strony strona](http://gamioff.pl/)
+
+## hasła do kont
+Uczeń 1<br>
+> email:<br>
+> hasło:<br>
+
+Nauczyciel 1
+>email:<br>
+> hasło:<br>
+
+Dyrektor 1<br>
+> email:<br>
+> hasło:<br>
+
+## rejestrowanie konta
+aby zarejestrować konto dyrektor szkoły musi najpierw dodać ucznia/nauczyciela do bazy danych
+
+# Autorzy<br>
+**Sebastian Firlit**<br>
+**Joanna Szura**<br>
+**Marcin Czechowicz**<br>
+**Piotr Niepsuj**<br>
+**Piotr Pamuła**<br>
+<!-- - [Podział pracy](##Podział-pracy)<br>
 - [pomysły](##pomysły)
 
 Jakieś informacje<br>
@@ -40,5 +65,5 @@ ciąg dalszy informacji
 > - informacje o szkole
 > - wiadomości
 > - szczęśliwy numerek
-> - ☑ Dane kontaktowe do nauczycieli (emaile i nr telefonów) i do sekretariatu
+> - ☑ Dane kontaktowe do nauczycieli (emaile i nr telefonów) i do sekretariatu -->
 
