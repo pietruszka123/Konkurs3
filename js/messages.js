@@ -1,4 +1,5 @@
 var Receivers = []
+
 function sendMessage(Content, title, Receiver) {
     $.ajax({
         type: "POST",
@@ -6,18 +7,19 @@ function sendMessage(Content, title, Receiver) {
         data: JSON.stringify({ Content: Content, title: title, Receivers: Receiver }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (response) {
+        success: function(response) {
             console.log(response)
             document.getElementById("titleInputBox").value = "Succes";
             document.getElementById("messageInputContent").value = "";
             Refresh();
         },
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             console.log(exception)
             console.log(jqXHR)
         }
     });
 }
+
 function Empty(v) {
     return (v.trim().length != 0) ? true : false;
 }
@@ -30,8 +32,9 @@ document.getElementsByClassName("sendMessageButton")[0].addEventListener("click"
         console.log(Receivers)
     } else message.value = "error";
 })
+
 function initButtons() {
-    $(".messagesButtons").children("button").each(function (index, element) {
+    $(".messagesButtons").children("button").each(function(index, element) {
         $(this).click((e) => {
             $(".messageContent").text("Ładowanie...");
             $.ajax({
@@ -40,21 +43,22 @@ function initButtons() {
                 data: JSON.stringify({ messageId: parseInt(this.id) }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     console.log(response)
                     $(".messageContent").html(response.message[0]);
-                    
+
                 }
             });
         })
     });
 }
+
 function Refresh() {
     $.ajax({
         type: "post",
         url: "api.php/getMessagesElements",
         contentType: "application/json; charset=utf-8",
-        success: function (response) {
+        success: function(response) {
             console.log(response)
             $(".messagesButtons").empty();
             for (let i = 0; i < response.message.length; i++) {
@@ -67,49 +71,55 @@ function Refresh() {
         }
     });
 }
-$("#refresh").click(function (e) {
+$("#refresh").click(function(e) {
     Refresh();
 });
 initButtons();
-$("#Switch").click((e)=>{
+$("#Switch").click((e) => {
     $(".sendMessageBox").toggle("fast");
 })
-$("#selectReciver").click(function(e){
-   
+$("#selectReciver").click(function(e) {
+    $("#popUp").toggle();
 })
-function initRec(){
+$(".popUp-close").click(function(e) {
+    $("#popUp").hide();
+})
+
+function initRec() {
     $("Selected").empty();
-    $(".notSelected").children("div").each(function(i,e){
+    $(".notSelected").children("div").each(function(i, e) {
         console.log(this)
         this.HiddenId = this.id;
-        $(this).click(function(e){
+        $(this).click(function(e) {
             var element = $(this).detach();
-            if(!$(this).hasClass("selected")){
+            if (!$(this).hasClass("selected")) {
                 $('.Selected').append(element);
-            }else{
+            } else {
                 $('.notSelected').append(element);
             }
-            element.toggleClass( "selected" );
+            element.toggleClass("selected");
         })
     })
 }
-$("#selectReceiverType").on("change",function(e){
+$("#selectReceiverType").on("change", function(e) {
     console.log(this.value)
 })
-function getSelected(){
+
+function getSelected() {
     var t = []
-    $(".Selected").children("div").each(function(i,e){
+    $(".Selected").children("div").each(function(i, e) {
         t.push(this.HiddenId)
     })
     console.log(t)
     return t;
 }
-$("#subbmit").click(function(e){
+$("#subbmit").click(function(e) {
     console.log($(".Selected").children("div").length)
-    if($(".Selected").children("div").length == 0){
+    if ($(".Selected").children("div").length == 0) {
         alert("wybierz przynajmniej jeden samochód")
-    }else{
+    } else {
         Receivers = getSelected();
+        $("#popUp").hide();
         console.log(Receivers)
     }
 })

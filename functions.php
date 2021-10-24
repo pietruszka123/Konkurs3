@@ -36,7 +36,7 @@ function getaId($arr,$s)
     return -1;
 }
 function parseGrade($grade){
-    $GradesCodes = array(7=>"+1",8=>"+2",9=>"+3",10=>"+4",11=>"+5",12=>"+6",13=>"+",14=>"-");
+    $GradesCodes = array("1.25"=>"+1","2.25"=>"+2","3.25"=>"+3","4.25"=>"+4","5.25"=>"+5","6.25"=>"+6", 0.75=>"-1",1.75=>"-2",2.75=>"-3",3.75=>"-4",4.75=>"-5",5.75=>"-6");
     if(array_key_exists($grade,$GradesCodes)){
         return $GradesCodes[$grade];
     }else
@@ -45,12 +45,18 @@ function parseGrade($grade){
 function UpdateGrades($data){
     global $mysqli;
     global $error;
-    $GradesCodes = array("+1"=>7,"+2"=>8,"+3"=>9,"+4"=>10,"+5"=>11,"+6"=>12,"+"=>13,"-"=>14);
+    $GradesCodes = array("+1"=>1.25,"+2"=>2.25,"+3"=>3.25,"+4"=>4.25,"+5"=>5.25,"+6"=>6.25,"-1"=>0.75,"-2"=>1.75,"-3"=>2.75,"-4"=>3.75,"-5"=>4.75,"-6"=>5.75);
     $queries = "";
-    if(array_key_exists("Labels",$data)){
-        echo "labels";
-        $sql = 'INSERT INTO gradecolumns(gradeWeight,gradeDescription,classId,columnPosition) VALUES(6,"a",1,3);';
+    if(array_key_exists("labels",$data)){
+        foreach ($data["labels"] as $key => $value) {
+            if($value["empty"]){
+                $queries .= 'INSERT INTO gradecolumns(gradeWeight,gradeDescription,classId,columnPosition, subjectId) VALUES('.$value["weight"].',"' .$value["desc"].'",'.$data["ClassId"] .','. $key .','.$data["SubjectId"].');';
+            }else{
+                
+            }
+        }  
     }
+    $queries = "";
     foreach ($data["Users"] as $key => $value) {
         foreach ($value["grades"] as $gKey => $gValue) {
             if(is_numeric($gValue["value"]) || array_key_exists($gValue["value"],$GradesCodes)){
@@ -60,12 +66,11 @@ function UpdateGrades($data){
                 if($gValue["empty"]){
                     $queries .= "INSERT INTO grades (studentId, gradeScale, gradeWeight,teacherId,gradeDescription,subjectId,classId,columnId) VALUES (".$value["id"].",".$gValue["value"].",".$gValue["GradesData"]["weight"].",".$_SESSION["id"].",'".$gValue["GradesData"]["desc"]."',".$data["SubjectId"].",".$data["ClassId"].",".$gKey+1 .");";
                 }else{
-                    
+                    $queries .= "UPDATE grades SET studentId = ".$value["id"].", gradeScale = ".$gValue["value"]. ", gradeWeight = ".$gValue["GradesData"]["weight"].", teacherId = ".$_SESSION["id"].", gradeDescription = '".$gValue["GradesData"]["desc"]."', subjectId = ".$data["SubjectId"]." , classId = ".$data["ClassId"].", columnId = ".$gValue["GradesData"]["id"] ." WHERE gradeId = ". $gValue["id"] .";";
                 }
             }
         }
     }
-    echo $queries;
     if($mysqli->multi_query($queries)){
         echo "{'status':true}";
     }else{
@@ -91,7 +96,7 @@ function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId,gradecolumns.columnId FROM subjects, grades, users,gradecolumns WHERE grades.subjectId = ? AND grades.classId = ? AND subjects.subjectId = grades.subjectId AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
 
     if ($stmt = $mysqli->prepare($sql))
     {
@@ -101,7 +106,7 @@ function getClassSubjectGrades($classId, $subjectId)
             $stmt->store_result();
             if ($stmt->num_rows != 0)
             {
-                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight,$gradeId);
+                $stmt->bind_result($userFirstName, $userSecondName, $userLastName, $userId, $gradeScale,$columnPosition,$gradeDescription,$gradeWeight,$gradeId,$columnId);
                 $t = array();
                 $max = 0;
                 $maxColl =0; 
@@ -116,15 +121,17 @@ function getClassSubjectGrades($classId, $subjectId)
                         if(count($t[$id]->gradeScales) > $max) $max = count($t[$id]->gradeScales);
                     }else{
                         array_push($ids,$userId);
-                    array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeIds'=>array(0=> $gradeId),'gradeScales'=> array(0=> $gradeScale)]);
+                        if(1 > $max) $max = 1;
+                        array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeIds'=>array(0=> $gradeId),'gradeScales'=> array(0=> $gradeScale)]);
                     }
                     if($columnPosition > $maxColl){
-                        echo "<td class='?'>$gradeDescription</td>";
+                        echo "<td data-id='$columnId' id='$columnPosition' class='GradeDesc'><input autocomplete='off' type='text' id='Desc' value='$gradeDescription'> <input autocomplete='off' type='text' id='Weight' value='$gradeWeight'></td>";
                         $maxColl = $columnPosition;
                     }
                 }
                 echo "<td><input id='addLabel' type='button' value='+'></td>";
                 $ii = 0;
+                echo "max ". $max;
                 foreach ($t as $key=>$element) {
                     echo "<tr data-id='".$ids[$key]."' id='t$key'><td class='User'>".$element->userFirstName. $element->userSecondName .$element->userLastName."</td>";
                     for ($i=0; $i < $max; $i++) {
@@ -134,12 +141,11 @@ function getClassSubjectGrades($classId, $subjectId)
                     }
                     echo "</tr>";
                 }
-                
                 return;
             }
         }
     }
-    return "UwU, somethin went wong.";
+    echo "UwU, somethin went wong.";
 }
 
 function getUserGrades()
@@ -249,7 +255,7 @@ function getUserMessages($ret = false)
                     $userSecondName = strip_tags((string)$userSecondName);
                     $userLastName = strip_tags((string)$userLastName);
                     $TEMP = "<button name=\"messageId\" id=\"$messageId\" type=\"submit\">
-                        <p>$messageTitle </p> <p>\"" . $messageDate . "\"</p> <p>$userFirstName $userSecondName $userLastName</p>
+                        <p class='titel'>$messageTitle </p><p class='juzer'>$userFirstName $userSecondName $userLastName</p> <p class='dacior'> $messageDate </p> 
                     </button>";
                     if ($ret) array_push($rarr, $TEMP);
                     else echo $TEMP;
@@ -1048,7 +1054,7 @@ function setExam()
     global $error;
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $sql = "INSERT INTO `exams` (`examId`, `examDate`, `subjectId`, `teacherId`, `examDescription`, `examType`, `classId`) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `exams` (`examDate`, `subjectId`, `teacherId`, `examDescription`, `examType`, `classId`) VALUES (?, ?, ?, ?, ?, ?)";
 
         if ($stmt = $mysqli->prepare($sql)) {
             $stmt->bind_param("ssssss", $_POST['examDate'], $_POST['examSubject'], $param_id, $_POST['examDescription'], $_POST['examType'], $_POST['examClass']);
@@ -1065,24 +1071,57 @@ function setExam()
         }
     }
 }
+function setHomework(){
+    global $mysqli;
+global $error;
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $sql = "INSERT INTO `homework` (`deadline`, `subjectId`, `teacherId`, `creationDate`, `homeworkDescription`, `obligatory` ,`classId` ) VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?)";
+
+
+    if ($stmt = $mysqli->prepare($sql))
+    {
+        $stmt->bind_param("ssssss", $_POST['homeworkDeadline'], $_POST['homeworkSubject'], $param_id, $_POST['homeworkDescription'], $_POST['obligatory'], $_POST['homeworkClass']);
+        $param_id = $_SESSION['id'];
+
+        if ($stmt->execute())
+        {
+            echo 'Dodano!';
+        }
+        else
+        {
+            $error = $error . "Nie powiodło się.";
+        }
+    }
+    else
+    {
+        $error = $error . "UwU, somethin went wong.";
+        echo $error;
+    }
+}
+}
 function getTeachersSubjects()
 {
     global $mysqli;
 
-    $sql = "SELECT * FROM `subjects`";
-    $result = $mysqli->query($sql);
+            $sql = "SELECT * FROM `subjects`";
+            $result = $mysqli->query($sql);
 
-    echo 'test';
 
-    while ($row = $result->fetch_assoc()) {
-        $obj = json_decode($row['teacherId']);
-        if (in_array("4", $obj->{'id'})) {
-            echo '<option value="' . $row['subjectId'] . '">' . $row['subjectName'] . '</option>';
-        } else {
-            echo 'Nie!';
-        }
-    }
+            while ($row = $result->fetch_assoc())
+            {
+                $obj = json_decode($row['teacherId']);
+                echo json_encode($obj) . " ";
+                if (isset($obj->id) && in_array($_SESSION["id"], $obj->id))
+                {
+                    echo '<option value="' . $row['subjectId'] . '">' . $row['subjectName'] . '</option>';
+                } else {
+                    echo 'Nie!';
+                }
+            }
+
+    
 }
 
 function getTeachersClasses()

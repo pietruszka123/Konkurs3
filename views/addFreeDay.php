@@ -1,13 +1,13 @@
 <?php
-include_once("header.php");
-include_once("views/t_header.php");
+include_once("../header.php");
+include_once("t_header.php");
 ?>
 
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     <input type="date" id="freeDayDate" name="freeDayDate">
-    <input type="text" id="freeDayReason" name="freeDayReason">
-    <input type="text" id="freeDayDescription" name="freeDayDescription">
+    <input type="text" id="freeDayReason" name="freeDayReason" placeholder="Powód">
+    <input type="text" id="freeDayDescription" name="freeDayDescription" placeholder="Opis/Wiecej detali">
     <input type="submit" class="addFreeDayButton" value="Dodaj">
 
 </form>
@@ -32,5 +32,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-include_once("footer.php");
+include_once("../footer.php");
 ?>

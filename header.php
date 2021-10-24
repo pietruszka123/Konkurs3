@@ -20,7 +20,7 @@ include_once("functions.php");
 
 <body>
 
-    <header><img class="plaster" src="img/plaster.svg" alt="">
+    <header><img class="plaster" src="img/ggg.svg" alt="">
         <h1>Hive Grades</h1>
         <a href="login.php" style="position:fixed; top:0.9283819628647215vh; right:1.3020833333333333vw;">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="logout" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

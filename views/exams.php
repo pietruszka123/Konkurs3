@@ -2,28 +2,54 @@
 include_once("t_header.php");
 ?>
 
-Wpisz sprawdzian
-<?php
-setExam();
-?>
-<form method="POST">
-    <input type="date" name="examDate" value="<?php echo date('Y-m-d'); ?>">
-    <select name="examSubject">
-        <option value="">Wybierz przedmiot</option>
+
+<form method="post">
+    <select name="coDodac" onchange="this.form.submit()">
+    <option value="">Wybierz co chcesz dodac</option>
+
+
+    <?php
+        $_SESSION["coDodac"] = $_POST["coDodac"];
+
+        ?>
         <?php
-        getTeachersSubjects();
+            if (isset($_SESSION["coDodac"]) && $_SESSION["coDodac"] == "test")
+            {
+                echo '<option selected value="test">Test</option>
+                <option value="zadanieDomowe">Zadanie domowe</option>';
+
+                
+            }
+            elseif (isset($_SESSION["coDodac"]) && $_SESSION["coDodac"] == "zadanieDomowe")
+            {
+                echo '<option value="test">Test</option>
+                <option selected value="zadanieDomowe">Zadanie domowe</option>';
+            }
+            else
+            {
+                echo '<option value="test">Test</option>
+                <option value="zadanieDomowe">Zadanie domowe</option>';
+            }
+        
+
         ?>
     </select>
-    <input type="text" name="examDescription" placeholder="Opis">
-    <input type="text" name="examType" placeholder="Typ egzaminu">
-    <select name="examClass">
-        <option value="">Wybierz klasę</option>
-        <?php
-        getTeachersClasses();
-        ?>
-    </select>
-    <input type="submit" name="examSubmit" value="Utwórz">
 </form>
+<?php 
+if (isset($_SESSION["coDodac"]) && $_SESSION["coDodac"] == "test")
+{
+    echo '<iframe src="exam.php" frameborder="0" class="inframe element"></iframe>';
+
+    
+}
+elseif (isset($_SESSION["coDodac"]) && $_SESSION["coDodac"] == "zadanieDomowe")
+{
+    echo '<iframe src="home.php" frameborder="0" class="inframe element"></iframe>';
+}
+?>
+
+
+
 
 <?php
 include_once("../footer.php");
