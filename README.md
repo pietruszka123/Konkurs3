@@ -5,16 +5,18 @@
 
 ## hasła do kont
 Uczeń 1<br>
-> email:<br>
-> hasło:<br>
-
+> email: uczen1@gmail.com<br>
+> hasło: haslo123<br>
+Uczeń 2<br>
+> email: uczen1@gmail.com<br>
+> hasło: **ustawić przy rejestracji**<br>
 Nauczyciel 1
->email:<br>
-> hasło:<br>
+>email: agnieszka@gmail.com<br>
+> hasło: **ustawić przy rejestracji**<br>
 
 Dyrektor 1<br>
-> email:<br>
-> hasło:<br>
+> email: dyrektor@gmail.com<br>
+> hasło: haslo123<br>
 
 ## rejestrowanie konta
 aby zarejestrować konto dyrektor szkoły musi najpierw dodać ucznia/nauczyciela do bazy danych (aktualnie możliwe tylko bezpośrednio w bazie danych, później zostanie dodane do interfejsu)

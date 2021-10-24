@@ -166,7 +166,8 @@ include_once("t_header.php");
             getStudents($_SESSION["wybranaKlasa"]);
             ?>
         </select>
-        <input type="text" name="opisOceny" placeholder="opis">
+        <input style="width: 100px;" type="text" name="opisOceny" placeholder="opis">
+        <label for="wagaOceny">Waga oceny: </label>
         <input type="number" name="wagaOceny">
         <select id="ocena" name="ocena">
             <option value="1"> 1</option>
@@ -205,7 +206,7 @@ include_once("t_header.php");
                 ( `studentId`, `gradeScale`, `gradeWeight`, `teacherId`, `gradeDescription`, `subjectId`, `gradeDate`, `classId`, `columnId`) 
     VALUES ( " . $_POST['gradeUser'] . ", " . $_POST['ocena'] . ", " . $_POST['wagaOceny'] . ",". $_SESSION['id'] .", '" . strval($_POST['opisOceny']) . "', " . $_SESSION['wybranyPrzedmiot'] . 
     ", CURRENT_TIMESTAMP, " . $_SESSION['wybranaKlasa'] . ", 1)";
-    
+
 
     if ($stmt = $mysqli->query($sql))
     {
