@@ -17,7 +17,7 @@ Dyrektor 1<br>
 > hasło:<br>
 
 ## rejestrowanie konta
-aby zarejestrować konto dyrektor szkoły musi najpierw dodać ucznia/nauczyciela do bazy danych
+aby zarejestrować konto dyrektor szkoły musi najpierw dodać ucznia/nauczyciela do bazy danych (aktualnie możliwe tylko bezpośrednio w bazie danych, później zostanie dodane do interfejsu)
 
 # Autorzy<br>
 **Sebastian Firlit**<br>
