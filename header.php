@@ -19,7 +19,7 @@ include_once("functions.php");
 </head>
 
 <body>
-
+<div class="tlo"></div>
     <header><img class="plaster" src="img/ggg.svg" alt="">
         <h1>Hive Grades</h1>
         <a href="login.php" style="position:fixed; top:0.9283819628647215vh; right:1.3020833333333333vw;">

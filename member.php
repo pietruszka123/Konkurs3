@@ -7,19 +7,28 @@ include_once("header.php");
 }*/
 ?>
 
-<!-- marcin zostaw | nie -->
-<!-- o co chodzi? -->
-
-
-<gridzio>
-    <div class="grades element">
+<ul class="container">
+    <li class="grades element">
         <div class="subjectGradesTable">
             <?php
             getUserGrades();
             ?>
         </div>
-    </div>
-    <div class="timeTable element">
+    </li>
+    <li class="attendanceTable element">
+        <h1>Obecności</h1>
+        <div class="attendanceTableE">
+            <?php
+            getAttendance($_SESSION["id"]);
+            ?>
+        </div>
+        <div class='strzalkiZmienne A'>
+            <input type='submit' id='back' value='<'>
+            <input type='submit' id='res' value='Today'>
+            <input type='submit' id='for' value='>'>
+        </div>
+    </li>
+    <li class="timeTable element">
         <h1>Plan Lekcji</h1>
         <div class="TimeTableE">
 
@@ -32,8 +41,38 @@ include_once("header.php");
             <input type="submit" id="reset" value="Today">
             <input type="submit" id="forward" value=">">
         </div>
-    </div>
-    <div class="dwa">
+    </li>
+
+
+
+    <li class="freeDaysTable element">
+        <h1>Dni Wolne</h1>
+        <?php
+        closestFreeDays()
+        ?>
+    </li>
+    <li class="closestExams element">
+        <h1>Sprawdziany</h1>
+        <?php
+        closestExams()
+        ?>
+    </li>
+    <li class="closestHomework element">
+        <h1>Zadania Domowe</h1>
+        <?php
+        closestHomework()
+        ?>
+    </li>
+
+
+
+    <li class="studentComments element">
+        <?php
+        getUserComments($_SESSION["id"]);
+        ?>
+    </li>
+
+    <li>
         <div class="daysUntilEndOfYear element">
             <?php
             getDaysUntilEndOfYear()
@@ -44,47 +83,9 @@ include_once("header.php");
             getLuckyNumber();
             ?>
         </div>
+    </li>
     </div>
-    <div class="freeDaysTable element">
-        <h1>Najbliższe Dni Wolne</h1>
-        <?php
-        closestFreeDays()
-        ?>
-    </div>
-    <div class="closestExams element">
-        <h1>Najbliższe sprawdziany</h1>
-        <?php
-        closestExams()
-        ?>
-    </div>
-    <div class="closestHomework element">
-        <h1>Zadania Domowe</h1>
-        <?php
-        closestHomework()
-        ?>
-    </div>
-
-    <div class="attendanceTable element">
-        <h1>Obecności</h1>
-        <div class="attendanceTableE">
-            <?php
-            getAttendance($_SESSION["id"]);
-            ?>
-        </div>
-        <div class='strzalkiZmienne A'>
-            <input type='submit' id='back' value='<'>
-            <input type='submit' id='res' value='Today'>
-            <input type='submit' id='for' value='>'>
-        </div>
-    </div>
-
-    <div class="studentComments element">
-        <?php
-        getUserComments($_SESSION["id"]);
-        ?>
-    </div>
-</gridzio>
-
+</ul>
 <script src="js/member.js"></script>
 
 

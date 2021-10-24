@@ -47,14 +47,13 @@ function UpdateGrades($data){
     global $error;
     $GradesCodes = array("+1"=>1.25,"+2"=>2.25,"+3"=>3.25,"+4"=>4.25,"+5"=>5.25,"+6"=>6.25,"-1"=>0.75,"-2"=>1.75,"-3"=>2.75,"-4"=>3.75,"-5"=>4.75,"-6"=>5.75);
     $queries = "";
+    $i = 0;
+
     if(array_key_exists("labels",$data)){
         foreach ($data["labels"] as $key => $value) {
-            if($value["empty"]){
-                $queries .= 'INSERT INTO gradecolumns(gradeWeight,gradeDescription,classId,columnPosition, subjectId) VALUES('.$value["weight"].',"' .$value["desc"].'",'.$data["ClassId"] .','. $key .','.$data["SubjectId"].');';
-            }else{
-                
+                $queries .= "UPDATE gradecolumns SET gradeDescription = '".$value["desc"]."', gradeWeight = ".$value["weight"]." WHERE columnId = ".$value["id"].";";
+                //SELECT columnId from (SELECT columnId FROM gradecolumns ORDER BY columnId DESC )as source order by columnId asc LIMIT ?; pytajnik to ilosc zapytan
             }
-        }  
     }
     $queries = "";
     foreach ($data["Users"] as $key => $value) {
@@ -78,26 +77,51 @@ function UpdateGrades($data){
         echo "{'status':false,'message':$mysqli->error}";
     }
 }
-function addLabel()
+function addLabel($classId,$pos,$SubjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "";
-
+    $sql = "INSERT INTO gradecolumns(gradeWeight,gradeDescription,classId,columnPosition, subjectId) VALUES(0,'',?,?,?);";
     if ($stmt = $mysqli->prepare($sql))
     {
-        $stmt->bind_param("ss", $subjectId, $classId);
+        $stmt->bind_param("sss", $classId,$pos,$SubjectId);
         if ($stmt->execute()){
-
+            if ($stmt->num_rows != 0)
+            {
+                $stmt->store_result();
+                $stmt->bind_result($id);
+                while ($stmt->fetch()){
+                    echo "i";
+                    echo $id;
+                }
+            }else {
+                $sql = "SELECT columnId FROM gradecolumns WHERE classId = $classId And columnPosition = $pos AND subjectId = $SubjectId";
+                if($stmt = $mysqli->prepare($sql)){
+                    if ($stmt->execute()){
+                        $stmt->store_result();
+                        $stmt->bind_result($id);
+                        while ($stmt->fetch()){
+                            echo '{"status":true,"message":'.$id.'}';
+                            break;
+                        }
+                    }
+                }
+            }
+        }else {
+            echo $mysqli->error;
         }
+    }else{
+        echo $mysqli->error;
     }
 }
 function getClassSubjectGrades($classId, $subjectId)
 {
     global $mysqli;
     global $error;
-    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId,gradecolumns.columnId FROM subjects, grades, users,gradecolumns WHERE grades.subjectId = ? AND grades.classId = ? AND subjects.subjectId = grades.subjectId AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
-
+    //$sql2 = "SELECT grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId,gradecolumns.columnId FROM gradecolumns,grades WHERE gradecolumns.classId = ? AND gradecolumns.subjectId = ?;    ";
+    //$sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId FROM subjects, grades, users,gradecolumns WHERE grades.subjectId = ? AND grades.classId = ? AND subjects.subjectId = grades.subjectId AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
+    //$result = array();
+    $sql = "SELECT users.userFirstName,users.userSecondName,users.userLastName,users.userId, grades.gradeScale,gradecolumns.columnPosition,gradecolumns.gradeDescription,gradecolumns.gradeWeight,grades.gradeId, gradecolumns.columnId FROM subjects, grades, users,gradecolumns WHERE subjects.subjectId = ? AND grades.classId = ? AND grades.columnId = gradecolumns.columnId AND grades.studentId = users.userId ORDER BY users.userId;";
     if ($stmt = $mysqli->prepare($sql))
     {
         $stmt->bind_param("ss", $subjectId, $classId);
@@ -124,6 +148,7 @@ function getClassSubjectGrades($classId, $subjectId)
                         if(1 > $max) $max = 1;
                         array_push($t,(object) ['userFirstName' => $userFirstName,'userSecondName' => $userSecondName,'userLastName'=> $userLastName,'userId' => $userId,'gradeIds'=>array(0=> $gradeId),'gradeScales'=> array(0=> $gradeScale)]);
                     }
+                    echo "pos:$columnPosition:"; 
                     if($columnPosition > $maxColl){
                         echo "<td data-id='$columnId' id='$columnPosition' class='GradeDesc'><input autocomplete='off' type='text' id='Desc' value='$gradeDescription'> <input autocomplete='off' type='text' id='Weight' value='$gradeWeight'></td>";
                         $maxColl = $columnPosition;
@@ -145,7 +170,7 @@ function getClassSubjectGrades($classId, $subjectId)
             }
         }
     }
-    echo "UwU, somethin went wong.";
+    //echo "UwU, somethin went wong.";
 }
 
 function getUserGrades()
@@ -201,7 +226,7 @@ function getUserGrades()
                                     echo "<span class=\"gradeGreaterInfo\">";
                                     echo "Nauczyciel: " . $userFirstName . "\n" . $userSecondName . "\n" . $userLastName . "<br>";
                                     echo "Data: " . $gradeDate . "<br>";
-                                    echo "<p>Opis: " . $gradeDescription . "</p>";
+                                    echo "Opis: " . $gradeDescription . "<br>";
                                     echo "Waga: " . $gradeWeight;
                                     echo "</span>";
                                     echo "</div>";
@@ -526,7 +551,7 @@ function getTimetable($ret = false, $direction = 0)
             }
             else
             {
-                $TEMP = 'Nie ma informacji';
+                $TEMP = '<p>Nie ma informacji</p>';
             }
         }
     }
@@ -590,7 +615,7 @@ function getLuckyNumber()
             $sql = "INSERT INTO luckynumbers (databaseDate, luckyNumberFirst, luckyNumberSecond) VALUES (CURRENT_DATE, $luckyNumberFirst, $luckyNumberSecond)";
             $mysqli->query($sql);
 
-            echo "<div><h1 class='luckynumber' style='color: white;'>".$luckyNumberFirst ."</h1><h1 class='luckynumber' style='color: white;'>". $luckyNumberSecond."</h1></div>";
+            echo "<div><div class='luckynumber' style='color: white;'>".$luckyNumberFirst ."</div><div class='luckynumber' style='color: white;'>". $luckyNumberSecond."</div></div>";
         }
         else
         {
@@ -778,45 +803,44 @@ function getAttendance($userID,$ret = false,$direction = 0)
                 $stmt->bind_result($subjectName, $teacherFirstName, $teacherSecondName, $teacherLastName, $subjectNumber, $attendanceState, $attendanceDescription, $attendanceDateDate, $attendanceExcuse);
                 
                 while ($stmt->fetch()) {
-
-                    if ($attendanceState = "Obecnosc") //$attendanceExcuse
+                
+                    if ($attendanceState == "Obecnosc") //$attendanceExcuse
                     {
                         $TEMP .= '<div class="singleAttendance present">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="attendanceType svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="lime" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
                                     <h3 class="subjectName2">' . $subjectName . '<p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p> </h3>
-                                    <h3 class="subjectNumber2">' . $subjectNumber .". 8:00 - 8-45 dodaj ktos". '</h3>
+                                    <h3 class="subjectNumber2"> Lekcja numer: ' . $subjectNumber . '</h3>
                                     </div>';
-                    } elseif ($attendanceState = "Spoznienie" && isset($attendanceExcuse)) {
+                    } elseif ($attendanceState == "Spoznienie" && isset($attendanceExcuse)) {
 
                         $TEMP .= '<div class="singleAttendance excusedLateness">
                         <h1 class="subjectNumber">' . $subjectNumber . '</h1>
                         <h3 class="subjectName">' . $subjectName . '</h3>
                         <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
-                        <h2 class="attendanceType>Spóźnienie Usprawiedliwione</h2>
+                        <h2 class="attendanceType">Spóźnienie Usprawiedliwione</h2>
                     </div>';
-                    } elseif ($attendanceState = "Spoznienie" && !isset($attendanceExcuse)) {
+                    } elseif ($attendanceState == "Spoznienie" && !isset($attendanceExcuse)) {
                         $TEMP .= '<div class="singleAttendance unexcusedLateness">
                         <h1 class="subjectNumber">' . $subjectNumber . '</h1>
                         <h3 class="subjectName">' . $subjectName . '</h3>
                         <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
-                        <h2 class="attendanceType>Spóźnienie Niesuprawiedliwione</h2>
+                        <h2 class="attendanceType">Spóźnienie Niesuprawiedliwione</h2>
                     </div>';
-                    } elseif ($attendanceState = "Nieobecnosc" && isset($attendanceExcuse)) {
+                    } elseif ($attendanceState == "Nieobecnosc" && isset($attendanceExcuse)) {
 
 
                         $TEMP .= '<div class="singleAttendance excusedAbsence">
                         <h1 class="subjectNumber">' . $subjectNumber . '</h1>
                         <h3 class="subjectName">' . $subjectName . '</h3>
                         <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
-                        <h2 class="attendanceType>Nieobecność Usprawiedliwiona</h2>
+                        <h2 class="attendanceType">Nieobecność Usprawiedliwiona</h2>
                     </div>';
-                    } elseif ($attendanceState = "Nieobecnosc" && !isset($attendanceExcuse)) {
+                    } elseif ($attendanceState == "Nieobecnosc" && !isset($attendanceExcuse)) {
                         $TEMP .= '<div class="singleAttendance unexcusedAbsence">
                         <h1 class="subjectNumber">' . $subjectNumber . '</h1>
                         <h3 class="subjectName">' . $subjectName . '</h3>
                         <p class="ticzer">' . $teacherFirstName . " " . $teacherSecondName . " " . $teacherLastName . '</p>
-                        <h2 class="attendanceType>Nieobecność Niesuprawiedliwiona</h2>
-                    </div>';
+                        <h2 class="attendanceType">Nieobecność Niesuprawiedliwiona</h2></div>';
                     } else {
                         $TEMP .= "<div class='singleAttendance'>
                             <h1>" . $subjectNumber . "</h1>
@@ -971,7 +995,7 @@ function closestHomework()
                     <div class="singleHomework">
                         <h2 class="subjectName">' . $subjectName . '</h2>
                         <p class="homeworkDescription">' . $homeworkDescription . '</p>
-                        <p class="creationDate"> Dodano: ' . $creationDate . '</p>
+                        <p class="creationDate">' . $creationDate . '</p>
                         <p class="deadline"> Do: ' . $deadline . '</p>
                         <p class="obligatory"> Obowiązkowe? 🡆 ' . $obligatory . '</p>
                     </div>

@@ -1,12 +1,18 @@
 <?php
 include_once("header.php");
 ?>
+<style> 
+body{
+display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    </style>
 <link href="http://fonts.cdnfonts.com/css/honey-script" rel="stylesheet">
 <img class="gwiazdka" src="img/gwiazdka.svg" alt="" style="top: 5vw; left:20vw;transform:rotate(120deg);">
 <img class="bombel" src="img/bombel.png" alt="" style="right: 18vw; bottom: 8.5vw;transform:rotate(60deg)">
 <img class="heksagon" src="img/heksagon.svg" alt="" style="left: 4vw;bottom: -4vw;transform:rotate(120deg);">
 <div class="logowanie">
-    <div class="loginPanel">
+    <div class="loginPanel element">
         <h1 class="h1Default">Rejestracja</h1>
         <h2>Proszę podać e-mail, hasło i potwierdź hasło</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

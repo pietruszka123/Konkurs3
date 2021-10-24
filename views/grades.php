@@ -14,7 +14,6 @@ include_once("t_header.php");
 </head>
 
 <body>
-
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <select id="wyborKlasy" name="wyborKlasy" onchange="this.form.submit()">
             <?php

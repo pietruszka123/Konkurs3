@@ -160,18 +160,9 @@ getGrades().then((arr) => {
         e.preventDefault();
     });
 });
-$("#addLabel").click(function(e) {
+
+function Why(id) {
     var index = 0;
-    max++;
-    $.ajax({
-        type: "Post",
-        url: "/Konkurs3/api.php/AddLabel", //nie zmienie tego
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(response) {
-            response
-        }
-    });
     $("tbody").children("tr").each(function(i, e) {
         var l = $("tbody").children("tr").length
         if (i == 0) {
@@ -179,7 +170,7 @@ $("#addLabel").click(function(e) {
             $(this).children("td").each(function(ii, ee) {
                 if (ii == ll - 1) {
                     console.log("?")
-                    var t = $(`<td class="GradeDesc"><input autocomplete="off" type="text" id="Desc"> <input autocomplete="off" type="text" id="Weight"></td>`)
+                    var t = $(`<td class="GradeDesc" id='${ii}'><input autocomplete="off" type="text" id="Desc"> <input autocomplete="off" type="text" id="Weight"></td>`)
                     $(t).insertBefore($(this))
                     console.log(t.find("Desc"))
                     console.log(t.find("Weight"))
@@ -195,13 +186,31 @@ $("#addLabel").click(function(e) {
                 $(this).find("input").off("input")
                 index++;
             }).promise().done(function() {
-                $(e).append(`<td class="Grade"><input id='i${index}' autocomplete="off" class="ocenaI" type="text"></td>`)
+                $(e).append(`<td class="Grade"'><input id='i${index}' autocomplete="off" class="ocenaI" type="text"></td>`)
                 Grades.Users[i - 1].grades.push({ "GradesData": { "weight": 0, "desc": "" }, "edited": false, "value": "", "empty": true, "id": ($(this).find('input').attr("data-id")) ? 1 : 2 })
                 ECOPY.Users[i - 1].grades.push({ "GradesData": { "weight": 0, "desc": "" }, "edited": false, "value": "", "empty": true, "id": ($(this).find('input').attr("data-id")) ? 1 : 2 })
                 index++;
             })
     })
     initInputs(ECOPY)
-    Grades.labels.push({ "id": max, "desc": "", "weight": 0, "edited": false, "empty": true });
+    Grades.labels.push({ "id": id, "desc": "", "weight": 0, "edited": false, "empty": true });
     initLabels();
+    console.log(Grades)
+}
+$("#addLabel").click(function(e) {
+    max++;
+    $.ajax({
+        type: "Post",
+        url: "/Konkurs3/api.php/AddLabel", //nie zmienie tego
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ "classId": Grades.ClassId, "pos": max, "subjectId": Grades.SubjectId }),
+        success: function(response) {
+            console.log(response)
+            Why(response.message)
+        },
+        error(r, i) {
+            console.log(i)
+        }
+    });
 })

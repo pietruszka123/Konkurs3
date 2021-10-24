@@ -53,7 +53,7 @@
             break;
         case 'AddLabel':
             header("HTTP/1.1 200 OK");
-            addLabel();
+            addLabel($data["classId"],$data["pos"],$data["subjectId"]);
             break;
         case 'getTimeTable':
             header("HTTP/1.1 200 OK");

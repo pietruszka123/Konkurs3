@@ -1,13 +1,17 @@
 <?php
 include_once("header.php");
 ?>
+<style> 
+body{
+display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    </style>
 <img class="bombel" src="img/bombel.png" alt="" Style="left: 15vw; bottom: 4.5vw;">
 <img class="heksagon" src="img/heksagon.svg" alt="" style="bottom: 3.2vw; right: -7.48vw;transform:rotate(120deg);">
 <img class="gwiazdka" src="img/gwiazdka.svg" alt="" style="top: 5vw; right:20vw;transform:rotate(45deg);">
-<div class="logowanie">
-    <div class="loginPanel">
+    <div class="loginPanel element">
         <h1 class="h1Default">Logowanie</h1>
-        <h2>Proszę podać e-mail i hasło</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="email">E-mail:</label>
             <input class="input" type="email" name="email" required><br>
@@ -20,7 +24,7 @@ include_once("header.php");
         </form>
 
     </div>
-</div>
+
 
 
 
