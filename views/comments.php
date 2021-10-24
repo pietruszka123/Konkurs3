@@ -19,7 +19,7 @@ setComment();
         <option value="5">5</option>
         <option value="6">6</option>
     </select>
-    <input type="text" name="commentContent">
+    <input placeholder="Opis" type="text" name="commentContent">
     <select name="studentId">
         <?php
         getTeachersStudents();

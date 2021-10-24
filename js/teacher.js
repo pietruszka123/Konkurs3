@@ -1,5 +1,6 @@
 $(".HorizontalNavBar > ol").children("li").each(function(i, e) {
     $(this).click(function(e) {
+        if (this.id == "messages") return;
         $("iframe")[0].src = `${this.id}.php/headless`
     })
 })

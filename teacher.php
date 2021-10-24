@@ -8,11 +8,11 @@ include_once("views/t_header.php");
             height: 97vh;
         }
     </style>
-<div class="tlo">
+<div class="tlo"></div>
     <iframe src="views/grades.php" frameborder="0" class="inframe element"></iframe>
     <script src="js/teacher.js"></script>
     
-</div>
+
 <?php
 include_once("footer.php");
 ?>

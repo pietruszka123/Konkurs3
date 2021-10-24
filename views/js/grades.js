@@ -91,7 +91,7 @@ function SendUpdateGrades() {
 
     $.ajax({
         type: "Post",
-        url: "/Konkurs3/api.php/UpdateGrades", //nie zmienie tego
+        url: "/api.php/UpdateGrades", //nie zmienie tego
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(COPY),
@@ -201,7 +201,7 @@ $("#addLabel").click(function(e) {
     max++;
     $.ajax({
         type: "Post",
-        url: "/Konkurs3/api.php/AddLabel", //nie zmienie tego
+        url: "/api.php/AddLabel", //nie zmienie tego
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({ "classId": Grades.ClassId, "pos": max, "subjectId": Grades.SubjectId }),

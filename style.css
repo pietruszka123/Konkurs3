@@ -80,6 +80,7 @@ body::-webkit-scrollbar-thumb {
     top: 0px;
     left: 0px;
     position: fixed;
+    z-index: -100;
 }
 
 header {
@@ -827,6 +828,7 @@ div input[type='text'] {
     padding: 1vw;
     height: 79vh;
     border-radius: 1vw;
+    margin-top: 100px;
 }
 
 .messagesButtons {
@@ -961,7 +963,6 @@ textarea::placeholder {
     margin-left: 2vw;
     background-color: rgb(136, 105, 210);
     grid-area: 1/3 / span 3 / span 3;
-    border: 1px white solid;
     border-radius: 1.3vw;
     padding: 1vw;
     margin-top: 10px;
@@ -1150,7 +1151,7 @@ nav {
     list-style-type: none;
     display: grid;
     grid-template-rows: 2fr;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
     gap: 5px;
 }
 
@@ -1172,14 +1173,14 @@ nav {
 
 .inframe {
     border: white 0.06vw solid;
-    width: 98vw;
+    width: 97vw;
+    height: 85vh;
     position: absolute;
-    top: 75px;
+    top: 80px;
     border-radius: 1.3vw;
     margin: 1vw;
     background-color: rgb(136, 105, 210);
     filter: drop-shadow(0px 0px 0.390625vw rgb(109, 109, 109));
-    height: 85%;
 }
 
 .element h1 {

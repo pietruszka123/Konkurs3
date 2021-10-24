@@ -346,7 +346,7 @@ function getUserMessages($ret = false)
 function getMessageElement($messageContent, $messageDate, $messageTitle, $userFirstName, $userSecondName, $userLastName)
 {
     return "<div class=\"tempMessageBox\">
-    <h1>Temat: $messageTitle</h1> <h2>Data: $messageDate</h2> <h3>Nadawca: $userFirstName $userSecondName $userLastName</h3><hr> <h3 class='messageContent'>$messageContent</h3>
+    <h1 style='overflow:hidden;'>Temat: $messageTitle</h1> <h2>Data: $messageDate</h2> <h3>Nadawca: $userFirstName $userSecondName $userLastName</h3><hr> <h3 style='word-break: break-word;'>$messageContent</h3>
 </div>";
 }
 function viewMessage(int $messageId, $ret = false)
