@@ -850,6 +850,7 @@ div input[type='text'] {
     border: 1px white solid;
     margin-bottom: 0.5vw;
     border-radius: 1vw;
+    cursor: pointer;
 }
 
 .titel {
