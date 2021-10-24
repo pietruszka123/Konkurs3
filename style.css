@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 html {
@@ -31,7 +31,7 @@ body {
   background-position: center center;
   justify-content: space-evenly;
   overflow-x: hidden;
-  padding-top: 11vh;
+  padding-top: 12vh;
   display: flex;
   flex-wrap: wrap;
 }
@@ -40,6 +40,11 @@ gridzio{
   grid-template-columns: 1fr 1fr 1fr;
   margin: 1vw;
   
+}
+.bg{
+  display: grid;
+  margin: 1vw;
+  height: 83vh;
 }
 :root {
   --darkerDiscordColor: rgb(41, 41, 41);
@@ -333,11 +338,12 @@ div input[type="text"] {
   align-items: center;
   display: flex;
 }
+
 .daysUntilEndOfYear {
   height: 13.89920424403183vh;
   width: 19vw;
-  margin-left: 6vw;
   padding: 1.5vw;
+  align-self: center;
 }
 .daysUntilEndOfYear div {
   display: flex;
@@ -362,6 +368,7 @@ div input[type="text"] {
   z-index: 1000;
   overflow-y: scroll;
   overflow-x: hidden;
+  justify-self: flex-end;
 }
 .luckyNumbers > div {
   display: flex;
@@ -466,7 +473,7 @@ h5 {
 .freeDaysTable {
   font-size: 1vw;
   width: 24vw;
-  height: 26vh;
+  height: 24vw;
   min-width: 15%;
   padding: 1.5vw;
   font-family: "Poppins", sans-serif;
