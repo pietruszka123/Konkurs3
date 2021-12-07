@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Paź 2021, 19:37
--- Wersja serwera: 10.4.14-MariaDB
--- Wersja PHP: 7.4.10
+-- Czas generowania: 07 Gru 2021, 22:19
+-- Wersja serwera: 10.4.21-MariaDB
+-- Wersja PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,8 +44,8 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`attendanceId`, `studentId`, `teacherId`, `subjectId`, `subjectNumber`, `attendanceState`, `attendanceDescription`, `attendanceDate`, `attendanceExcuse`) VALUES
-(1, 3, 1, 1, 1, 'Obecnosc', NULL, '2021-07-19 08:49:53', NULL),
-(2, 3, 1, 5, 3, 'Obecnosc', NULL, '2021-10-16 02:09:04', NULL);
+(1, 3, 1, 1, 1, 'Obecnosc', NULL, '2021-12-07 08:49:53', NULL),
+(2, 3, 1, 5, 3, 'Obecnosc', NULL, '2021-12-06 02:09:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`classId`, `classStartYear`, `classGrade`, `classLetter`, `classProfile`, `classType`, `mentorId`) VALUES
-(1, 2018, 2, 'a', 'Szambooczyszczacz', 'Technikum', 1);
+(1, 2020, 2, 'a', 'Programista', 'Technikum', 1);
 
 -- --------------------------------------------------------
 
@@ -91,10 +91,10 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentId`, `commentType`, `commentWeight`, `commentContent`, `commentDate`, `teacherId`, `studentId`) VALUES
-(1, 'Uwaga Pozytywna', 6, 'Tworzył metamfetaminę na teoretycznych zajęciach z Teoretycznej Metaamfetaminie Kwantowej.', '2021-07-19 08:40:00', 1, 3),
-(2, 'Uwaga Pozytywna', 15, 'Zesrał sie na stole dyrektora podczas obiadu', '2021-10-15 14:45:44', 1, 3),
-(3, 'Uwaga Pozytywna', 99, 'Wpierdolił nauczycielce', '2021-10-15 16:56:32', 7, 3),
-(4, 'Uwaga Negatywna', 23, 'Uczeń zesrał się do torebki pani od polskiego', '2021-10-15 16:56:32', 8, 3);
+(1, 'Uwaga Pozytywna', 6, 'przykładowy opis', '2021-12-06 08:40:00', 1, 3),
+(2, 'Uwaga Pozytywna', 15, 'przykładowy opis', '2021-12-03 14:45:44', 1, 3),
+(3, 'Uwaga Pozytywna', 99, 'przykładowy opis', '2021-10-15 16:56:32', 7, 3),
+(4, 'Uwaga Negatywna', 23, 'przykładowy opis', '2021-10-15 16:56:32', 8, 3);
 
 -- --------------------------------------------------------
 
@@ -117,8 +117,8 @@ CREATE TABLE `exams` (
 --
 
 INSERT INTO `exams` (`examId`, `examDate`, `subjectId`, `teacherId`, `examDescription`, `examType`, `classId`) VALUES
-(1, '2021-07-20', 1, 1, 'Sprawdzian oralny', 'Oralny', 1),
-(2, '2021-10-25', 5, 7, 'Examin z gotowanie wodki', 'Pisemny', 1);
+(1, '2021-07-20', 1, 1, 'Polski', 'Pisemny', 1),
+(2, '2021-10-25', 5, 7, 'Matematyka', 'Pisemny', 1);
 
 -- --------------------------------------------------------
 
@@ -138,9 +138,9 @@ CREATE TABLE `freedays` (
 --
 
 INSERT INTO `freedays` (`freeDayId`, `freeDayDate`, `freeDayReason`, `freeDayDescription`) VALUES
-(1, '2021-10-18', 'SPIERDALAJ', 'WYPIERDALANKO DO DOMSKU'),
-(2, '2021-11-26', 'bo jestem chory byczku', 'no choroba wyszloc o mam poradzic szczylu maly'),
-(3, '2021-10-31', 'bo tak', 'bo mi sie nie chce przychodzi mlody');
+(1, '2021-12-31', 'Nowy rok', 'Nowy rok'),
+(2, '2021-10-14', 'dzień nauczyciela', 'dzień nauczyciela'),
+(3, '2022-05-03', '3 maja', '3 maja');
 
 -- --------------------------------------------------------
 
@@ -188,12 +188,12 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`gradeId`, `studentId`, `gradeScale`, `gradeWeight`, `teacherId`, `gradeDescription`, `subjectId`, `gradeDate`, `classId`, `columnId`) VALUES
-(1, 3, 6, 420, 1, 'Zdał sprawdzian oralny', 1, '2021-07-19 08:44:08', 1, 0),
+(1, 3, 6, 2, 1, 'brak', 1, '2021-07-19 08:44:08', 1, 0),
 (2, 3, 4, 1, 4, 'Sprawdzian z mnożenia.', 2, '2021-07-20 09:55:50', 1, 0),
-(3, 11, 3, 1, 7, 'Sprawdzian z robienia lodów', 5, '2021-07-21 11:35:35', 1, 0),
+(3, 11, 3, 1, 7, 'brak', 5, '2021-07-21 11:35:35', 1, 0),
 (4, 11, 4, 2, 8, 'Sprawdzian z globusa Polski', 7, '2021-07-21 11:36:23', 1, 0),
-(12, 3, 2, 1, 7, 'Dwójeczka na prośbę mojego ulubionego ucznia, ponieważ jest pierwszy.', 4, '2021-07-22 14:07:45', 1, 0),
-(13, 3, 6, 2, 1, 'Bardzo dobrze zapoznał się z procesem tworzenia metamfetaminy.', 1, '2021-07-22 14:07:45', 1, 0),
+(12, 3, 2, 1, 7, 'brak', 4, '2021-07-22 14:07:45', 1, 0),
+(13, 3, 6, 2, 1, 'brak', 1, '2021-07-22 14:07:45', 1, 0),
 (14, 3, 6, 6, 1, 'No i kolejna szósteczka', 1, '2021-07-23 08:58:16', 1, 0),
 (15, 3, 3, 1, 7, 'Za tą zimną kawę', 4, '2021-07-23 08:58:16', 1, 0),
 (16, 3, 6, 2, 1, 'Najlepszy uczeń na świecie', 1, '2021-07-23 08:59:41', 1, 0),
@@ -227,9 +227,9 @@ CREATE TABLE `homework` (
 --
 
 INSERT INTO `homework` (`homeworkId`, `subjectId`, `teacherId`, `creationDate`, `deadline`, `homeworkDescription`, `obligatory`, `classId`) VALUES
-(1, 1, 1, '2021-07-19 08:46:28', '2021-07-20 06:45:39', 'Przygotuj czystą metamfetaminę', 'Tak', 1),
-(2, 6, 1, '2021-10-17 19:53:59', '2021-10-28 19:53:20', 'dfsgsdfgsdfg', 'Tak', 1),
-(3, 2, 4, '2021-10-17 19:53:59', '2021-10-26 19:53:20', 'asdfasdfasdfasdf', 'Nie', 1);
+(1, 1, 1, '2021-07-19 08:46:28', '2021-07-20 06:45:39', 'przygotuj się na lekcję', 'Tak', 1),
+(2, 6, 1, '2021-10-17 19:53:59', '2021-10-28 19:53:20', 'przygotuj się na lekcję', 'Tak', 1),
+(3, 2, 4, '2021-10-17 19:53:59', '2021-10-26 19:53:20', 'przygotuj się na lekcję', 'Nie', 1);
 
 -- --------------------------------------------------------
 
@@ -248,6 +248,9 @@ CREATE TABLE `luckynumbers` (
 --
 
 INSERT INTO `luckynumbers` (`databaseDate`, `luckyNumberFirst`, `luckyNumberSecond`) VALUES
+('2021-10-13', 15, 26),
+('2021-10-14', 15, 19),
+('2021-10-21', 15, 18),
 ('2021-10-13', 15, 26),
 ('2021-10-14', 15, 19),
 ('2021-10-21', 15, 18);
@@ -272,7 +275,7 @@ CREATE TABLE `meetings` (
 --
 
 INSERT INTO `meetings` (`meetingId`, `teacherId`, `meetingDescription`, `meetingDate`, `meetingForm`, `meetingClassroom`) VALUES
-(1, 1, 'Spotykamy się, aby obmówić oralnie ważną sytuację ekonomii Polskiej metaamfetaminy', '2021-07-19 06:46:38', 'Irl', '694201337213769');
+(1, 1, 'spotkanie', '2021-07-19 06:46:38', 'Irl', '694201337213769');
 
 -- --------------------------------------------------------
 
@@ -313,15 +316,8 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`messageId`, `senderId`, `receiverId`, `messageContent`, `messageDate`, `messageTitle`) VALUES
-(1, 1, '{\r\n\"id\": [\"3\"]\r\n}', 'Elo kurwiu, jutro poniedziałek, wpadaj do budy', '2021-07-19 08:42:54', 'WRACASZ KURWA!'),
-(2, 7, '{\r\n\"rank\": [\"3\"]\r\n}', 'Jutro masz do mnie przyjść na specjalną ceremonię odznaczenia. Zostaniesz odznaczony, za swoją służbę jako największy dzban klasy.', '2021-07-27 13:54:39', 'Uroczystość'),
-(3, 3, '{\r\n\"id\": [\"11\"]\r\n}', 'Dzban', '2021-07-29 09:09:36', 'Dzbaniura'),
-(17, 3, '{ \"id\": [1]}', 'asdfasdf', '2021-07-29 09:50:31', 'asdfasdf'),
-(18, 3, '{ \"id\": [1]}', 'test', '2021-07-29 09:50:37', 'test'),
-(19, 3, '{ \"id\": [1]}', 'test', '2021-07-29 10:51:01', 'test'),
-(20, 3, '{ \"id\": [1]}', 'wybierz auto ', '2021-09-02 12:35:41', 'Elo'),
-(21, 3, '{ \"id\": [3]}', 'jestes chuj', '2021-09-09 10:41:05', 'chuj'),
-(22, 3, '{ \"id\": [3]}', 'jestes chuj', '2021-09-09 10:41:09', 'chuj');
+(1, 1, '{\r\n\"id\": [\"3\"]\r\n}', 'wiadomosc', '2021-07-19 08:42:54', 'tytul'),
+(2, 7, '{\r\n\"rank\": [\"3\"]\r\n}', 'test', '2021-07-27 13:54:39', 'Uroczystość');
 
 -- --------------------------------------------------------
 
@@ -342,6 +338,7 @@ CREATE TABLE `schoolinformation` (
 --
 
 INSERT INTO `schoolinformation` (`schoolName`, `schoolAddress`, `schoolPhoneNumber`, `schoolPrincipal`, `schoolEndYear`) VALUES
+('Zespół Szkół Nr 1 im. Ignacego Łukasiewicza w Gorlicach nr 1', 'ul. Wyszyńskiego 18, 38,300 Gorlice, Polska', '(0-18) 353-60-40', 'Janusz Kryca', '2021-10-30'),
 ('Zespół Szkół Nr 1 im. Ignacego Łukasiewicza w Gorlicach nr 1', 'ul. Wyszyńskiego 18, 38,300 Gorlice, Polska', '(0-18) 353-60-40', 'Janusz Kryca', '2021-10-30');
 
 -- --------------------------------------------------------
@@ -361,7 +358,7 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`subjectId`, `subjectName`, `teacherId`) VALUES
-(1, 'Teoretyczna Metaamfetamina Kwantowa', '{\r\n\"id\": [\"1\"]\r\n}'),
+(1, 'Przedmiot', '{\r\n\"id\": [\"1\"]\r\n}'),
 (2, 'Matematyka', '{\r\n\"id\": [\"4\"]\r\n}'),
 (3, 'Wychowanie Fizyczne', '{\r\n\"id\": [\"4\"]\r\n}'),
 (4, 'Polski', '{\r\n\"id\": \"7\"\r\n}'),
@@ -399,7 +396,7 @@ CREATE TABLE `timetables` (
 --
 
 INSERT INTO `timetables` (`timetableId`, `subjectId`, `teacherId`, `classId`, `classDateStart`, `classDateEnd`, `classDescription`, `classroom`, `obligatory`, `substituteTeacherId`, `substituteSubjectId`, `substituteDescription`, `substituteClassroom`, `cancelled`, `subjectNumber`) VALUES
-(1, 1, 1, 1, '2021-07-19 06:40:15', '2021-07-19 07:40:15', 'Teoretyka tworzenia metaamfetaminy', '42069', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
+(1, 1, 1, 1, '2021-07-19 06:40:15', '2021-07-19 07:40:15', 'Przedmiot', '42069', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
 (2, 4, 7, 1, '2021-07-30 11:15:16', '2021-07-30 12:15:16', 'Polska Polskość w Polsce na Polskiej Polszczyźnie', '2137', 'Nie', 8, 6, 'FIZYKAAA ', '2137', 0, 0),
 (3, 6, 8, 1, '2021-10-14 14:09:51', '2021-10-14 15:09:51', 'Taka testowa lekcja.', '23', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
 (4, 2, 4, 1, '2021-10-15 14:11:33', '2021-10-15 15:11:33', 'Taka druga testowa lekcja.', '4B', 'Tak', NULL, NULL, NULL, NULL, 0, 0),
@@ -437,9 +434,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `userRank`, `userEmail`, `userPassword`, `userPesel`, `userCreationDate`, `userFirstName`, `userSecondName`, `userLastName`, `userAddress`, `userLegitimationNumber`, `userBirthDate`, `userJoinDate`, `userLeaveDate`, `userPhoneNumber`, `userGender`, `classId`) VALUES
-(1, '{\r\n\"rank\": [\"dyrektor\", \"nauczyciel\", \"Chemia\", \"Teoretyczna Metaamfetamina Kwantowa\"]\r\n}', 'dyrektor@gmail.com', '$2y$10$.bUOJv3Pi.hkQ1cwB.Ku7ehuCSwym30vcd6fysdpg0uVsWfJtBIv2', 12345678901, '2021-07-19 08:27:20', 'Janusz', 'Skalmar', 'Okojski', 'Dyrektorska 1', NULL, '1939-07-06', '2020-09-01', NULL, '+48123456789', 'Dyrektor', NULL),
+(1, '{\r\n\"rank\": [\"dyrektor\", \"nauczyciel\", \"Chemia\", \"Teoretyczna Metaamfetamina Kwantowa\"]\r\n}', 'dyrektor@gmail.com', 'empty', 12345678901, '2021-07-19 08:27:20', 'Janusz', 'Skalmar', 'Okojski', 'Dyrektorska 1', NULL, '1939-07-06', '2020-09-01', NULL, '+48123456789', 'Dyrektor', NULL),
 (3, '{\r\n\"rank\": [\"uczen\"]\r\n}', 'uczen1@gmail.com', '$2y$10$AUPsiyYdtihoVybeLtbaNeZKk/Wgca3kYEP6WaGgJqbBCE9Lq9gjG', 12345678911, '2021-07-19 08:35:14', 'Pierwszy', NULL, 'Uczen', 'Uczniowska 1', 123455, '2004-07-06', '2020-09-01', NULL, '+48123456432', 'Uczeń', 1),
-(4, '{\n\"rank\": [\"nauczyciel\", \"Matematyka\", \"Wychowanie Fizyczne\"]\n}', 'agnieszka@gmail.com', '$2y$10$2zndmxji9pi.nVXFbZevBuz/k27MXBoZ3KAMcgupfx.zHaOy31RMa', 12345678921, '2021-07-20 09:51:11', 'Agnieszka', 'Magda', 'Kowalska', 'Agnieszkowa 13', NULL, '1947-03-02', '2002-05-17', NULL, '+48123358678', 'Kobieta', NULL),
+(4, '{\n\"rank\": [\"nauczyciel\", \"Matematyka\", \"Wychowanie Fizyczne\"]\n}', 'agnieszka@gmail.com', 'empty', 12345678921, '2021-07-20 09:51:11', 'Agnieszka', 'Magda', 'Kowalska', 'Agnieszkowa 13', NULL, '1947-03-02', '2002-05-17', NULL, '+48123358678', 'Kobieta', NULL),
 (7, '{\r\n\"rank\": [\"nauczyciel\", \"Polski\", \"Historia\"]\r\n}', 'grazyna@gmail.com', 'empty', 12345678931, '2021-07-21 11:09:40', 'Grażyna', 'Eustachy', 'Kołocka', 'Rombana 69', NULL, '1374-02-01', '2019-03-02', NULL, '+48373558678', 'Kobieta', NULL),
 (8, '{\r\n\"rank\": [\"nauczyciel\", \"Fizyka\", \"Geografia\"]\r\n}', 'bombiaszzz@gmail.com', 'empty', 12345678941, '2021-07-21 11:12:51', 'Adam', NULL, 'Knapik', 'Czajkowska 12', NULL, '1986-05-14', '2019-07-21', NULL, '+48123453841', 'Mężczyzna', NULL),
 (11, '{\r\n\"rank\": [\"uczen\"]\r\n}', 'uczen2original@gmail.com', '$2y$10$lGnXnZRlEQgg.GP2Z6iD2u3K7fLZBrDg9CIUy.7ALUTTo6EE2vsci', 12345678951, '2021-07-21 11:24:37', 'Gabriela', NULL, 'Dzban', 'Wójtowa 420', 654321, '2005-11-17', '2030-08-17', '2021-07-20', '+48721738192', 'Kobieta', 1);
@@ -560,7 +557,7 @@ ALTER TABLE `users`
   ADD KEY `classId` (`classId`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
