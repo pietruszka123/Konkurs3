@@ -1,7 +1,7 @@
 # Konkurs3
 
 # jak Używać
-[link do strony strona](https://dziennik.hlandia.pl/)
+[link do strony](https://dziennik.hlandia.pl/)
 
 ## hasła do kont
 Uczeń 1<br>
